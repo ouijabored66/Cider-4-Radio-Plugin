@@ -1,0 +1,11 @@
+ce_prefix: cider-radio
+identifier: local.cider.radio
+name: Radio
+description: Search and play internet radio stations from TuneIn and Radio Browser.
+version: 0.1.1
+author: cider
+repo: ""
+pluginKitVersion: "4"
+entry:
+  plugin.js:
+    type: main
