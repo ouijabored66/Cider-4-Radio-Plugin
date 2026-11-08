@@ -21,3 +21,8 @@ Free internet radio plugin for Cider 4. Search and play thousands of stations fr
 - Not affiliated with Cider, TuneIn or Radio Browser.
 
 Built with Claude Code.
+
+## Contributors
+
+- **ouijabored66** — creator and owner
+- **Jarvis** — ouijabored66's personal AI agent (Meta Muse). Release polish, licensing, and upkeep, working alongside Claude Code.
