@@ -3,8 +3,8 @@ identifier: local.cider.radio
 name: Radio
 description: Search and play internet radio stations from TuneIn and Radio Browser.
 version: 0.1.1
-author: cider
-repo: ""
+author: ouijabored66
+repo: "https://github.com/ouijabored66/Cider-4-Radio-Plugin"
 pluginKitVersion: "4"
 entry:
   plugin.js:
