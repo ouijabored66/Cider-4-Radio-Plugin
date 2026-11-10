@@ -16,7 +16,7 @@ Free internet radio plugin for Cider 4. Search and play thousands of stations fr
 
 ## Install
 
-1. Download [cider-radio-plugin-0.1.1.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.1.1/cider-radio-plugin-0.1.1.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest).
+1. Download [cider-radio-plugin-0.2.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.2.0/cider-radio-plugin-0.2.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest).
 2. Unzip it into Cider's plugins folder so the `radio` folder sits alongside your other plugins.
 3. Restart Cider and open **Radio** from the menu.
 
