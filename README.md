@@ -15,7 +15,7 @@ Free internet radio plugin for Cider 4. Search and play thousands of stations fr
 2. Unzip it into Cider's plugins folder so the `radio` folder sits alongside your other plugins.
 3. Restart Cider and open **Radio** from the menu.
 
-## Cider Radio for iPhone
+## Free Radio for iPhone
 
 A companion iPhone app that puts the station directories from Radio Browser, TuneIn, SomaFM and the Icecast directory in one app. iptv-org support is included, but its radio playlist is currently unavailable upstream, so that source shows as unreachable.
 

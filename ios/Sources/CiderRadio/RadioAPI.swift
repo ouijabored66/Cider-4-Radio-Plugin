@@ -9,7 +9,7 @@ struct APIError: LocalizedError {
 enum RadioAPI {
     static let radioBrowser = "https://all.api.radio-browser.info/json"
     static let tuneIn = "https://opml.radiotime.com"
-    static let userAgent = "CiderRadio/1.0"
+    static let userAgent = "FreeRadio/1.0"
 
     private static let session: URLSession = {
         let c = URLSessionConfiguration.default
