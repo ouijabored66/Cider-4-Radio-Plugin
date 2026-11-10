@@ -26,6 +26,16 @@ A companion iPhone app that puts the station directories from Radio Browser, Tun
 
 The unsigned IPA is attached to this repo's [GitHub Releases](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases). Install it with SideStore or another sideloading tool, using your own Apple ID.
 
+### Install
+
+Download `FreeRadio.ipa` from [Releases](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases), then install it with any of these tools using your own Apple ID:
+
+- **SideStore** (no computer after the one-time setup): open SideStore, go to My Apps, tap **+** and pick the IPA. SideStore refreshes the app automatically before the 7-day free-signing expiry.
+- **iLoader** (computer): connect the iPhone by USB, sign in with your Apple ID, import the IPA and choose Install.
+- **Sideloadly** (computer): connect the iPhone by USB, drag the IPA into Sideloadly, enter your Apple ID and press Start.
+
+With a free Apple ID the app is signed for 7 days. SideStore keeps it refreshed on its own; iLoader and Sideloadly installs need a quick re-install each week.
+
 Source: [ios/](ios/)
 
 ## Notes
