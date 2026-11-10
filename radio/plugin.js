@@ -7442,12 +7442,12 @@ var Ld = class {
     return At().playItemByHref(t.href);
   }
 }, BO = window.__PLUGINSYS__.Dialog, WO = window.__PLUGINSYS__.ContextMenu, HO = window.__PLUGINSYS__.Composables.useContextMenu, MN = {
-  ce_prefix: "dylanr-radio",
-  identifier: "local.dylanr.radio",
+  ce_prefix: "cider-radio",
+  identifier: "local.cider.radio",
   name: "Radio",
   description: "Search and play internet radio stations from TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.",
   version: "0.2.0",
-  author: "dylanr",
+  author: "cider",
   repo: "",
   pluginKitVersion: "4",
   entry: { "plugin.js": { type: "main" } }
