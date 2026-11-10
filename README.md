@@ -1,10 +1,15 @@
 # Cider 4 Radio Plugin
 
-Free internet radio plugin for Cider 4. Search and play thousands of stations from TuneIn and Radio Browser, right inside Cider.
+Free internet radio plugin for Cider 4. Search and play thousands of stations from five free sources (TuneIn, Radio Browser, SomaFM, the Icecast directory and iptv-org), right inside Cider.
 
 ## Features
 
-- Search stations from TuneIn and Radio Browser at the same time
+- Search five free sources at the same time:
+  - **TuneIn** and **Radio Browser**: live search
+  - **SomaFM**: the full channel list, filtered locally
+  - **Icecast** directory (dir.xiph.org): about 7,000 streams, including Ogg, downloaded once a day and searched locally
+  - **iptv-org**: M3U support is built in, but iptv-org currently publishes no radio playlist, so this source shows as unreachable
+- A source that is down never breaks the others
 - Play, stop and adjust volume from the Radio page
 - Pauses Apple Music when a station starts, and stops the radio when Apple Music plays
 - "Radio" and "Stop Radio" menu entries
@@ -40,7 +45,7 @@ Source: [ios/](ios/)
 
 ## Notes
 
-- Station data comes from the public TuneIn (opml.radiotime.com) and Radio Browser APIs. Some stations may not play if their stream is offline or uses an unsupported format.
+- Station data comes from the public TuneIn (opml.radiotime.com), Radio Browser, SomaFM (somafm.com) and Icecast (dir.xiph.org) APIs; the iptv-org source is currently empty upstream. Some stations may not play if their stream is offline or uses an unsupported format.
 - Not affiliated with Cider, TuneIn or Radio Browser.
 
 Built with Claude Code.
