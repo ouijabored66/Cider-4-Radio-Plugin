@@ -48,9 +48,7 @@ Source: [ios/](ios/)
 - Station data comes from the public TuneIn (opml.radiotime.com), Radio Browser, SomaFM (somafm.com) and Icecast (dir.xiph.org) APIs; the iptv-org source is currently empty upstream. Some stations may not play if their stream is offline or uses an unsupported format.
 - Not affiliated with Cider, TuneIn or Radio Browser.
 
-Built with Claude Code.
-
 ## Contributors
 
 - **ouijabored66** — creator and owner
-- **Jarvis** — ouijabored66's personal AI agent (Meta Muse). Release polish, licensing, and upkeep, working alongside Claude Code.
+- **Jarvis** — ouijabored66's personal AI agent (Meta Muse). Release polish, licensing, and upkeep.
