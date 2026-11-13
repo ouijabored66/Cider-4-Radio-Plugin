@@ -51,4 +51,4 @@ Source: [ios/](ios/)
 ## Contributors
 
 - **ouijabored66** — creator and owner
-- **Jarvis** — ouijabored66's personal AI agent (Meta Muse). Release polish, licensing, and upkeep.
+- **Jarvis** — ouijabored66's personal AI agent. Release polish, licensing, and upkeep.
