@@ -9,7 +9,7 @@ struct APIError: LocalizedError {
 enum RadioAPI {
     static let radioBrowser = "https://all.api.radio-browser.info/json"
     static let tuneIn = "https://opml.radiotime.com"
-    static let userAgent = "FreeRadio/1.0"
+    static let userAgent = "FreeRadio/1.1"
 
     private static let session: URLSession = {
         let c = URLSessionConfiguration.default
@@ -203,8 +203,9 @@ enum RadioAPI {
         }
     }
 
-    /// Merged search over all five sources. A failing source is reported in `failed`; the rest still appear.
-    /// Ids carry a per-source prefix (rb-, ti-, sm-, ic-, iptv-), so dedupe by id never merges across sources.
+    /// Merged search over the Free Radio library and the five directories.
+    /// A failing directory is reported in `failed`; library matches still appear.
+    /// A directory hit that is already in the library is replaced by the library copy.
     static func search(_ query: String) async -> SearchResult {
         async let ti: Result<[Station], Error> = capture { try await searchTuneIn(query) }
         async let rb: Result<[Station], Error> = capture { try await searchRadioBrowser(query) }
@@ -218,10 +219,17 @@ enum RadioAPI {
         var stations: [Station] = []
         var failed: [Source] = []
         var seen = Set<String>()
+        // Library matches first, so a saved station is never hidden behind a directory hit.
+        for station in FreeRadioCatalog.search(query) where seen.insert(station.id).inserted {
+            stations.append(station)
+        }
         for (source, result) in results {
             switch result {
             case .success(let list):
-                for s in list where seen.insert(s.id).inserted { stations.append(s) }
+                for station in list {
+                    let pick = FreeRadioCatalog.libraryCopy(of: station) ?? station
+                    if seen.insert(pick.id).inserted { stations.append(pick) }
+                }
             case .failure: failed.append(source)
             }
         }

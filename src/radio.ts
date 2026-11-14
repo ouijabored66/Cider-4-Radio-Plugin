@@ -1,3 +1,5 @@
+import { libraryCopy, searchFreeRadio } from "./freeRadio";
+
 export type Source = "TuneIn" | "Radio Browser" | "SomaFM" | "Icecast" | "iptv-org";
 
 export interface Station {
@@ -9,8 +11,11 @@ export interface Station {
   /**
    * Stream or playlist address. TuneIn stations get theirs from resolveStream();
    * for SomaFM this is a .pls playlist that resolveStream() unwraps at play time.
+   * Curated TuneIn stations leave this empty so the guide id is resolved at play time.
    */
   streamUrl?: string;
+  /** Comma-separated genres or group names. Used by local search. */
+  tags?: string;
 }
 
 export interface SearchResult {
@@ -381,14 +386,13 @@ export class Catalog {
   }
 }
 
-/** Name matches first, then matches in the detail text (genre, description, country). */
+/** Name matches first, then matches in the detail text or tags (genre, description, country). */
 export function searchLocal(stations: Station[], query: string, limit = SEARCH_LIMIT): Station[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
+  const extra = (s: Station) => `${s.detail}\n${s.tags ?? ""}`.toLowerCase();
   const byName = stations.filter((s) => s.name.toLowerCase().includes(q));
-  const byDetail = stations.filter(
-    (s) => !s.name.toLowerCase().includes(q) && s.detail.toLowerCase().includes(q)
-  );
+  const byDetail = stations.filter((s) => !s.name.toLowerCase().includes(q) && extra(s).includes(q));
   return [...byName, ...byDetail].slice(0, limit);
 }
 
@@ -443,13 +447,19 @@ export async function searchStations(query: string): Promise<SearchResult> {
   const stations: Station[] = [];
   const failed: Source[] = [];
   const seen = new Set<string>();
+  // Library matches first, so a station he saved is never hidden behind a directory hit.
+  for (const station of searchFreeRadio(query)) {
+    if (seen.has(station.id)) continue;
+    seen.add(station.id);
+    stations.push(station);
+  }
   settled.forEach((result, i) => {
     if (result.status === "fulfilled") {
       for (const station of result.value) {
-        if (!seen.has(station.id)) {
-          seen.add(station.id);
-          stations.push(station);
-        }
+        const pick = libraryCopy(station) ?? station;
+        if (seen.has(pick.id)) continue;
+        seen.add(pick.id);
+        stations.push(pick);
       }
     }
     else {
