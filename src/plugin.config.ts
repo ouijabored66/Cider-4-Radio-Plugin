@@ -2,13 +2,13 @@
  * Plugin configuration.
  */
 export default {
-    ce_prefix: 'dylanr-radio',
-    identifier: 'local.dylanr.radio',
+    ce_prefix: 'cider-radio',
+    identifier: 'local.cider.radio',
     name: 'Radio',
-    description: 'Search and play internet radio stations from TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.',
-    version: '0.2.0',
-    author: 'dylanr',
-    repo: '',
+    description: 'Play the Free Radio library and search TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.',
+    version: '0.3.0',
+    author: 'ouijabored66',
+    repo: 'https://github.com/ouijabored66/Cider-4-Radio-Plugin',
     pluginKitVersion: '4',
     entry: {
         'plugin.js': {

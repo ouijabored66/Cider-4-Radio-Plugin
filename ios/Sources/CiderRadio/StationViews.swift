@@ -8,6 +8,7 @@ struct CategoryTarget: Hashable {
     var source: Source? = nil
 }
 struct SourceTarget: Hashable { let source: Source }
+struct FreeRadioTarget: Hashable { let id: String }
 
 @MainActor
 final class HomeModel: ObservableObject {
@@ -69,6 +70,7 @@ struct StationsHomeView: View {
         .onSubmit(of: .search) { Task { await model.search(query) } }
         .navigationDestination(for: CategoryTarget.self) { CategoryListView(target: $0) }
         .navigationDestination(for: SourceTarget.self) { SourceView(source: $0.source) }
+        .navigationDestination(for: FreeRadioTarget.self) { FreeRadioGroupView(groupId: $0.id) }
         .task { await model.load() }
         .refreshable { model.loaded = false; await model.load() }
     }
@@ -76,6 +78,26 @@ struct StationsHomeView: View {
     @ViewBuilder private var homeContent: some View {
         if let e = model.topError {
             Section { NoteText(text: e) }
+        }
+        Section {
+            ForEach(FreeRadioCatalog.groups) { group in
+                NavigationLink(value: FreeRadioTarget(id: group.id)) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(group.name).font(.headline)
+                            Text(group.source.rawValue).font(.caption).foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Text("\(group.stations.count)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        } header: {
+            Text("Free Radio")
+        } footer: {
+            Text("\(FreeRadioCatalog.stations.count) instrumental stations from your library.")
         }
         Section("Sources") {
             ForEach([Source.somaFM, .icecast, .iptvOrg], id: \.self) { src in
@@ -101,14 +123,14 @@ struct StationsHomeView: View {
 
     @ViewBuilder private var searchContent: some View {
         ForEach(model.failed, id: \.self) { s in
-            Section { NoteText(text: "\(s.rawValue) couldn't be reached, so its stations aren't shown.") }
+            Section { NoteText(text: "\(s.rawValue) search couldn't be reached. Stations already in your Free Radio library are still listed.") }
         }
         if model.searching {
             Section { ProgressView().frame(maxWidth: .infinity) }
         } else if model.searched && model.results.isEmpty {
             Section { NoteText(text: "No stations found.") }
         } else if !model.searched {
-            Section { NoteText(text: "Press search to look in TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.") }
+            Section { NoteText(text: "Press search to look in your Free Radio library, TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.") }
         } else {
             Section("Results") { ForEach(model.results) { StationRow(station: $0) } }
         }
@@ -130,6 +152,31 @@ struct StationsHomeView: View {
             .padding(.vertical, 2)
         }
         .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
+}
+
+struct FreeRadioGroupView: View {
+    let groupId: String
+
+    private var group: FreeRadioCatalog.Group? {
+        FreeRadioCatalog.groups.first { $0.id == groupId }
+    }
+
+    var body: some View {
+        List {
+            if let group {
+                if group.stations.isEmpty {
+                    Section { NoteText(text: "No stations in this group.") }
+                } else {
+                    ForEach(group.stations) { StationRow(station: $0) }
+                }
+            } else {
+                Section { NoteText(text: "This group is no longer in the library.") }
+            }
+        }
+        .listStyle(.insetGrouped)
+        .navigationTitle(group?.name ?? "Free Radio")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

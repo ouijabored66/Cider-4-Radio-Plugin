@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { searchStations, type Source, type Station } from "../radio";
+import { freeRadioGroups } from "../freeRadio";
 import { current, diagnostics, play, setVolume, status, stop, volume } from "../player";
 
 const query = ref("");
@@ -8,6 +9,21 @@ const stations = ref<Station[]>([]);
 const failed = ref<Source[]>([]);
 const searching = ref(false);
 const searched = ref(false);
+const selectedGroup = ref(freeRadioGroups[0]?.id ?? "");
+
+const libraryCount = freeRadioGroups.reduce((count, group) => count + group.stations.length, 0);
+const activeGroup = computed(
+  () => freeRadioGroups.find((group) => group.id === selectedGroup.value) ?? freeRadioGroups[0]
+);
+const visible = computed(() => (searched.value ? stations.value : (activeGroup.value?.stations ?? [])));
+
+watch(query, (value) => {
+  if (!value.trim()) {
+    searched.value = false;
+    stations.value = [];
+    failed.value = [];
+  }
+});
 
 const statusText = computed(
   () =>
@@ -62,13 +78,32 @@ async function search() {
       <button class="c-btn" type="button" @click="stop">Stop</button>
     </section>
 
+    <section v-if="!searched" class="radio-library">
+      <h2>Free Radio</h2>
+      <p class="radio-note">{{ libraryCount }} instrumental stations from your library. Pick a group, or search.</p>
+      <div class="radio-groups" role="tablist" aria-label="Free Radio groups">
+        <button
+          v-for="group in freeRadioGroups"
+          :key="group.id"
+          type="button"
+          role="tab"
+          :class="{ active: group.id === activeGroup?.id }"
+          :aria-selected="group.id === activeGroup?.id"
+          @click="selectedGroup = group.id"
+        >
+          {{ group.name }}
+          <span>{{ group.stations.length }}</span>
+        </button>
+      </div>
+    </section>
+
     <p v-for="source in failed" :key="source" class="radio-note">
-      {{ source }} couldn't be reached, so its stations aren't shown.
+      {{ source }} search couldn't be reached. Stations already in your Free Radio library are still listed.
     </p>
     <p v-if="searched && !stations.length && !searching" class="radio-note">No stations found.</p>
 
     <ul class="radio-list">
-      <li v-for="station in stations" :key="station.id">
+      <li v-for="station in visible" :key="station.id">
         <button type="button" :class="{ active: current?.id === station.id }" @click="play(station)">
           <img v-if="station.image" :src="station.image" alt="" loading="lazy" />
           <span class="radio-name">{{ station.name }}</span>
@@ -93,6 +128,14 @@ async function search() {
 .radio-now-text { display: flex; flex-direction: column; flex: 1; min-width: 180px; }
 .radio-diagnostics { opacity: 0.7; font-size: 0.75em; }
 .radio-note { opacity: 0.75; margin: 4px 0; }
+.radio-library h2 { font-size: 1.15rem; margin: 0 0 4px; }
+.radio-groups { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
+.radio-groups button {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+  border: 1px solid rgba(128, 128, 128, 0.35); background: transparent; color: inherit; font: inherit; cursor: pointer;
+}
+.radio-groups button.active { background: rgba(128, 128, 128, 0.2); }
+.radio-groups span { opacity: 0.6; font-size: 0.8em; }
 .radio-list { list-style: none; margin: 0; padding: 0; }
 .radio-list button {
   display: grid; grid-template-columns: 40px 1fr auto; grid-template-rows: auto auto;
