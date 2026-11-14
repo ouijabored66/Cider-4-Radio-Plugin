@@ -6,9 +6,10 @@ enum Source: String, Codable {
     case somaFM = "SomaFM"
     case icecast = "Icecast"
     case iptvOrg = "iptv-org"
+    case veniceClassic = "Venice Classic Radio"
 
     /// Sources searched and shown, in display order.
-    static let displayOrder: [Source] = [.tuneIn, .radioBrowser, .somaFM, .icecast, .iptvOrg]
+    static let displayOrder: [Source] = [.tuneIn, .radioBrowser, .somaFM, .icecast, .veniceClassic, .iptvOrg]
     /// Sources served from a locally cached copy of a feed.
     var isLocalCatalog: Bool { self == .somaFM || self == .icecast || self == .iptvOrg }
 }
@@ -31,6 +32,9 @@ struct Station: Identifiable, Codable, Hashable {
     var tags: String?
     /// Country, when the source gives one.
     var country: String?
+    /// Broadcaster or directory page. Optional so favorites saved before this field still decode.
+    /// The stream address is stored separately and is not rewritten.
+    var homepage: String? = nil
 
     var badge: String? {
         guard bitrate > 0 else { return nil }

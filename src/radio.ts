@@ -1,6 +1,6 @@
 import { libraryCopy, searchFreeRadio } from "./freeRadio";
 
-export type Source = "TuneIn" | "Radio Browser" | "SomaFM" | "Icecast" | "iptv-org";
+export type Source = "TuneIn" | "Radio Browser" | "SomaFM" | "Icecast" | "iptv-org" | "Venice Classic Radio";
 
 export interface Station {
   id: string;
@@ -16,6 +16,8 @@ export interface Station {
   streamUrl?: string;
   /** Comma-separated genres or group names. Used by local search. */
   tags?: string;
+  /** Broadcaster or directory page for this station. The stream URL is separate and is not rewritten. */
+  homepage?: string;
 }
 
 export interface SearchResult {

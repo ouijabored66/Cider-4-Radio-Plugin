@@ -237,6 +237,7 @@ extension Source {
         case .somaFM: return "Listener-supported, commercial-free channels"
         case .icecast: return "Icecast directory (dir.xiph.org), browse by genre"
         case .iptvOrg: return "iptv-org radio index, browse by group"
+        case .veniceClassic: return "Classical stations from Venice Classic Radio"
         default: return ""
         }
     }

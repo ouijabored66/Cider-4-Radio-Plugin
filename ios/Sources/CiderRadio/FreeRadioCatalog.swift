@@ -70,6 +70,7 @@ enum FreeRadioCatalog {
             let bitrate: Int
             let uuid: String?
             let tags: String
+            let homepage: String?
         }
         let groups: [Group]
         let stations: [Entry]
@@ -82,6 +83,7 @@ enum FreeRadioCatalog {
         case "SomaFM": return .somaFM
         case "Icecast": return .icecast
         case "iptv-org": return .iptvOrg
+        case "Venice Classic Radio": return .veniceClassic
         default: return .tuneIn
         }
     }
@@ -99,7 +101,8 @@ enum FreeRadioCatalog {
                     source: source(entry.source),
                     streamUrl: entry.streamUrl.flatMap { $0.isEmpty ? nil : $0 },
                     uuid: entry.uuid.flatMap { $0.isEmpty ? nil : $0 },
-                    tags: entry.tags, country: nil)
+                    tags: entry.tags, country: nil,
+                    homepage: entry.homepage.flatMap { $0.isEmpty ? nil : $0 })
             }
             return Group(id: group.id, name: group.name, source: source(group.source), stations: stations)
         }
@@ -188,6 +191,146 @@ enum FreeRadioCatalog {
       "id": "lounge",
       "name": "Lounge",
       "source": "TuneIn"
+    },
+    {
+      "id": "venice-classic-radio",
+      "name": "Venice Classic Radio",
+      "source": "Venice Classic Radio"
+    },
+    {
+      "id": "somafm-vocal",
+      "name": "SomaFM Vocal",
+      "source": "SomaFM"
+    },
+    {
+      "id": "radio-browser-vocal",
+      "name": "Radio Browser Vocal",
+      "source": "Radio Browser"
+    },
+    {
+      "id": "icecast-vocal",
+      "name": "Icecast Vocal",
+      "source": "Icecast"
+    },
+    {
+      "id": "adult-hits",
+      "name": "Adult Hits · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "blues",
+      "name": "Blues · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "boss-radio",
+      "name": "Boss Radio · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "children-s-music",
+      "name": "Children's Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "classic-hits",
+      "name": "Classic Hits · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "classical-music",
+      "name": "Classical Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "college-radio",
+      "name": "College Radio · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "country",
+      "name": "Country · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "dance-electronic",
+      "name": "Dance & Electronic · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "decades-music",
+      "name": "Decades Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "easy-listening",
+      "name": "Easy Listening · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "folk",
+      "name": "Folk · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "hip-hop",
+      "name": "Hip Hop · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "holiday-music",
+      "name": "Holiday Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "indie-music",
+      "name": "Indie Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "jazz",
+      "name": "Jazz · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "powerhitz",
+      "name": "Powerhitz · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "reggae-dancehall",
+      "name": "Reggae & Dancehall · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "religious-music",
+      "name": "Religious Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "rock-music",
+      "name": "Rock Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "soul-r-b",
+      "name": "Soul & R&B · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "top-40-pop-music",
+      "name": "Top 40 & Pop Music · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "variety",
+      "name": "Variety · Vocal",
+      "source": "TuneIn"
+    },
+    {
+      "id": "world-music",
+      "name": "World Music · Vocal",
+      "source": "TuneIn"
     }
   ],
   "stations": [
@@ -202,7 +345,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/beatblender/",
+      "style": "instrumental"
     },
     {
       "id": "sm-chillits",
@@ -215,7 +360,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, chill, live"
+      "tags": "SomaFM, chill, live, Instrumental",
+      "homepage": "https://somafm.com/chillits/",
+      "style": "instrumental"
     },
     {
       "id": "sm-christmas",
@@ -228,7 +375,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, holiday"
+      "tags": "SomaFM, holiday, Instrumental",
+      "homepage": "https://somafm.com/christmas/",
+      "style": "instrumental"
     },
     {
       "id": "sm-cliqhop",
@@ -241,7 +390,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/cliqhop/",
+      "style": "instrumental"
     },
     {
       "id": "sm-deepspaceone",
@@ -254,7 +405,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, ambient"
+      "tags": "SomaFM, ambient, Instrumental",
+      "homepage": "https://somafm.com/deepspaceone/",
+      "style": "instrumental"
     },
     {
       "id": "sm-defcon",
@@ -267,7 +420,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, electronic, specials"
+      "tags": "SomaFM, electronic, specials, Instrumental",
+      "homepage": "https://somafm.com/defcon/",
+      "style": "instrumental"
     },
     {
       "id": "sm-deptstore",
@@ -280,7 +435,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, holiday"
+      "tags": "SomaFM, holiday, Instrumental",
+      "homepage": "https://somafm.com/deptstore/",
+      "style": "instrumental"
     },
     {
       "id": "sm-digitalis",
@@ -293,7 +450,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, electronic, alternative"
+      "tags": "SomaFM, electronic, alternative, Instrumental",
+      "homepage": "https://somafm.com/digitalis/",
+      "style": "instrumental"
     },
     {
       "id": "sm-doomed",
@@ -306,7 +465,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient, industrial"
+      "tags": "SomaFM, ambient, industrial, Instrumental",
+      "homepage": "https://somafm.com/doomed/",
+      "style": "instrumental"
     },
     {
       "id": "sm-dronezone",
@@ -319,7 +480,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient"
+      "tags": "SomaFM, ambient, Instrumental",
+      "homepage": "https://somafm.com/dronezone/",
+      "style": "instrumental"
     },
     {
       "id": "sm-dz2",
@@ -332,7 +495,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, ambient"
+      "tags": "SomaFM, ambient, Instrumental",
+      "homepage": "https://somafm.com/dz2/",
+      "style": "instrumental"
     },
     {
       "id": "sm-dubstep",
@@ -345,7 +510,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/dubstep/",
+      "style": "instrumental"
     },
     {
       "id": "sm-fluid",
@@ -358,7 +525,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, electronic, hiphop"
+      "tags": "SomaFM, electronic, hiphop, Instrumental",
+      "homepage": "https://somafm.com/fluid/",
+      "style": "instrumental"
     },
     {
       "id": "sm-groovesalad",
@@ -371,7 +540,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient, electronic"
+      "tags": "SomaFM, ambient, electronic, Instrumental",
+      "homepage": "https://somafm.com/groovesalad/",
+      "style": "instrumental"
     },
     {
       "id": "sm-groovesalad2",
@@ -384,7 +555,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient, electronic"
+      "tags": "SomaFM, ambient, electronic, Instrumental",
+      "homepage": "https://somafm.com/groovesalad2/",
+      "style": "instrumental"
     },
     {
       "id": "sm-gsclassic",
@@ -397,7 +570,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, ambient, electronic"
+      "tags": "SomaFM, ambient, electronic, Instrumental",
+      "homepage": "https://somafm.com/gsclassic/",
+      "style": "instrumental"
     },
     {
       "id": "sm-illstreet",
@@ -410,7 +585,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, lounge"
+      "tags": "SomaFM, lounge, Instrumental",
+      "homepage": "https://somafm.com/illstreet/",
+      "style": "instrumental"
     },
     {
       "id": "sm-missioncontrol",
@@ -423,7 +600,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, ambient, electronic"
+      "tags": "SomaFM, ambient, electronic, Instrumental",
+      "homepage": "https://somafm.com/missioncontrol/",
+      "style": "instrumental"
     },
     {
       "id": "sm-n5md",
@@ -436,7 +615,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, specials"
+      "tags": "SomaFM, specials, Instrumental",
+      "homepage": "https://somafm.com/n5md/",
+      "style": "instrumental"
     },
     {
       "id": "sm-secretagent",
@@ -449,7 +630,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, lounge"
+      "tags": "SomaFM, lounge, Instrumental",
+      "homepage": "https://somafm.com/secretagent/",
+      "style": "instrumental"
     },
     {
       "id": "sm-sonicuniverse",
@@ -462,7 +645,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, jazz"
+      "tags": "SomaFM, jazz, Instrumental",
+      "homepage": "https://somafm.com/sonicuniverse/",
+      "style": "instrumental"
     },
     {
       "id": "sm-spacestation",
@@ -475,7 +660,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 320,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/spacestation/",
+      "style": "instrumental"
     },
     {
       "id": "sm-synphaera",
@@ -488,7 +675,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient, electronic"
+      "tags": "SomaFM, ambient, electronic, Instrumental",
+      "homepage": "https://somafm.com/synphaera/",
+      "style": "instrumental"
     },
     {
       "id": "sm-darkzone",
@@ -501,7 +690,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, ambient"
+      "tags": "SomaFM, ambient, Instrumental",
+      "homepage": "https://somafm.com/darkzone/",
+      "style": "instrumental"
     },
     {
       "id": "sm-thetrip",
@@ -514,7 +705,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/thetrip/",
+      "style": "instrumental"
     },
     {
       "id": "sm-tikitime",
@@ -527,7 +720,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": null,
-      "tags": "SomaFM, tiki, world"
+      "tags": "SomaFM, tiki, world, Instrumental",
+      "homepage": "https://somafm.com/tikitime/",
+      "style": "instrumental"
     },
     {
       "id": "sm-vaporwaves",
@@ -540,7 +735,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": null,
-      "tags": "SomaFM, electronic"
+      "tags": "SomaFM, electronic, Instrumental",
+      "homepage": "https://somafm.com/vaporwaves/",
+      "style": "instrumental"
     },
     {
       "id": "rb-be9dcb42-f365-11e8-a471-52543be04c81",
@@ -553,7 +750,9 @@ enum FreeRadioCatalog {
       "codec": "aac+",
       "bitrate": 64,
       "uuid": "be9dcb42-f365-11e8-a471-52543be04c81",
-      "tags": "Radio Browser, ambient, chillout, easy listening, electro"
+      "tags": "Radio Browser, ambient, chillout, easy listening, electro, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96281314-0601-11e8-ae97-52543be04c81",
@@ -566,7 +765,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "96281314-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, chillout"
+      "tags": "Radio Browser, chillout, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-07064262-5ef9-44e1-900d-ed752b7433b8",
@@ -579,7 +780,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "07064262-5ef9-44e1-900d-ed752b7433b8",
-      "tags": "Radio Browser, downtempo, psychedelic chillout grooves, slow trance"
+      "tags": "Radio Browser, downtempo, psychedelic chillout grooves, slow trance, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-962a7d59-0601-11e8-ae97-52543be04c81",
@@ -592,7 +795,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "962a7d59-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, movie soundtracks"
+      "tags": "Radio Browser, movie soundtracks, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96225a38-0601-11e8-ae97-52543be04c81",
@@ -605,7 +810,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "96225a38-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, baroque, classical"
+      "tags": "Radio Browser, baroque, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-961f28c0-0601-11e8-ae97-52543be04c81",
@@ -618,7 +825,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "961f28c0-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, chillout, waynesboro"
+      "tags": "Radio Browser, chillout, waynesboro, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96257742-0601-11e8-ae97-52543be04c81",
@@ -631,7 +840,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "96257742-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical guitar, guitar, waynesboro"
+      "tags": "Radio Browser, classical guitar, guitar, waynesboro, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-25ff1b4c-ffcb-4572-a561-9347e0e58c75",
@@ -644,7 +855,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 192,
       "uuid": "25ff1b4c-ffcb-4572-a561-9347e0e58c75",
-      "tags": "Radio Browser, ambient, chill, chillout, lounge"
+      "tags": "Radio Browser, ambient, chill, chillout, lounge, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-961aeb3b-0601-11e8-ae97-52543be04c81",
@@ -657,7 +870,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "961aeb3b-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, ambient, chillout, non-commercial, relaxation music"
+      "tags": "Radio Browser, ambient, chillout, non-commercial, relaxation music, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-961fa288-0601-11e8-ae97-52543be04c81",
@@ -670,7 +885,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 256,
       "uuid": "961fa288-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, ambient, meditation, sleep"
+      "tags": "Radio Browser, ambient, meditation, sleep, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-fb6f79e4-d5ac-481b-90f5-b6f4828235de",
@@ -683,7 +900,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "fb6f79e4-d5ac-481b-90f5-b6f4828235de",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-962ece3f-0601-11e8-ae97-52543be04c81",
@@ -696,7 +915,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "962ece3f-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, bach, classical"
+      "tags": "Radio Browser, bach, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-5a056387-0cf9-11e8-ae97-52543be04c81",
@@ -709,7 +930,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "5a056387-0cf9-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, baroque, classical"
+      "tags": "Radio Browser, baroque, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-962ec7c6-0601-11e8-ae97-52543be04c81",
@@ -722,7 +945,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "962ec7c6-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical, strauss"
+      "tags": "Radio Browser, classical, strauss, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96250be4-0601-11e8-ae97-52543be04c81",
@@ -735,7 +960,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "96250be4-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical, mozart"
+      "tags": "Radio Browser, classical, mozart, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-963b8a47-0601-11e8-ae97-52543be04c81",
@@ -748,7 +975,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "963b8a47-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, easy listening, piano"
+      "tags": "Radio Browser, easy listening, piano, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96301845-0601-11e8-ae97-52543be04c81",
@@ -761,7 +990,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "96301845-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, baroque, classical"
+      "tags": "Radio Browser, baroque, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-962ed0ef-0601-11e8-ae97-52543be04c81",
@@ -774,7 +1005,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "962ed0ef-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical, vivaldi"
+      "tags": "Radio Browser, classical, vivaldi, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-4f4a3176-343c-4571-ac03-0dad7c5f0a09",
@@ -787,7 +1020,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 192,
       "uuid": "4f4a3176-343c-4571-ac03-0dad7c5f0a09",
-      "tags": "Radio Browser, chill, chillhop, chillout, lo-fi"
+      "tags": "Radio Browser, chill, chillhop, chillout, lo-fi, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-41fbe760-75f0-46a9-aef4-9283667b58dc",
@@ -800,7 +1035,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "41fbe760-75f0-46a9-aef4-9283667b58dc",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-9641edb9-0601-11e8-ae97-52543be04c81",
@@ -813,7 +1050,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "9641edb9-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-9625d0fa-0601-11e8-ae97-52543be04c81",
@@ -826,7 +1065,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "9625d0fa-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, baroque, classical, early music"
+      "tags": "Radio Browser, baroque, classical, early music, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-2815bbc7-2cbf-11e8-91bf-52543be04c81",
@@ -839,7 +1080,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 320,
       "uuid": "2815bbc7-2cbf-11e8-91bf-52543be04c81",
-      "tags": "Radio Browser, chillout, lounge, relaxing"
+      "tags": "Radio Browser, chillout, lounge, relaxing, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-1111c128-3215-49dd-9741-7858967455c4",
@@ -852,7 +1095,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 320,
       "uuid": "1111c128-3215-49dd-9741-7858967455c4",
-      "tags": "Radio Browser, ambient, chillout, lullaby, relaxing"
+      "tags": "Radio Browser, ambient, chillout, lullaby, relaxing, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-f37ed4e9-b930-4ff3-a7c6-a44a96c5877e",
@@ -865,7 +1110,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "f37ed4e9-b930-4ff3-a7c6-a44a96c5877e",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-11b52be4-df72-11e9-a8ba-52543be04c81",
@@ -878,7 +1125,9 @@ enum FreeRadioCatalog {
       "codec": "aac",
       "bitrate": 64,
       "uuid": "11b52be4-df72-11e9-a8ba-52543be04c81",
-      "tags": "Radio Browser, ambient, atmospheric, chillout, easy listening"
+      "tags": "Radio Browser, ambient, atmospheric, chillout, easy listening, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-1e8ba89b-7dcd-4d62-a20d-073739df672d",
@@ -891,7 +1140,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 192,
       "uuid": "1e8ba89b-7dcd-4d62-a20d-073739df672d",
-      "tags": "Radio Browser, ambient, ambient and relaxation music, chill, chillout"
+      "tags": "Radio Browser, ambient, ambient and relaxation music, chill, chillout, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-4abe67bd-cd14-418e-88c3-284f1ef8c487",
@@ -904,7 +1155,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "4abe67bd-cd14-418e-88c3-284f1ef8c487",
-      "tags": "Radio Browser, celtic, classical, hits, music"
+      "tags": "Radio Browser, celtic, classical, hits, music, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-96162e74-0601-11e8-ae97-52543be04c81",
@@ -917,7 +1170,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "96162e74-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classic, classical"
+      "tags": "Radio Browser, classic, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-5ebbc7bb-b3e3-4a5c-b660-cb7ab2615ac4",
@@ -930,7 +1185,9 @@ enum FreeRadioCatalog {
       "codec": "aac",
       "bitrate": 64,
       "uuid": "5ebbc7bb-b3e3-4a5c-b660-cb7ab2615ac4",
-      "tags": "Radio Browser, big band, easy listening, instrumental"
+      "tags": "Radio Browser, big band, easy listening, instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-c528303b-3f8b-11e9-aa55-52543be04c81",
@@ -943,7 +1200,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "c528303b-3f8b-11e9-aa55-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-ffd351fe-219e-4c6e-b14f-9c2e02fbe45e",
@@ -956,7 +1215,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 0,
       "uuid": "ffd351fe-219e-4c6e-b14f-9c2e02fbe45e",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-963712bc-0601-11e8-ae97-52543be04c81",
@@ -969,7 +1230,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "963712bc-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-686a0847-a519-460d-b351-831e1a80d516",
@@ -982,7 +1245,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 320,
       "uuid": "686a0847-a519-460d-b351-831e1a80d516",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-961d4dec-0601-11e8-ae97-52543be04c81",
@@ -995,7 +1260,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "961d4dec-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-4dad0ae3-720a-434e-b350-7186e4c5ea6f",
@@ -1008,7 +1275,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 160,
       "uuid": "4dad0ae3-720a-434e-b350-7186e4c5ea6f",
-      "tags": "Radio Browser, ambient, ambient and relaxation music, nature"
+      "tags": "Radio Browser, ambient, ambient and relaxation music, nature, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-95277bca-2c9a-4c08-b2e7-0854e5793f8e",
@@ -1021,7 +1290,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "95277bca-2c9a-4c08-b2e7-0854e5793f8e",
-      "tags": "Radio Browser, ambient, ambient and relaxation music, nature, rainorshine"
+      "tags": "Radio Browser, ambient, ambient and relaxation music, nature, rainorshine, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-bbae7603-b9c0-42fe-a1f5-da8f424baa8b",
@@ -1034,7 +1305,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 320,
       "uuid": "bbae7603-b9c0-42fe-a1f5-da8f424baa8b",
-      "tags": "Radio Browser, chillout, lounge, smooth jazz"
+      "tags": "Radio Browser, chillout, lounge, smooth jazz, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-3653b75c-0116-11ea-bbf2-52543be04c81",
@@ -1047,7 +1320,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "3653b75c-0116-11ea-bbf2-52543be04c81",
-      "tags": "Radio Browser, 2 stations, 24/7, chill, chillout"
+      "tags": "Radio Browser, 2 stations, 24/7, chill, chillout, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-c04ed475-b85a-4b99-ba69-c7edbedebdaf",
@@ -1060,7 +1335,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "c04ed475-b85a-4b99-ba69-c7edbedebdaf",
-      "tags": "Radio Browser, instrumental, piano, relax"
+      "tags": "Radio Browser, instrumental, piano, relax",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-701d3a6d-06e0-4d1f-9521-7742e725ba94",
@@ -1073,7 +1350,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "701d3a6d-06e0-4d1f-9521-7742e725ba94",
-      "tags": "Radio Browser, #chillout, chillout, electronic"
+      "tags": "Radio Browser, #chillout, chillout, electronic, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-564e60e1-ae3a-11e8-aa67-52543be04c81",
@@ -1086,7 +1365,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "564e60e1-ae3a-11e8-aa67-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-5e715331-d8ae-11e8-a9cc-52543be04c81",
@@ -1099,7 +1380,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "5e715331-d8ae-11e8-a9cc-52543be04c81",
-      "tags": "Radio Browser, ambient, instrumental, soft music"
+      "tags": "Radio Browser, ambient, instrumental, soft music",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-9f57367e-96b1-4e52-97a0-0bc37cf6957a",
@@ -1112,7 +1395,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "9f57367e-96b1-4e52-97a0-0bc37cf6957a",
-      "tags": "Radio Browser, classical, piano, sleep"
+      "tags": "Radio Browser, classical, piano, sleep, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-radio-art-relaxing-violin-piano-cello",
@@ -1125,7 +1410,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 0,
       "uuid": null,
-      "tags": "Radio Browser"
+      "tags": "Radio Browser, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-bd8e4968-ae38-11e8-aa67-52543be04c81",
@@ -1138,7 +1425,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 96,
       "uuid": "bd8e4968-ae38-11e8-aa67-52543be04c81",
-      "tags": "Radio Browser, ambient, instrumental"
+      "tags": "Radio Browser, ambient, instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-67a91981-4654-4d8e-9534-a970d4d60c3c",
@@ -1151,7 +1440,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "67a91981-4654-4d8e-9534-a970d4d60c3c",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-960dc513-0601-11e8-ae97-52543be04c81",
@@ -1164,7 +1455,9 @@ enum FreeRadioCatalog {
       "codec": "aac+",
       "bitrate": 48,
       "uuid": "960dc513-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-dfe95eca-06e0-11e9-a80b-52543be04c81",
@@ -1177,7 +1470,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 192,
       "uuid": "dfe95eca-06e0-11e9-a80b-52543be04c81",
-      "tags": "Radio Browser, instrumental"
+      "tags": "Radio Browser, instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-sleep-radio",
@@ -1190,7 +1485,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 0,
       "uuid": null,
-      "tags": "Radio Browser"
+      "tags": "Radio Browser, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-963dc372-0601-11e8-ae97-52543be04c81",
@@ -1203,7 +1500,9 @@ enum FreeRadioCatalog {
       "codec": "aac+",
       "bitrate": 192,
       "uuid": "963dc372-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, movie, richmond, soundtrack"
+      "tags": "Radio Browser, movie, richmond, soundtrack, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-dcf4d7aa-f7d5-11e8-a471-52543be04c81",
@@ -1216,7 +1515,9 @@ enum FreeRadioCatalog {
       "codec": "aac",
       "bitrate": 128,
       "uuid": "dcf4d7aa-f7d5-11e8-a471-52543be04c81",
-      "tags": "Radio Browser, baroque, classical"
+      "tags": "Radio Browser, baroque, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-f4562879-908f-4dc8-8908-d6c78b238e69",
@@ -1229,7 +1530,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "f4562879-908f-4dc8-8908-d6c78b238e69",
-      "tags": "Radio Browser, classical"
+      "tags": "Radio Browser, classical, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "rb-960ac54b-0601-11e8-ae97-52543be04c81",
@@ -1242,7 +1545,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 128,
       "uuid": "960ac54b-0601-11e8-ae97-52543be04c81",
-      "tags": "Radio Browser, classical, relax"
+      "tags": "Radio Browser, classical, relax, Instrumental",
+      "homepage": "https://www.radio-browser.info/",
+      "style": "instrumental"
     },
     {
       "id": "ic-immersound",
@@ -1255,7 +1560,9 @@ enum FreeRadioCatalog {
       "codec": "mp3",
       "bitrate": 0,
       "uuid": null,
-      "tags": "Icecast"
+      "tags": "Icecast, Instrumental",
+      "homepage": "https://dir.xiph.org/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s34682",
@@ -1268,7 +1575,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, TuneIn"
+      "tags": "TuneIn, TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s34682/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s8880",
@@ -1281,7 +1590,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, TuneIn"
+      "tags": "TuneIn, TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s8880/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s105932",
@@ -1294,7 +1605,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, TuneIn"
+      "tags": "TuneIn, TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s105932/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s306577",
@@ -1307,7 +1620,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s306577/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s220755",
@@ -1320,7 +1635,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s220755/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s203450",
@@ -1333,7 +1650,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s203450/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361882",
@@ -1346,7 +1665,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s361882/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321104",
@@ -1359,7 +1680,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321104/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s158097",
@@ -1372,7 +1695,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s158097/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310835",
@@ -1385,7 +1710,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s310835/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s190314",
@@ -1398,7 +1725,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s190314/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321102",
@@ -1411,7 +1740,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321102/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321103",
@@ -1424,7 +1755,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321103/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361887",
@@ -1437,7 +1770,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s361887/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s343295",
@@ -1450,7 +1785,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s343295/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s221540",
@@ -1463,7 +1800,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s221540/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142801",
@@ -1476,7 +1815,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s142801/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s302881",
@@ -1489,7 +1830,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s302881/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321184",
@@ -1502,7 +1845,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321184/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s282997",
@@ -1515,7 +1860,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s282997/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321179",
@@ -1528,7 +1875,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321179/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s240424",
@@ -1541,7 +1890,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s240424/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s335562",
@@ -1554,7 +1905,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s335562/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s172068",
@@ -1567,7 +1920,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s172068/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320480",
@@ -1580,7 +1935,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s320480/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s17364",
@@ -1593,7 +1950,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s17364/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s305553",
@@ -1606,7 +1965,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s305553/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321180",
@@ -1619,7 +1980,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321180/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s336624",
@@ -1632,7 +1995,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s336624/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s132271",
@@ -1645,7 +2010,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s132271/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s359751",
@@ -1658,7 +2025,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s359751/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s275739",
@@ -1671,7 +2040,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s275739/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s260893",
@@ -1684,7 +2055,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s260893/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s257734",
@@ -1697,7 +2070,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s257734/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321178",
@@ -1710,7 +2085,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321178/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s132812",
@@ -1723,7 +2100,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s132812/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s228215",
@@ -1736,7 +2115,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s228215/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s237131",
@@ -1749,7 +2130,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s237131/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s213374",
@@ -1762,7 +2145,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s213374/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s206475",
@@ -1775,7 +2160,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s206475/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s51002",
@@ -1788,7 +2175,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s51002/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355583",
@@ -1801,7 +2190,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s355583/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s238256",
@@ -1814,7 +2205,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s238256/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s205347",
@@ -1827,7 +2220,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s205347/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s184695",
@@ -1840,7 +2235,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s184695/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321182",
@@ -1853,7 +2250,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321182/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s215840",
@@ -1866,7 +2265,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s215840/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s302899",
@@ -1879,7 +2280,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s302899/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s232518",
@@ -1892,7 +2295,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s232518/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142246",
@@ -1905,7 +2310,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s142246/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321064",
@@ -1918,7 +2325,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s321064/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321083",
@@ -1931,7 +2340,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s321083/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s290623",
@@ -1944,7 +2355,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s290623/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s133513",
@@ -1957,7 +2370,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s133513/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s247260",
@@ -1970,7 +2385,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s247260/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s89783",
@@ -1983,7 +2400,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s89783/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s89792",
@@ -1996,7 +2415,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s89792/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142273",
@@ -2009,7 +2430,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s142273/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s277998",
@@ -2022,7 +2445,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s277998/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s290439",
@@ -2035,7 +2460,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s290439/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s282482",
@@ -2048,7 +2475,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s282482/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s257653",
@@ -2061,7 +2490,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s257653/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s290440",
@@ -2074,7 +2505,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s290440/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s257672",
@@ -2087,7 +2520,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s257672/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s279400",
@@ -2100,7 +2535,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s279400/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s360929",
@@ -2113,7 +2550,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Christmas Instrumental"
+      "tags": "TuneIn, Christmas Instrumental",
+      "homepage": "https://tunein.com/radio/s360929/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309932",
@@ -2126,7 +2565,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309932/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309935",
@@ -2139,7 +2580,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309935/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309936",
@@ -2152,7 +2595,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309936/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309933",
@@ -2165,7 +2610,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309933/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309934",
@@ -2178,7 +2625,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309934/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s345086",
@@ -2191,7 +2640,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s345086/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s289739",
@@ -2204,7 +2655,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s289739/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s268386",
@@ -2217,7 +2670,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s268386/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s231720",
@@ -2230,7 +2685,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s231720/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s260558",
@@ -2243,7 +2700,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s260558/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s284213",
@@ -2256,7 +2715,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s284213/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s319565",
@@ -2269,7 +2730,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s319565/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s35951",
@@ -2282,7 +2745,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s35951/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s358609",
@@ -2295,7 +2760,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s358609/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s279629",
@@ -2308,7 +2775,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s279629/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362694",
@@ -2321,7 +2790,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s362694/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s6372",
@@ -2334,7 +2805,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s6372/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s306553",
@@ -2347,7 +2820,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s306553/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s55415",
@@ -2360,7 +2835,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s55415/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s343696",
@@ -2373,7 +2850,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s343696/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320276",
@@ -2386,7 +2865,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s320276/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s244379",
@@ -2399,7 +2880,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s244379/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s302790",
@@ -2412,7 +2895,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s302790/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s148324",
@@ -2425,7 +2910,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s148324/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s87673",
@@ -2438,7 +2925,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s87673/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362192",
@@ -2451,7 +2940,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s362192/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362100",
@@ -2464,7 +2955,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s362100/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s231527",
@@ -2477,7 +2970,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s231527/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s97464",
@@ -2490,7 +2985,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s97464/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s314621",
@@ -2503,7 +3000,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s314621/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s311379",
@@ -2516,7 +3015,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s311379/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s101578",
@@ -2529,7 +3030,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s101578/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s305749",
@@ -2542,7 +3045,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s305749/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s347523",
@@ -2555,7 +3060,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s347523/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s349223",
@@ -2568,7 +3075,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s349223/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s357045",
@@ -2581,7 +3090,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s357045/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s109548",
@@ -2594,7 +3105,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s109548/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s10869",
@@ -2607,7 +3120,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s10869/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s1749",
@@ -2620,7 +3135,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s1749/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s238408",
@@ -2633,7 +3150,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s238408/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s364653",
@@ -2646,7 +3165,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s364653/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321084",
@@ -2659,7 +3180,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s321084/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s234173",
@@ -2672,7 +3195,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s234173/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s311640",
@@ -2685,7 +3210,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s311640/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s360606",
@@ -2698,7 +3225,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s360606/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362123",
@@ -2711,7 +3240,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s362123/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362559",
@@ -2724,7 +3255,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s362559/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s67246",
@@ -2737,7 +3270,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s67246/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s28152",
@@ -2750,7 +3285,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s28152/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s301787",
@@ -2763,7 +3300,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s301787/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s27729",
@@ -2776,7 +3315,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s27729/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s99874",
@@ -2789,7 +3330,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s99874/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s224735",
@@ -2802,7 +3345,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s224735/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s156850",
@@ -2815,7 +3360,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s156850/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142210",
@@ -2828,7 +3375,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s142210/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s129352",
@@ -2841,7 +3390,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s129352/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s311427",
@@ -2854,7 +3405,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s311427/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321091",
@@ -2867,7 +3420,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s321091/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s311450",
@@ -2880,7 +3435,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s311450/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s346896",
@@ -2893,7 +3450,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s346896/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s185738",
@@ -2906,7 +3465,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s185738/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s363027",
@@ -2919,7 +3480,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s363027/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s332172",
@@ -2932,7 +3495,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s332172/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351919",
@@ -2945,7 +3510,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s351919/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351304",
@@ -2958,7 +3525,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s351304/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361012",
@@ -2971,7 +3540,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s361012/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s295253",
@@ -2984,7 +3555,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s295253/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355815",
@@ -2997,7 +3570,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s355815/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s258107",
@@ -3010,7 +3585,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s258107/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s219265",
@@ -3023,7 +3600,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s219265/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s133393",
@@ -3036,7 +3615,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s133393/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s300606",
@@ -3049,7 +3630,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s300606/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s47723",
@@ -3062,7 +3645,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s47723/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s297919",
@@ -3075,7 +3660,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s297919/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s255925",
@@ -3088,7 +3675,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s255925/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s136618",
@@ -3101,7 +3690,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s136618/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s213714",
@@ -3114,7 +3705,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s213714/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s262659",
@@ -3127,7 +3720,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s262659/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s240423",
@@ -3140,7 +3735,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s240423/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s354929",
@@ -3153,7 +3750,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s354929/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s138091",
@@ -3166,7 +3765,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s138091/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s189571",
@@ -3179,7 +3780,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s189571/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s270007",
@@ -3192,7 +3795,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s270007/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s184641",
@@ -3205,7 +3810,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s184641/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351822",
@@ -3218,7 +3825,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s351822/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351825",
@@ -3231,7 +3840,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s351825/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352041",
@@ -3244,7 +3855,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s352041/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351837",
@@ -3257,7 +3870,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s351837/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355568",
@@ -3270,7 +3885,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s355568/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s231747",
@@ -3283,7 +3900,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s231747/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s272723",
@@ -3296,7 +3915,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s272723/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s283322",
@@ -3309,7 +3930,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s283322/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s270143",
@@ -3322,7 +3945,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s270143/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s287521",
@@ -3335,7 +3960,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s287521/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s222839",
@@ -3348,7 +3975,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s222839/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s221708",
@@ -3361,7 +3990,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s221708/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s68932",
@@ -3374,7 +4005,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s68932/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s329191",
@@ -3387,7 +4020,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s329191/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s143693",
@@ -3400,7 +4035,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s143693/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s358820",
@@ -3413,7 +4050,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s358820/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s307977",
@@ -3426,7 +4065,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s307977/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s111775",
@@ -3439,7 +4080,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s111775/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s76627",
@@ -3452,7 +4095,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s76627/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s336526",
@@ -3465,7 +4110,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s336526/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s311041",
@@ -3478,7 +4125,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s311041/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s166521",
@@ -3491,7 +4140,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s166521/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s274842",
@@ -3504,7 +4155,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s274842/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s21866",
@@ -3517,7 +4170,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s21866/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s354569",
@@ -3530,7 +4185,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s354569/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s297918",
@@ -3543,7 +4200,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s297918/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s262989",
@@ -3556,7 +4215,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s262989/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s254882",
@@ -3569,7 +4230,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s254882/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s206902",
@@ -3582,7 +4245,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s206902/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s221605",
@@ -3595,7 +4260,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s221605/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s302893",
@@ -3608,7 +4275,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s302893/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321564",
@@ -3621,7 +4290,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s321564/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s244748",
@@ -3634,7 +4305,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s244748/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s285775",
@@ -3647,7 +4320,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s285775/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352184",
@@ -3660,7 +4335,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s352184/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s267208",
@@ -3673,7 +4350,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s267208/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s364338",
@@ -3686,7 +4365,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s364338/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s16735",
@@ -3699,7 +4380,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s16735/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s106565",
@@ -3712,7 +4395,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s106565/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s325768",
@@ -3725,7 +4410,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s325768/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s256110",
@@ -3738,7 +4425,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s256110/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s356315",
@@ -3751,7 +4440,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s356315/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s240562",
@@ -3764,7 +4455,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s240562/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s119960",
@@ -3777,7 +4470,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s119960/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s141862",
@@ -3790,7 +4485,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s141862/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s289039",
@@ -3803,7 +4500,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s289039/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s22718",
@@ -3816,7 +4515,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s22718/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309759",
@@ -3829,7 +4530,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s309759/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s214678",
@@ -3842,7 +4545,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s214678/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s322842",
@@ -3855,7 +4560,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s322842/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s315868",
@@ -3868,7 +4575,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s315868/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s268754",
@@ -3881,7 +4590,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s268754/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355443",
@@ -3894,7 +4605,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s355443/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355015",
@@ -3907,7 +4620,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s355015/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362304",
@@ -3920,7 +4635,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s362304/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321680",
@@ -3933,7 +4650,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s321680/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s306649",
@@ -3946,7 +4665,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s306649/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361228",
@@ -3959,7 +4680,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s361228/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s350566",
@@ -3972,7 +4695,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s350566/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310777",
@@ -3985,7 +4710,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s310777/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s303481",
@@ -3998,7 +4725,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s303481/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s341191",
@@ -4011,7 +4740,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s341191/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352571",
@@ -4024,7 +4755,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s352571/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352697",
@@ -4037,7 +4770,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s352697/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s362242",
@@ -4050,7 +4785,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s362242/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s353423",
@@ -4063,7 +4800,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s353423/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352443",
@@ -4076,7 +4815,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lo-Fi"
+      "tags": "TuneIn, Lo-Fi, Instrumental",
+      "homepage": "https://tunein.com/radio/s352443/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s126408",
@@ -4089,7 +4830,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s126408/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s356804",
@@ -4102,7 +4845,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s356804/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321150",
@@ -4115,7 +4860,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321150/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321148",
@@ -4128,7 +4875,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321148/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321144",
@@ -4141,7 +4890,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321144/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355191",
@@ -4154,7 +4905,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s355191/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321190",
@@ -4167,7 +4920,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321190/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321080",
@@ -4180,7 +4935,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321080/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321082",
@@ -4193,7 +4950,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321082/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s358061",
@@ -4206,7 +4965,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s358061/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321087",
@@ -4219,7 +4980,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321087/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321066",
@@ -4232,7 +4995,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321066/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310375",
@@ -4245,7 +5010,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s310375/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310368",
@@ -4258,7 +5025,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s310368/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321118",
@@ -4271,7 +5040,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321118/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s349575",
@@ -4284,7 +5055,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s349575/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309595",
@@ -4297,7 +5070,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s309595/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361275",
@@ -4310,7 +5085,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s361275/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321130",
@@ -4323,7 +5100,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321130/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s99666",
@@ -4336,7 +5115,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s99666/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s49689",
@@ -4349,7 +5130,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s49689/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s99668",
@@ -4362,7 +5145,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s99668/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320485",
@@ -4375,7 +5160,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s320485/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s250283",
@@ -4388,7 +5175,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s250283/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320500",
@@ -4401,7 +5190,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s320500/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321135",
@@ -4414,7 +5205,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321135/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s329186",
@@ -4427,7 +5220,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s329186/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s318851",
@@ -4440,7 +5235,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s318851/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361884",
@@ -4453,7 +5250,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s361884/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s322961",
@@ -4466,7 +5265,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s322961/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321065",
@@ -4479,7 +5280,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321065/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s353413",
@@ -4492,7 +5295,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s353413/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361945",
@@ -4505,7 +5310,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s361945/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s359620",
@@ -4518,7 +5325,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s359620/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s307976",
@@ -4531,7 +5340,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s307976/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321117",
@@ -4544,7 +5355,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321117/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s352102",
@@ -4557,7 +5370,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s352102/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s325134",
@@ -4570,7 +5385,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s325134/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s247230",
@@ -4583,7 +5400,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s247230/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s247229",
@@ -4596,7 +5415,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s247229/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s281875",
@@ -4609,7 +5430,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s281875/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s238367",
@@ -4622,7 +5445,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s238367/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s364350",
@@ -4635,7 +5460,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s364350/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s364367",
@@ -4648,7 +5475,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s364367/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s364078",
@@ -4661,7 +5490,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s364078/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321067",
@@ -4674,7 +5505,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321067/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321131",
@@ -4687,7 +5520,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321131/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142243",
@@ -4700,7 +5535,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s142243/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321209",
@@ -4713,7 +5550,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321209/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321161",
@@ -4726,7 +5565,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321161/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321134",
@@ -4739,7 +5580,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321134/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321213",
@@ -4752,7 +5595,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321213/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321211",
@@ -4765,7 +5610,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s321211/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s280928",
@@ -4778,7 +5625,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, New Age"
+      "tags": "TuneIn, New Age, Instrumental",
+      "homepage": "https://tunein.com/radio/s280928/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309764",
@@ -4791,7 +5640,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s309764/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s48961",
@@ -4804,7 +5655,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s48961/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s48965",
@@ -4817,7 +5670,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s48965/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s250911",
@@ -4830,7 +5685,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s250911/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s90495",
@@ -4843,7 +5700,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s90495/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s95096",
@@ -4856,7 +5715,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s95096/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361820",
@@ -4869,7 +5730,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s361820/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361885",
@@ -4882,7 +5745,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s361885/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321232",
@@ -4895,7 +5760,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321232/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s31824",
@@ -4908,7 +5775,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s31824/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s295679",
@@ -4921,7 +5790,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s295679/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s21414",
@@ -4934,7 +5805,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s21414/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321168",
@@ -4947,7 +5820,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321168/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s182573",
@@ -4960,7 +5835,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s182573/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310038",
@@ -4973,7 +5850,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310038/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s191786",
@@ -4986,7 +5865,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s191786/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310030",
@@ -4999,7 +5880,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310030/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310036",
@@ -5012,7 +5895,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310036/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142213",
@@ -5025,7 +5910,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s142213/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s103212",
@@ -5038,7 +5925,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s103212/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142716",
@@ -5051,7 +5940,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s142716/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142214",
@@ -5064,7 +5955,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s142214/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s280686",
@@ -5077,7 +5970,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s280686/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s262360",
@@ -5090,7 +5985,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s262360/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s132813",
@@ -5103,7 +6000,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s132813/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351824",
@@ -5116,7 +6015,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s351824/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351832",
@@ -5129,7 +6030,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s351832/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s351833",
@@ -5142,7 +6045,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s351833/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320512",
@@ -5155,7 +6060,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320512/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320517",
@@ -5168,7 +6075,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320517/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320521",
@@ -5181,7 +6090,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320521/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320520",
@@ -5194,7 +6105,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320520/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320509",
@@ -5207,7 +6120,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320509/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320526",
@@ -5220,7 +6135,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320526/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320514",
@@ -5233,7 +6150,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320514/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320507",
@@ -5246,7 +6165,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320507/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320527",
@@ -5259,7 +6180,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320527/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320519",
@@ -5272,7 +6195,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320519/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320522",
@@ -5285,7 +6210,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320522/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320516",
@@ -5298,7 +6225,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320516/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320528",
@@ -5311,7 +6240,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320528/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320529",
@@ -5324,7 +6255,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320529/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320525",
@@ -5337,7 +6270,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320525/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320524",
@@ -5350,7 +6285,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320524/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320513",
@@ -5363,7 +6300,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320513/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320531",
@@ -5376,7 +6315,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320531/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320515",
@@ -5389,7 +6330,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320515/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320511",
@@ -5402,7 +6345,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320511/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320508",
@@ -5415,7 +6360,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320508/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320510",
@@ -5428,7 +6375,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320510/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320530",
@@ -5441,7 +6390,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320530/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320523",
@@ -5454,7 +6405,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320523/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320518",
@@ -5467,7 +6420,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320518/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310369",
@@ -5480,7 +6435,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310369/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309940",
@@ -5493,7 +6450,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s309940/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310029",
@@ -5506,7 +6465,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310029/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310031",
@@ -5519,7 +6480,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310031/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321208",
@@ -5532,7 +6495,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321208/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321086",
@@ -5545,7 +6510,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321086/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321689",
@@ -5558,7 +6525,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321689/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321218",
@@ -5571,7 +6540,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321218/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s338979",
@@ -5584,7 +6555,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s338979/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s133516",
@@ -5597,7 +6570,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s133516/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s235835",
@@ -5610,7 +6585,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s235835/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s250282",
@@ -5623,7 +6600,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s250282/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320484",
@@ -5636,7 +6615,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320484/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s308918",
@@ -5649,7 +6630,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s308918/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s342459",
@@ -5662,7 +6645,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s342459/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s282479",
@@ -5675,7 +6660,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s282479/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321099",
@@ -5688,7 +6675,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321099/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321174",
@@ -5701,7 +6690,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321174/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310033",
@@ -5714,7 +6705,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310033/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s88374",
@@ -5727,7 +6720,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s88374/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310035",
@@ -5740,7 +6735,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310035/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s22654",
@@ -5753,7 +6750,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s22654/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s342655",
@@ -5766,7 +6765,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s342655/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321173",
@@ -5779,7 +6780,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321173/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321172",
@@ -5792,7 +6795,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321172/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321166",
@@ -5805,7 +6810,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321166/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321170",
@@ -5818,7 +6825,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321170/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309263",
@@ -5831,7 +6840,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s309263/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310028",
@@ -5844,7 +6855,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310028/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310899",
@@ -5857,7 +6870,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310899/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321222",
@@ -5870,7 +6885,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321222/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s249710",
@@ -5883,7 +6900,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s249710/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s221684",
@@ -5896,7 +6915,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s221684/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s247239",
@@ -5909,7 +6930,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s247239/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s154174",
@@ -5922,7 +6945,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s154174/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s187590",
@@ -5935,7 +6960,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s187590/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320293",
@@ -5948,7 +6975,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s320293/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310037",
@@ -5961,7 +6990,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310037/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s177672",
@@ -5974,7 +7005,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s177672/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142209",
@@ -5987,7 +7020,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s142209/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s132816",
@@ -6000,7 +7035,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s132816/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s132811",
@@ -6013,7 +7050,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s132811/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310034",
@@ -6026,7 +7065,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s310034/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s280576",
@@ -6039,7 +7080,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s280576/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s35299",
@@ -6052,7 +7095,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s35299/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321167",
@@ -6065,7 +7110,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s321167/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s325770",
@@ -6078,7 +7125,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s325770/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s238788",
@@ -6091,7 +7140,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s238788/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s28807",
@@ -6104,7 +7155,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s28807/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s51195",
@@ -6117,7 +7170,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s51195/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s128726",
@@ -6130,7 +7185,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s128726/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s22608",
@@ -6143,7 +7200,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Piano"
+      "tags": "TuneIn, Piano, Instrumental",
+      "homepage": "https://tunein.com/radio/s22608/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s233145",
@@ -6156,7 +7215,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s233145/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s164357",
@@ -6169,7 +7230,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s164357/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s335109",
@@ -6182,7 +7245,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s335109/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309689",
@@ -6195,7 +7260,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s309689/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s97088",
@@ -6208,7 +7275,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s97088/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s357497",
@@ -6221,7 +7290,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s357497/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s320482",
@@ -6234,7 +7305,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s320482/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321077",
@@ -6247,7 +7320,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s321077/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s343790",
@@ -6260,7 +7335,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s343790/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s314386",
@@ -6273,7 +7350,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s314386/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s266086",
@@ -6286,7 +7365,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s266086/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s322147",
@@ -6299,7 +7380,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s322147/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s310376",
@@ -6312,7 +7395,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s310376/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s336421",
@@ -6325,7 +7410,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s336421/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321187",
@@ -6338,7 +7425,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Ambient"
+      "tags": "TuneIn, Ambient, Instrumental",
+      "homepage": "https://tunein.com/radio/s321187/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s187592",
@@ -6351,7 +7440,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Celtic Instrumental"
+      "tags": "TuneIn, Celtic Instrumental",
+      "homepage": "https://tunein.com/radio/s187592/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s318238",
@@ -6364,7 +7455,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s318238/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s191785",
@@ -6377,7 +7470,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s191785/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s179297",
@@ -6390,7 +7485,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s179297/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s266704",
@@ -6403,7 +7500,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s266704/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s309474",
@@ -6416,7 +7515,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s309474/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s7332",
@@ -6429,7 +7530,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Classical"
+      "tags": "TuneIn, Classical, Instrumental",
+      "homepage": "https://tunein.com/radio/s7332/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361706",
@@ -6442,7 +7545,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s361706/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s268677",
@@ -6455,7 +7560,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s268677/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s233642",
@@ -6468,7 +7575,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s233642/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s192669",
@@ -6481,7 +7590,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s192669/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s250092",
@@ -6494,7 +7605,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s250092/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321100",
@@ -6507,7 +7620,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s321100/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s247240",
@@ -6520,7 +7635,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s247240/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321169",
@@ -6533,7 +7650,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Guitar Instrumental"
+      "tags": "TuneIn, Guitar Instrumental",
+      "homepage": "https://tunein.com/radio/s321169/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s321097",
@@ -6546,7 +7665,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s321097/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142242",
@@ -6559,7 +7680,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s142242/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s299278",
@@ -6572,7 +7695,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s299278/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s361881",
@@ -6585,7 +7710,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s361881/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s142247",
@@ -6598,7 +7725,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s142247/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s187593",
@@ -6611,7 +7740,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Instrumental"
+      "tags": "TuneIn, Instrumental",
+      "homepage": "https://tunein.com/radio/s187593/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s279962",
@@ -6624,7 +7755,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s279962/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s255585",
@@ -6637,7 +7770,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Jazz Instrumental"
+      "tags": "TuneIn, Jazz Instrumental",
+      "homepage": "https://tunein.com/radio/s255585/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s358923",
@@ -6650,7 +7785,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lounge"
+      "tags": "TuneIn, Lounge, Instrumental",
+      "homepage": "https://tunein.com/radio/s358923/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s308844",
@@ -6663,7 +7800,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lounge"
+      "tags": "TuneIn, Lounge, Instrumental",
+      "homepage": "https://tunein.com/radio/s308844/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s355357",
@@ -6676,7 +7815,9 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Lounge"
+      "tags": "TuneIn, Lounge, Instrumental",
+      "homepage": "https://tunein.com/radio/s355357/",
+      "style": "instrumental"
     },
     {
       "id": "ti-s143560",
@@ -6689,7 +7830,4704 @@ enum FreeRadioCatalog {
       "codec": "",
       "bitrate": 0,
       "uuid": null,
-      "tags": "TuneIn, Soundtracks"
+      "tags": "TuneIn, Soundtracks, Instrumental",
+      "homepage": "https://tunein.com/radio/s143560/",
+      "style": "instrumental"
+    },
+    {
+      "id": "sm-brfm",
+      "name": "Black Rock FM",
+      "source": "SomaFM",
+      "detail": "Vocal · From the Black Rock Desert playa to the world, year round!",
+      "image": "https://api.somafm.com/logos/512/brfm512.jpg?v=1342301053",
+      "streamUrl": "https://ice6.somafm.com/brfm-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/brfm/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-bootliquor",
+      "name": "Boot Liquor",
+      "source": "SomaFM",
+      "detail": "Vocal · Americana Roots music for Cowhands, Cowpokes and Cowtippers",
+      "image": "https://api.somafm.com/logos/512/bootliquor512.png?v=1299122797",
+      "streamUrl": "https://ice6.somafm.com/bootliquor-320-mp3",
+      "codec": "mp3",
+      "bitrate": 320,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/bootliquor/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-bossa",
+      "name": "Bossa Beyond",
+      "source": "SomaFM",
+      "detail": "Vocal · Silky-smooth, laid-back Brazilian-style rhythms of Bossa Nova, Samba and beyond",
+      "image": "https://api.somafm.com/logos/512/bossa-512.jpg?v=1695354225",
+      "streamUrl": "https://ice6.somafm.com/bossa-256-mp3",
+      "codec": "mp3",
+      "bitrate": 256,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/bossa/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-xmasrocks",
+      "name": "Christmas Rocks!",
+      "source": "SomaFM",
+      "detail": "Vocal · Have your self an indie/alternative holiday season!",
+      "image": "https://api.somafm.com/logos/512/xmasrocks512.png?v=1351794645",
+      "streamUrl": "https://ice6.somafm.com/xmasrocks-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/xmasrocks/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-covers",
+      "name": "Covers",
+      "source": "SomaFM",
+      "detail": "Vocal · Just covers. Songs you know by artists you don't. We've got you covered.",
+      "image": "https://api.somafm.com/logos/512/covers512.png?v=1299185740",
+      "streamUrl": "https://ice6.somafm.com/covers-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/covers/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-folkfwd",
+      "name": "Folk Forward",
+      "source": "SomaFM",
+      "detail": "Vocal · Indie Folk, Alt-folk and the occasional folk classics.",
+      "image": "https://api.somafm.com/logos/512/folkfwd512.png?v=1359700713",
+      "streamUrl": "https://ice2.somafm.com/folkfwd-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/folkfwd/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-reggae",
+      "name": "Heavyweight Reggae",
+      "source": "SomaFM",
+      "detail": "Vocal · Reggae, Ska, Rocksteady classic and deep tracks.",
+      "image": "https://api.somafm.com/logos/512/reggae512.png?v=1579290024",
+      "streamUrl": "https://ice2.somafm.com/reggae-256-mp3",
+      "codec": "mp3",
+      "bitrate": 256,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/reggae/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-insound",
+      "name": "The In-Sound",
+      "source": "SomaFM",
+      "detail": "Vocal · 60s/70s Hipster Euro Pop where psychedelic melodies meets groovy vibes.",
+      "image": "https://api.somafm.com/logos/512/insound-512.jpg?v=1695848542",
+      "streamUrl": "https://ice2.somafm.com/insound-256-mp3",
+      "codec": "mp3",
+      "bitrate": 256,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/insound/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-indiepop",
+      "name": "Indie Pop Rocks!",
+      "source": "SomaFM",
+      "detail": "Vocal · New and classic favorite indie pop tracks.",
+      "image": "https://api.somafm.com/logos/512/indiepop512.png?v=1299187943",
+      "streamUrl": "https://ice2.somafm.com/indiepop-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/indiepop/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-jollysoul",
+      "name": "Jolly Ol' Soul",
+      "source": "SomaFM",
+      "detail": "Vocal · Where we cut right to the soul of the season.",
+      "image": "https://api.somafm.com/logos/512/jollysoul512.png?v=1417386861",
+      "streamUrl": "https://ice2.somafm.com/jollysoul-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/jollysoul/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-seventies",
+      "name": "Left Coast 70s",
+      "source": "SomaFM",
+      "detail": "Vocal · Mellow album rock from the Seventies. Yacht not required.",
+      "image": "https://api.somafm.com/logos/512/seventies512.jpg?v=1435992015",
+      "streamUrl": "https://ice2.somafm.com/seventies-320-mp3",
+      "codec": "mp3",
+      "bitrate": 320,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/seventies/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-lush",
+      "name": "Lush",
+      "source": "SomaFM",
+      "detail": "Vocal · Sensuous and mellow female vocals, many with an electronic influence.",
+      "image": "https://api.somafm.com/logos/512/lush512.png?v=1317866644",
+      "streamUrl": "https://ice2.somafm.com/lush-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/lush/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-metal",
+      "name": "Metal Detector",
+      "source": "SomaFM",
+      "detail": "Vocal · From black to doom, prog to sludge, thrash to post, stoner to crossover, punk to industrial.",
+      "image": "https://api.somafm.com/logos/512/metal512.png?v=1438371170",
+      "streamUrl": "https://ice2.somafm.com/metal-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/metal/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-poptron",
+      "name": "PopTron",
+      "source": "SomaFM",
+      "detail": "Vocal · Electropop and indie dance rock with sparkle and pop.",
+      "image": "https://api.somafm.com/logos/512/poptron512.png?v=1299124019",
+      "streamUrl": "https://ice2.somafm.com/poptron-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/poptron/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-7soul",
+      "name": "Seven Inch Soul",
+      "source": "SomaFM",
+      "detail": "Vocal · Vintage soul tracks from the original 45 RPM vinyl.",
+      "image": "https://api.somafm.com/logos/512/7soul512.png?v=1396144489",
+      "streamUrl": "https://ice2.somafm.com/7soul-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/7soul/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-live",
+      "name": "SomaFM Live",
+      "source": "SomaFM",
+      "detail": "Vocal · Special Live Events and rebroadcasts of past live events",
+      "image": "https://api.somafm.com/logos/512/live512.png?v=1782343536",
+      "streamUrl": "https://ice2.somafm.com/live-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/live/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-specials",
+      "name": "SomaFM Specials",
+      "source": "SomaFM",
+      "detail": "Vocal · Now featuring Afternoon Jazz, Wavepool, DubX, The Surf Report & More!",
+      "image": "https://api.somafm.com/logos/512/specials512.png?v=1674947103",
+      "streamUrl": "https://ice2.somafm.com/specials-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/specials/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-suburbsofgoa",
+      "name": "Suburbs of Goa",
+      "source": "SomaFM",
+      "detail": "Vocal · Desi-influenced Asian world beats and beyond.",
+      "image": "https://api.somafm.com/logos/512/suburbsofgoa512.png?v=1299205961",
+      "streamUrl": "https://ice2.somafm.com/suburbsofgoa-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/suburbsofgoa/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-thistle",
+      "name": "ThistleRadio",
+      "source": "SomaFM",
+      "detail": "Vocal · Exploring music from Celtic roots and branches",
+      "image": "https://api.somafm.com/logos/512/thistle512.jpg?v=1433008752",
+      "streamUrl": "https://ice2.somafm.com/thistle-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/thistle/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-u80s",
+      "name": "Underground 80s",
+      "source": "SomaFM",
+      "detail": "Vocal · Early 80s UK Synthpop and a bit of New Wave.",
+      "image": "https://api.somafm.com/logos/512/u80s512.png?v=1418528343",
+      "streamUrl": "https://ice2.somafm.com/u80s-256-mp3",
+      "codec": "mp3",
+      "bitrate": 256,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/u80s/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "sm-xmasinfrisko",
+      "name": "Xmas in Frisko",
+      "source": "SomaFM",
+      "detail": "Vocal · SomaFM's wacky and eclectic holiday mix. Not for the easily offended.",
+      "image": "https://api.somafm.com/logos/512/xmasinfrisko512.jpg?v=1444422061",
+      "streamUrl": "https://ice2.somafm.com/xmasinfrisko-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, SomaFM, SomaFM",
+      "homepage": "https://somafm.com/xmasinfrisko/",
+      "style": "vocal",
+      "group": "somafm-vocal"
+    },
+    {
+      "id": "rb-78012206-1aa1",
+      "name": "MANGORADIO",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "https://mangoradio.stream.laut.fm/mangoradio",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://laut.fm/mangoradio",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-962cc6df-0601",
+      "name": "Dance Wave! | MP3",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "https://dancewave.online/dance.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://dancewave.online/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-9617a958-0601",
+      "name": "Radio Paradise Main Mix (EU) 320k AAC",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://stream-uk1.radioparadise.com/aac-320",
+      "codec": "aac",
+      "bitrate": 320,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://radioparadise.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-d1a54d2e-623e",
+      "name": "Classic Vinyl HD",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "https://icecast.walmradio.com:8443/classic",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://walmradio.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-d28420a4-eccf",
+      "name": "101 SMOOTH JAZZ",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://jking.cdnstream1.com/b22139_128mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.101smoothjazz.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-961d9b63-0601",
+      "name": ".977 Country",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://24293.live.streamtheworld.com:3690/977_COUNTRY_SC",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.977music.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-961b7325-0601",
+      "name": ".977 80s",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://26433.live.streamtheworld.com/977_80_SC",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.977music.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-961d5c4e-0601",
+      "name": ".977 Hitz",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://15313.live.streamtheworld.com/977_HITS_SC",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.977music.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-964be8b7-0601",
+      "name": "Dance Wave Retro! | MP3",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "https://dancewave.online/retrodance.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://dancewave.online/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-961787d1-0601",
+      "name": "Frisky",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://stream2.friskyradio.com/frisky_mp3_hi",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.friskyradio.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-af6f51b1-0ca9",
+      "name": "Intense Radio - We love Dance 256K",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "https://secure.live-streams.nl/main",
+      "codec": "mp3",
+      "bitrate": 256,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.intense-radio.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-9606ceae-0601",
+      "name": "Radio Caroline",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://78.129.202.200:8040/;",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.radiocaroline.co.uk/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-bd9c1301-562d",
+      "name": "Kiss FM 106.5",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://online.kissfm.ua/KissFM",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.kissfm.ua/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "rb-961dbb40-0601",
+      "name": ".977 The Mix",
+      "source": "Radio Browser",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://15113.live.streamtheworld.com:3690/977_MIX_SC",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Radio Browser, Radio Browser",
+      "homepage": "https://www.977music.com/",
+      "style": "vocal",
+      "group": "radio-browser-vocal"
+    },
+    {
+      "id": "ic-aix-radio",
+      "name": "AiX Radio",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://cast4.my-control-panel.com:8093/autodj",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-azur-eclectic",
+      "name": "Azur Eclectic",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://ecmanager2.pro-fhi.net:3130/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-radio-mansfield-australi",
+      "name": "Radio Mansfield - Australia",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://c7.radioboss.fm:8291/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-mmg-radio-gospel",
+      "name": "MMG Radio Gospel",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://everest.servercast.com.br:1330/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-christian-hits-radio",
+      "name": "Christian Hits Radio",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://phoebe.streamerr.co:2800/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-lounge-music",
+      "name": "Lounge Music",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://radio.amgroupmkt.com:1630/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-elova-radio",
+      "name": "ELOVA RADIO",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://c44.radioboss.fm:8063/live",
+      "codec": "aac",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-whwr",
+      "name": "WHWR",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://pavo.prostreaming.net:8028/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ic-mix-altitude",
+      "name": "Mix Altitude",
+      "source": "Icecast",
+      "detail": "Vocal",
+      "image": null,
+      "streamUrl": "http://manager8.streamradio.fr:2680/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, Icecast, Icecast",
+      "homepage": "https://dir.xiph.org/",
+      "style": "vocal",
+      "group": "icecast-vocal"
+    },
+    {
+      "id": "ti-s234497",
+      "name": "Absolute Mix Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "http://audiovision.cdnstream1.com/2157_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s234497/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s102147",
+      "name": "Bolton FM (Bolton - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "http://radio.canstream.co.uk:8083/live.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s102147/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s10214",
+      "name": "Central FM (Glasgow - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://stream.rcs.revma.com/3p9gkcy5z72vv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s10214/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s348040",
+      "name": "Derby ONE (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://stream.aiir.com/qbgoiwyhsyquv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s348040/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s80451",
+      "name": "Kfm Radio (Dublin - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/K_FM.mp3?dist=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s80451/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s87423",
+      "name": "Northern Sound (Monaghan - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/NORTHERN_SOUND.mp3?dist=tunein&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5MywiaXNzIjoidGlzcnYifQ.n5nCQuaziVwSuW99srr_o4uQn66FU2tIrvmaCCssuZs",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s87423/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s80570",
+      "name": "Shannonside FM (Longford - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SHANNONSIDE_FM.mp3?dist=tunein&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5MywiaXNzIjoidGlzcnYifQ.n5nCQuaziVwSuW99srr_o4uQn66FU2tIrvmaCCssuZs",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s80570/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s22903",
+      "name": "Sunny 95 (Columbus - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wsnyfmmp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s22903/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s38878",
+      "name": "The Colorado Sound (Greeley - CO)",
+      "source": "TuneIn",
+      "detail": "Vocal · Adult Hits",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7891_96k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5MywiaXNzIjoidGlzcnYifQ.n5nCQuaziVwSuW99srr_o4uQn66FU2tIrvmaCCssuZs",
+      "codec": "mp3",
+      "bitrate": 96,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Adult Hits",
+      "homepage": "https://tunein.com/radio/s38878/",
+      "style": "vocal",
+      "group": "adult-hits"
+    },
+    {
+      "id": "ti-s90500",
+      "name": "181.FM True Blues (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "http://listen.181fm.com/181-blues_128k.mp3?noPreRoll=true",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s90500/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s336485",
+      "name": "A MISSISSIPPI BLUES (Toronto - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://cast1.torontocast.com:4450/;?type=http&nocache=1746940333",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s336485/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s183588",
+      "name": "Aardvark Blues FM (Houston-Galveston - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://streaming.live365.com/a36201",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s183588/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s213070",
+      "name": "Blues Music Fan Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://orbit.citrus3.com:8052/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s213070/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s286688",
+      "name": "HD Radio - The Blues (Milwaukee-Racine - WI)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://haradioblues-rfritschka.radioca.st/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s286688/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s31574",
+      "name": "KAXE (Grand Rapids - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/KAXEFM.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s31574/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s32239",
+      "name": "KDAQ (Shreveport - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "http://18123.live.streamtheworld.com:80/KDAQFM_SC?TGT=TuneIn&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjIxMDY0IiwiaWF0IjoxNzk0NjIwOTkxLCJ0ZC1yZWciOmZhbHNlfQ.r6yR4wYNWi3sPuTTG52jId5MkQT5RXX7FwtajQ5bQG8&DIST=TuneIn&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5MSwiaXNzIjoidGlzcnYifQ.F58mGLIu-R_3Fz0wIOqb6rU90_qNYYrwHb97gDu4C1s&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s32239/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s33019",
+      "name": "KHPR (Honolulu - HI)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "http://khpr-ice.streamguys1.com:80/khpr2",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s33019/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s219014",
+      "name": "Music City Roadhouse (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "http://streaming.live365.com/a73754",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s219014/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s35273",
+      "name": "San Diego's Jazz 88.3 (San Diego - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "http://ksds-ice.streamguys.com/ksds.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s35273/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s29063",
+      "name": "WGLT (Normal - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Blues",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/WGLT_NI.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Blues",
+      "homepage": "https://tunein.com/radio/s29063/",
+      "style": "vocal",
+      "group": "blues"
+    },
+    {
+      "id": "ti-s114109",
+      "name": "Boss Radio 66",
+      "source": "TuneIn",
+      "detail": "Vocal · Boss Radio",
+      "image": null,
+      "streamUrl": "http://cdn-cms.tunein.com/service/Audio/georestricted.enUS.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Boss Radio",
+      "homepage": "https://tunein.com/radio/s114109/",
+      "style": "vocal",
+      "group": "boss-radio"
+    },
+    {
+      "id": "ti-s232029",
+      "name": "D Park Radio Channel 1 (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://listen.openstream.co/3573/audio",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s232029/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s279402",
+      "name": "DISNEY (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://tunein-live-b.cdnstream1.com/3854_128.mp3?aw_0_1st.skey=1794620986&lat=29.953&lon=-90.0764&aw_0_1st.abtest=&aw_0_1st.stationId=s279402&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g76&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.affiliateIds=a40075%2ca38725%2ca39100&aw_0_1st.bandId=16&delivery=1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s279402/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s67862",
+      "name": "Fun Kids (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://listen-funkids.sharp-stream.com/funkids.mp3?platform=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s67862/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s308401",
+      "name": "Fun Kids Junior (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://listen-funkids.sharp-stream.com/funkidsjunior.mp3?platform=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s308401/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s309600",
+      "name": "Fun Kids Naps (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://stream.rcs.revma.com/pp2cg1z3tm0uv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s309600/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s309601",
+      "name": "Fun Kids Party (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://stream.rcs.revma.com/0gpwvpz3tm0uv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s309601/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s309598",
+      "name": "Fun Kids Silly (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://stream.rcs.revma.com/s1gvh2z3tm0uv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s309598/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s309604",
+      "name": "Fun Kids Soundtracks (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://stream.rcs.revma.com/x8wbda03tm0uv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s309604/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s340164",
+      "name": "Kids Corner (Somersworth - NH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://streaming.atlanticsunrisehosting.com/proxy/kidscorner/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s340164/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s262576",
+      "name": "Muppet Central Radio (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://listen.openstream.co/3835/audio",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s262576/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s67309",
+      "name": "Rock the Cradle (Minneapolis - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Children's Music",
+      "image": null,
+      "streamUrl": "https://rockthecradle.stream.publicradio.org/rockthecradle.mp3?srcid=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Children's Music",
+      "homepage": "https://tunein.com/radio/s67309/",
+      "style": "vocal",
+      "group": "children-s-music"
+    },
+    {
+      "id": "ti-s22472",
+      "name": "92.9 WBPM (Poughkeepsie - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "http://ais-sa1.streamon.fm/7832_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5OCwiaXNzIjoidGlzcnYifQ.zMeC79DntIo3C5aqHQmctEFXYAQBOO8IwdZP1sf9des",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s22472/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s22199",
+      "name": "96.5 Live Free Country (Bedford - NH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wmllfmmp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s22199/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s196839",
+      "name": "Absolute Classic Hits (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "http://audiovision.cdnstream1.com/2139_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s196839/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s27341",
+      "name": "Classic Hits 103.3 (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "http://18153.live.streamtheworld.com:80/WRQQFM_SC?TGT=TuneIn&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjIxMDY0IiwiaWF0IjoxNzk0NjIwOTk2LCJ0ZC1yZWciOmZhbHNlfQ.yX5Don6AX8FgUQvWYkFoBRq6WhlgBmt8Gmq4yHAlObc&DIST=TuneIn&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImxhdCI6IjI5Ljk1MyIsImxvbmciOiItOTAuMDc2NCIsImlhdCI6MTc5NDYyMDk5NiwiaXNzIjoidGlzcnYifQ.jzCwZ-j0fDFhSzPhLv76oPmWMUcZknjvBfMgUzUJ9Z4&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s27341/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s28560",
+      "name": "Classic Hits Q101.7 (Hudson Falls - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7831_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5OCwiaXNzIjoidGlzcnYifQ.zMeC79DntIo3C5aqHQmctEFXYAQBOO8IwdZP1sf9des",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s28560/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s31163",
+      "name": "Cool 106.3 (Sarnia - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://blackburn-ais.leanstream.co/CHKSFM-MP3?args=tuneIn_01",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s31163/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s267064",
+      "name": "Dragon Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://listen-nation.sharp-stream.com/tcnationdigital.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s267064/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s43893",
+      "name": "Jack 94 5 (Regina - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://rawlco.leanstream.co/CKCKFM-MP3?args=tunein_01",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s43893/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s54157",
+      "name": "Offshore Music Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "http://bitsmitter.com:8000/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s54157/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s127750",
+      "name": "Oldies America (Cincinnati - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://s9.citrus3.com:8398/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s127750/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s30050",
+      "name": "Rewind 103.5/104.3 (Pickerington - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wnndfmmp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s30050/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s28159",
+      "name": "Rewind 94.3 (Oak Grove - KY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wrndfmmp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s28159/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s251337",
+      "name": "The Breeze 95.3 (Monroe - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://thebreeze953.ddns.net/broadwave.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s251337/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s22192",
+      "name": "WQLB (Tawas City - MI)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "https://ice6.securenetsystems.net/WQLBM",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s22192/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s23145",
+      "name": "WTIX-FM (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classic Hits",
+      "image": null,
+      "streamUrl": "http://hemnos.cdnstream.com/1427_64",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classic Hits",
+      "homepage": "https://tunein.com/radio/s23145/",
+      "style": "vocal",
+      "group": "classic-hits"
+    },
+    {
+      "id": "ti-s31914",
+      "name": "KBYI (Rexburg - ID)",
+      "source": "TuneIn",
+      "detail": "Vocal · Classical Music",
+      "image": null,
+      "streamUrl": "https://radiostream.byui.edu/kbyi",
+      "codec": "aac",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Classical Music",
+      "homepage": "https://tunein.com/radio/s31914/",
+      "style": "vocal",
+      "group": "classical-music"
+    },
+    {
+      "id": "ti-s27483",
+      "name": "90.5 The Night (Lincroft - NJ)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://ice.wbjb.net/905-MP3-High",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s27483/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s26584",
+      "name": "91X (Monroe - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://stream.kxul.com/listen.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s26584/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s20314",
+      "name": "Bailrigg FM (Blackpool - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://stream.bailriggfm.co.uk/listen/bfm/320.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s20314/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s32127",
+      "name": "KCPR (San Luis Obispo - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://ice23.securenetsystems.net:80/KCPR2",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s32127/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s32950",
+      "name": "KHDX Radio (Little Rock - AR)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://streaming.radio.co/s662abb673/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s32950/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s258645",
+      "name": "KJACK (Flagstaff-Prescott - AZ)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://stream.ec.nau.edu:8443/kjack",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s258645/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s35938",
+      "name": "KUPS (Seattle-Tacoma - WA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://nap.casthost.net:8244/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s35938/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s26366",
+      "name": "KWSC 91.9 The Cat (Sioux City - NE)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://cc141.cir.st/KWSC",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s26366/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s23564",
+      "name": "Messiah's Pulse Radio (Mechanicsburg - PA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://us9.maindigitalstream.com/ssl/WVMM",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s23564/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s136895",
+      "name": "Radio Boise - KRBX (Boise - ID)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://radioboise-ice.streamguys1.com/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s136895/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s32397",
+      "name": "Radio K (Minneapolis - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://radiok.broadcasttool.stream/play_256",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s32397/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s329035",
+      "name": "Radio Lockhart (Austin - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://streaming.klkt.org/play",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s329035/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s28032",
+      "name": "WCRX (Chicago - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://wcrx.streamguys1.com:80/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s28032/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s304511",
+      "name": "WLJZ 107.1 FM (Salisbury - NC)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://stream.radiojar.com/y47fsua10heuv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s304511/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s21252",
+      "name": "WMSV - The Junction (Starkville - MS)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://stream.wmsv.msstate.edu:8000/wmsv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s21252/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s22386",
+      "name": "WRFL – Radio Free Lexington (Lexington-Fayette - KY)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://dj.wrfl.fm:9000/stream/1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s22386/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s23307",
+      "name": "WTUL New Orleans (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://stream.wtulneworleans.com/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s23307/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s30013",
+      "name": "WUML - Lowell (Lowell - MA)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://nap.casthost.net:8378/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s30013/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s267811",
+      "name": "WXNA (Nashville - TN)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "http://listen.wxnafm.org:8000/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s267811/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s24037",
+      "name": "WXOU (Auburn Hills - MI)",
+      "source": "TuneIn",
+      "detail": "Vocal · College Radio",
+      "image": null,
+      "streamUrl": "https://a8.asurahosting.com/listen/wxou/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, College Radio",
+      "homepage": "https://tunein.com/radio/s24037/",
+      "style": "vocal",
+      "group": "college-radio"
+    },
+    {
+      "id": "ti-s164665",
+      "name": "100.1 BayFM (Corner Brook - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://stream.statsradio.com:8148/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s164665/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s30267",
+      "name": "100.9/107.1 The Cat (Albany - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7819_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDkzNiwiaXNzIjoidGlzcnYifQ.wFtfSypn--rwwXdrA2oyeuNAce1oJIQDeU4hNfhbjPs",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s30267/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s299112",
+      "name": "104 The Ranch - KKEX-HD3 (Tremonton - UT)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://ice9.securenetsystems.net/KKEX3",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s299112/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s28420",
+      "name": "105.3 Cat Country (Lebanon-Rutland-White River Junction - VT)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7823_96k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDkzNiwiaXNzIjoidGlzcnYifQ.wFtfSypn--rwwXdrA2oyeuNAce1oJIQDeU4hNfhbjPs",
+      "codec": "mp3",
+      "bitrate": 96,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s28420/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s276672",
+      "name": "99.3 WOWZ (Chincoteague - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://wctg.streamguys1.com/WOW",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s276672/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s260326",
+      "name": "Americana Boogie Radio (SALEM - OR)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://samcloud.spacial.com/api/listen?sid=70719&m=sc",
+      "codec": "aac+",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s260326/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s261313",
+      "name": "Australian Country Radio (Sydney - Australia)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://streaming.radio.co/s5ea3fdd1c/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s261313/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s291704",
+      "name": "Ballina Killaloe Local Radio (Killaloe - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://streamer.radio.co/s776d00065/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s291704/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s27409",
+      "name": "Bay Country 97.9 (Crisfield - MD)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://wctg.streamguys1.com/WBEY",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s27409/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s31167",
+      "name": "CHOK 103.9 (Sarnia - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://blackburn-ais.leanstream.co/CHOKAM-MP3?args=tuneIn_01&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDkzNiwiaXNzIjoidGlzcnYifQ.wFtfSypn--rwwXdrA2oyeuNAce1oJIQDeU4hNfhbjPs",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s31167/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s196675",
+      "name": "CountryLine Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "http://ads-direct.sharp-stream.com/chriscountry.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s196675/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s30086",
+      "name": "Froggy 100.3 (Warrensburg - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7828_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDkzNiwiaXNzIjoidGlzcnYifQ.wFtfSypn--rwwXdrA2oyeuNAce1oJIQDeU4hNfhbjPs",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s30086/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s322407",
+      "name": "Hit Country 105.3 (Quebec City - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CHCT_FM.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s322407/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s234136",
+      "name": "Independent Baptist Radio (Huntsville - AL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://www.ibradio.org/stream/192",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s234136/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s7723",
+      "name": "KX 94.7 (Hamilton - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CHKXFM.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDkzNiwiaXNzIjoidGlzcnYifQ.wFtfSypn--rwwXdrA2oyeuNAce1oJIQDeU4hNfhbjPs",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s7723/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s281621",
+      "name": "Outlaw 100.7 - WCVQ-HD3 (Clarksville - TN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wcvqhd3mp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s281621/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s96727",
+      "name": "Radio Free Americana (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://thassos.cdnstream.com:9950/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s96727/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s131396",
+      "name": "Redneck Radio 101 (Ft. Smith - AR)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "http://s21.myradiostream.com:10806/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s131396/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s135419",
+      "name": "The Ranch - Classic Country (Phoenix - AZ)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://loveradio.stream:8010/theranch/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s135419/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s140137",
+      "name": "Today's Hot Country (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://ais-sa2.cdnstream1.com/1398_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s140137/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s30517",
+      "name": "WKZE-FM (Poughkeepsie - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://stream.aiir.com/wirrrzolq3tvv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s30517/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s22019",
+      "name": "WPOR (Portland - ME)",
+      "source": "TuneIn",
+      "detail": "Vocal · Country",
+      "image": null,
+      "streamUrl": "https://prod-204-236-243-71.amperwave.net/saga-wporfmmp3-ibc1?session-id=b7f827bc63c5b1611cd3db8f565405ab&source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Country",
+      "homepage": "https://tunein.com/radio/s22019/",
+      "style": "vocal",
+      "group": "country"
+    },
+    {
+      "id": "ti-s92147",
+      "name": "1Mix Radio Trance Stream (Douglas - Isle of Man)",
+      "source": "TuneIn",
+      "detail": "Vocal · Dance & Electronic",
+      "image": null,
+      "streamUrl": "https://fr2.1mix.co.uk:8000/320",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Dance & Electronic",
+      "homepage": "https://tunein.com/radio/s92147/",
+      "style": "vocal",
+      "group": "dance-electronic"
+    },
+    {
+      "id": "ti-s122126",
+      "name": "Chilltrax (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Dance & Electronic",
+      "image": null,
+      "streamUrl": "https://streamssl.chilltrax.com/index.html?sid=1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Dance & Electronic",
+      "homepage": "https://tunein.com/radio/s122126/",
+      "style": "vocal",
+      "group": "dance-electronic"
+    },
+    {
+      "id": "ti-s78631",
+      "name": "Lounge Motion FM (Montreal - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Dance & Electronic",
+      "image": null,
+      "streamUrl": "https://vm.motionfm.com/motionthree_free",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Dance & Electronic",
+      "homepage": "https://tunein.com/radio/s78631/",
+      "style": "vocal",
+      "group": "dance-electronic"
+    },
+    {
+      "id": "ti-s259858",
+      "name": "Pride Radio (Newcastle - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Dance & Electronic",
+      "image": null,
+      "streamUrl": "http://philae.shoutca.st:8807",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Dance & Electronic",
+      "homepage": "https://tunein.com/radio/s259858/",
+      "style": "vocal",
+      "group": "dance-electronic"
+    },
+    {
+      "id": "ti-s97878",
+      "name": "Radio Danz (Miami - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Dance & Electronic",
+      "image": null,
+      "streamUrl": "https://streamssl.radiodanz.com/index.html?sid=1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Dance & Electronic",
+      "homepage": "https://tunein.com/radio/s97878/",
+      "style": "vocal",
+      "group": "dance-electronic"
+    },
+    {
+      "id": "ti-s341578",
+      "name": "America's Best Oldies (GARDENDALE - AL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://ec3.yesstreaming.net:2185/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s341578/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346746",
+      "name": "Bob Radio Playing Anything (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station2/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346746/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s349965",
+      "name": "Hive FM (Nottingham - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://stream.aiir.com/oukspr99eiptv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s349965/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s347326",
+      "name": "The Mix Best Club Hits From The 2000's (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station17/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s347326/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346753",
+      "name": "The Mix Best Dance Hits From the 90s (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station11/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346753/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346378",
+      "name": "The Mix Best Hits From 80's & 90's (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station8/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346378/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s347324",
+      "name": "The Mix Best Hits From Generation 2K (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station15/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s347324/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s347325",
+      "name": "The Mix Best Hits From The 2010's (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station16/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s347325/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s347323",
+      "name": "The Mix Best Hits From The 60's (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station3/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s347323/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346747",
+      "name": "The Mix Best Hits From The 70 (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station4/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346747/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346750",
+      "name": "The Mix Best Hits From The 70s & 80s (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station7/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346750/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346748",
+      "name": "The Mix Best Hits From The 80 (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station5/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346748/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346749",
+      "name": "The Mix Best Hits From The 90 (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station6/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346749/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s346771",
+      "name": "The Mix Best Remixes From 80s & 90s (Quebec - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://jupiter.themixradio.ca/listen/station12/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s346771/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s359781",
+      "name": "WMTP-DB (Deltona - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Decades Music",
+      "image": null,
+      "streamUrl": "https://ec1.yesstreaming.net:1960/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Decades Music",
+      "homepage": "https://tunein.com/radio/s359781/",
+      "style": "vocal",
+      "group": "decades-music"
+    },
+    {
+      "id": "ti-s336539",
+      "name": "100% COVERS LOUNGE (Toronto - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://az1.mediacp.eu/listen/100coverslounge/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s336539/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s336545",
+      "name": "AIRPORT LOUNGE RADIO (Toronto - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://az1.mediacp.eu/listen/airport-lounge-radio/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s336545/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s113440",
+      "name": "ATOS Theatre Organ Radio Hi Def (Bloomington - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "http://45.79.43.73:8001/stream/2/;",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s113440/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s166562",
+      "name": "Classic Gold Radio (Invercargill - New Zealand)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "http://203.118.144.79:8000/stream.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s166562/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s22541",
+      "name": "Magic 100.5 (Albany - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7820_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk3MiwiaXNzIjoidGlzcnYifQ.jmiwLw2qs_SzX3GRwPTJp05kPPO-0qXLGaMXsv3sZSc",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s22541/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s237812",
+      "name": "Peaceful Currents Radio (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://cast1.torontocast.com:2865/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s237812/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s111491",
+      "name": "Prince Bishops Hospital Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "http://www.ahr.org.uk:8000/;",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s111491/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s96862",
+      "name": "Radio Hillingdon (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://streaming.broadcast.radio/hrhillingdonmp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s96862/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s2649",
+      "name": "Radio Tyneside (Newcastle - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "http://stream.radiotyneside.co.uk/tyneside128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s2649/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s106844",
+      "name": "Somer Valley FM (Bristol - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://stream4.hippynet.co.uk:8014/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s106844/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s67859",
+      "name": "Sunshine 106.8 (Dublin - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Easy Listening",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SUNSHINE_106_8.mp3?dist=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Easy Listening",
+      "homepage": "https://tunein.com/radio/s67859/",
+      "style": "vocal",
+      "group": "easy-listening"
+    },
+    {
+      "id": "ti-s283449",
+      "name": "American Roots (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://stream.americanrootsradio.com:3035/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s283449/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s342233",
+      "name": "Ariba The Party station (Toronto - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://kathy.torontocast.com:1735/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s342233/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s37265",
+      "name": "Folk Alley - WKSU-HD2 (Kent - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://freshgrass.streamguys1.com/folkalley-128mp3-tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s37265/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s1207",
+      "name": "KRVS Public Media (Lafayette - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "http://29327.live.streamtheworld.com:80/KRVSFM_SC?TGT=TuneIn&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjIxMDY0IiwiaWF0IjoxNzk0NjIwOTcwLCJ0ZC1yZWciOmZhbHNlfQ.eo08rIt-zxcMVDMUtX7As_JbPNHqVvfBceYgJPWUf0I&DIST=TuneIn&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk3MCwiaXNzIjoidGlzcnYifQ.5YjUlOfbxrp6qkKFlgxHmDJRFfTUAKrJf5c6r7JWONE&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s1207/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s28632",
+      "name": "NHPR (Concord - NH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://nhpr.streamguys1.com/nhpr",
+      "codec": "aac",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s28632/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s274958",
+      "name": "Radio Happysound (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://radiohappysound.com/192-ssl",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s274958/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s52555",
+      "name": "Radio Heartland - KNOW-HD2 (Minneapolis - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "https://radioheartland.stream.publicradio.org/radioheartland.mp3?srcid=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s52555/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s190122",
+      "name": "SomaFM: Folk Forward (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "http://ice6.somafm.com/folkfwd-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s190122/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s29518",
+      "name": "WICN (Worcester - MA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Folk",
+      "image": null,
+      "streamUrl": "http://wicn-ice.streamguys1.com/live-mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk2OSwiaXNzIjoidGlzcnYifQ.KJnUNVyA5evq2OC5HbyVwbqACIUAykXysEyvFRFyKBI",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Folk",
+      "homepage": "https://tunein.com/radio/s29518/",
+      "style": "vocal",
+      "group": "folk"
+    },
+    {
+      "id": "ti-s262590",
+      "name": "Bang West Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://stream.radiojar.com/q8yghdvnu1duv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s262590/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s301170",
+      "name": "Chop Shop radio Live (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://s4.radioforge.com:8157/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s301170/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s164051",
+      "name": "DJ KIDNU RADIO (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://stream.radio.co/s4ae4ea1dc/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s164051/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s135290",
+      "name": "Gangstaville Radio (Miami - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://stream.radio.co/s1cffd7347/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s135290/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s291630",
+      "name": "Go! 104.5 (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://centova11.instainternet.com:2199/tunein/godjradio.asx",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s291630/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s213410",
+      "name": "Greatest Hits of Hip Hop - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1537_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s213410/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s213411",
+      "name": "Hip Hop & R&B - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1536_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s213411/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s280125",
+      "name": "Hip Hop Muzic Hub (Wichita - KS)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://c11.radioboss.fm:8187/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s280125/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s287106",
+      "name": "Hip-Hop Request #1 In HipHop And RnB (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://radio.978host.com/sslstream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s287106/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s154523",
+      "name": "Hot 21 Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://listen.openstream.co/4083/audio",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s154523/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s67085",
+      "name": "Houston Public Media Mixtape - KUHF-HD3 (Houston-Galveston - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://stream.houstonpublicmedia.org/thevibe-mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s67085/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s198896",
+      "name": "K-100 RADIO (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://usa19.fastcast4u.com:4770/1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s198896/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s226336",
+      "name": "KRUD-DB Rudeboy Radio 808 (Honolulu - HI)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "http://s47.myradiostream.com:14460/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s226336/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s117471",
+      "name": "Power 104.7 Baltimore (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://us10a.serverse.com/proxy/anrzksuy/stream?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk2OCwiaXNzIjoidGlzcnYifQ.LajuFTM_Ho-Ktvya0BNEC5jqleASDqExkx-Lr9uxEaw",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s117471/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s259075",
+      "name": "The Beat (Houston-Galveston - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · Hip Hop",
+      "image": null,
+      "streamUrl": "https://a9.asurahosting.com/listen/the_beat/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Hip Hop",
+      "homepage": "https://tunein.com/radio/s259075/",
+      "style": "vocal",
+      "group": "hip-hop"
+    },
+    {
+      "id": "ti-s24185",
+      "name": "B 95.5 (Albany - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "https://ais-sa1.streamon.fm/7821_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk2MSwiaXNzIjoidGlzcnYifQ.kEmScupIuEXbITERbnjO8xniW3Xk7WhoqOzPa7bgDIk",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s24185/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s235189",
+      "name": "Branson Christmas Radio (Branson - MO)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "http://stream.radiojar.com/22habbgmb",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s235189/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s151255",
+      "name": "CBN Christmas Radio (Virginia Beach - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "https://streams.cbnradio.com/christmas-128K?app=tunein",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s151255/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s184182",
+      "name": "CBN Cross Country Christmas (Virginia Beach - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "https://streams.cbnradio.com/country-christmas-128K?app=tunein",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s184182/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s117270",
+      "name": "Christmas FM (Dublin - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "https://christmasfm.cdnstream1.com/2547_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s117270/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s212791",
+      "name": "Christmas FM Classics (Dublin - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "https://christmasfm.cdnstream1.com/2550_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s212791/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s235230",
+      "name": "Christmas Oldies (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "http://listen1.57fm.com/rcxmas",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s235230/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s298318",
+      "name": "The Alway's Christmas Channel (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "http://kea.cdnstream.com/1837_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s298318/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s150406",
+      "name": "Tinsel & Tunes (Pittsburgh - PA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Holiday Music",
+      "image": null,
+      "streamUrl": "http://cp1.thepuremix.net:9952/stream.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Holiday Music",
+      "homepage": "https://tunein.com/radio/s150406/",
+      "style": "vocal",
+      "group": "holiday-music"
+    },
+    {
+      "id": "ti-s106599",
+      "name": "98.1 The River - WOXL-HD2 (Asheville - NC)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-woxlhd2mp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s106599/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s201315",
+      "name": "Casual Dining Radio by MMG (Los Angeles - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://208.52.190.253:8000/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s201315/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s247489",
+      "name": "Deepstuff radio I (Bradford  - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://s6.autopo.st:8691/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s247489/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s31376",
+      "name": "Indie-1023 (Denver-Boulder - CO)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://stream2.cprnetwork.org:8000/cpr3_lo",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s31376/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s255939",
+      "name": "KHOL (Jackson - WY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://peridot.streamguys.com:6010/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s255939/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s138748",
+      "name": "KPTZ (Seattle-Tacoma - WA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://kptz.streamguys1.com/live-mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s138748/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s361802",
+      "name": "Moodhoney Radio (Ottawa - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://radio.moodhoney.com/listen/moodhoney_radio/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s361802/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s178759",
+      "name": "Radio BurgerFuel (Auckland - New Zealand)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://s3.radio.co/s9909bd65f/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s178759/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s158120",
+      "name": "Songwriters Island (PUNTA GORDA - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://azuracast.myautodj.com:8010/radio.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s158120/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s23235",
+      "name": "The Gamut (Frederick - MD)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/WWFDAM.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk1OSwiaXNzIjoidGlzcnYifQ.ovIWIj-2ltyfBr1CUkDkos8J64RfVgKcXBAanNxRfDU",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s23235/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s27596",
+      "name": "WBRU (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "https://s3.radio.co/s115121de1/listen?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk1OSwiaXNzIjoidGlzcnYifQ.ovIWIj-2ltyfBr1CUkDkos8J64RfVgKcXBAanNxRfDU",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s27596/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s28755",
+      "name": "WFIT (Melbourne - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://streaming.wfit.org/wfit-fm?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk1OSwiaXNzIjoidGlzcnYifQ.ovIWIj-2ltyfBr1CUkDkos8J64RfVgKcXBAanNxRfDU",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s28755/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s21320",
+      "name": "WMXM (Chicago - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Indie Music",
+      "image": null,
+      "streamUrl": "http://wmxm.streamguys1.com/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Indie Music",
+      "homepage": "https://tunein.com/radio/s21320/",
+      "style": "vocal",
+      "group": "indie-music"
+    },
+    {
+      "id": "ti-s193288",
+      "name": "Giants of Jazz Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://streaming.radio.co:80/s297e618a7/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s193288/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s286258",
+      "name": "Global Soul Radio (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://streams.radio.co/s91ab79ddc/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s286258/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s31681",
+      "name": "Jazz 88.5 (Minneapolis - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://kbem-live.streamguys1.com/kbem_mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s31681/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s229122",
+      "name": "Jazz Cafe (New Zealand)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://radio.wanderingsheep.tv:8000/jazzcafe",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s229122/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s225199",
+      "name": "Jazz London Radio (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://radio.canstream.co.uk:8075/live.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s225199/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s98067",
+      "name": "JAZZRADIOdc.com (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://s2.stationplaylist.com:7040/listen.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s98067/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s32163",
+      "name": "KCSM Jazz 91.1 (San Mateo - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://ice7.securenetsystems.net/KCSM2",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s32163/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s35922",
+      "name": "KUNV (Las Vegas - NV)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://kunv.oit.unlv.edu:8000/stream/1/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s35922/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s55412",
+      "name": "Martini In The Morning (Los Angeles - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://tunein-live-f.cdnstream1.com/4068_128.mp3?aw_0_1st.skey=1794620959&lat=29.953&lon=-90.0764&aw_0_1st.abtest=&aw_0_1st.stationId=s55412&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g11&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.affiliateIds=a40301%2ca39100%2ca39110&aw_0_1st.bandId=16&delivery=1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s55412/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s110768",
+      "name": "RadioSky Music Jazz (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://live.radioskymusic.com:7006/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s110768/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s266419",
+      "name": "Radiowish Smooth Jazz Vocals (Circle Pines - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "http://s47.myradiostream.com:14694/",
+      "codec": "aac+",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s266419/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s156422",
+      "name": "The Chiaroscuro Channel - WVIA-HD3 (Scranton - PA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://wvia.streamguys1.com:80/WVIAHD3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk1OSwiaXNzIjoidGlzcnYifQ.ovIWIj-2ltyfBr1CUkDkos8J64RfVgKcXBAanNxRfDU",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s156422/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s237932",
+      "name": "The World of Jazz from Detroit (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://s3.radio.co/sc46eba0e7/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s237932/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s23833",
+      "name": "WWOZ (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Jazz",
+      "image": null,
+      "streamUrl": "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Jazz",
+      "homepage": "https://tunein.com/radio/s23833/",
+      "style": "vocal",
+      "group": "jazz"
+    },
+    {
+      "id": "ti-s322692",
+      "name": "Powerhitz.com - Lit Hip Hop",
+      "source": "TuneIn",
+      "detail": "Vocal · Powerhitz",
+      "image": null,
+      "streamUrl": "https://live.powerhitz.com/lit?aw_0_req.gdpr=true",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Powerhitz",
+      "homepage": "https://tunein.com/radio/s322692/",
+      "style": "vocal",
+      "group": "powerhitz"
+    },
+    {
+      "id": "ti-s234929",
+      "name": "Big Reggae Mix (San Diego - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://ais-sa2.cdnstream1.com/2294_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s234929/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s252444",
+      "name": "Cane Grove Radio! (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://streaming.radio.co:80/sd39255bf8/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s252444/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s137355",
+      "name": "DANCEHALL LINK (Orlando - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://streamer.radio.co/s30d82be5e/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s137355/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s233969",
+      "name": "Fresh Fm Radio London (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://eu4.fastcast4u.com/proxy/blacka?mp=/1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s233969/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s35469",
+      "name": "HI95 Kauai (Kauai - HI)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://pacificmedia.cdnstream1.com/2789_128.mp3?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s35469/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s158175",
+      "name": "Irie 98 FM (Hamilton - Bermuda)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://usa19.fastcast4u.com:7430/;?type=http&nocache=1716135247",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s158175/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s357379",
+      "name": "IRIE FM 107.7 Jamaica (Kingston - Jamaica)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://stream.iriefm.net:8006/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s357379/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s114855",
+      "name": "iRie Rockers Fm (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://s20.reliastream.com:8130/admin",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s114855/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s155516",
+      "name": "LoversrockRadio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://199.115.115.71:8325",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s155516/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s246972",
+      "name": "ONE RADIO LINK (Jamaica)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://stream.radio.co/s865966bbf/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s246972/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s214804",
+      "name": "Rastafari Jams (Chicago - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://s2.radio.co/sccc2dccb5/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s214804/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s204086",
+      "name": "Rockers Movement Radio (Miami - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://rockersmovement.radioca.st/;",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s204086/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s162440",
+      "name": "Skyline Radio (Birmingham - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://stream.zeno.fm/gppe0uht9c0uv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s162440/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s308769",
+      "name": "SomaFM: Heavyweight Reggae (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://ice6.somafm.com/reggae-128-mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s308769/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s172616",
+      "name": "SunCity 104.9 FM (Kingston - Jamaica)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "http://edge.mixlr.com/channel/ibrdq",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s172616/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s206776",
+      "name": "ViiLD REGGAE (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Reggae & Dancehall",
+      "image": null,
+      "streamUrl": "https://ec1.yesstreaming.net:3425/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Reggae & Dancehall",
+      "homepage": "https://tunein.com/radio/s206776/",
+      "style": "vocal",
+      "group": "reggae-dancehall"
+    },
+    {
+      "id": "ti-s266682",
+      "name": "3ABN Radio Music Channel (Marion-Carbondale - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://war.str3am.com:7180/MC01",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s266682/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s54344",
+      "name": "Cape Christian Radio",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://ice64.securenetsystems.net/CCR1MP3",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s54344/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s128893",
+      "name": "CBN Gospel (Virginia Beach - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://streams.cbnradio.com/gospel-128K?app=tunein",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s128893/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s149133",
+      "name": "Christian Hits K-True (La Harpe - KS)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://hestia.cdnstream.com/1569_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s149133/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s112984",
+      "name": "Christian Life Radio",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://ice64.securenetsystems.net/CLR1MP3",
+      "codec": "",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s112984/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s209918",
+      "name": "ChristianClassicRock.Net (Springfield - MO)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://shoutcast.christianrock.net/stream/9/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s209918/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s98542",
+      "name": "ChristianPowerPraise.Net (Springfield - MO)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://shoutcast.christianrock.net/stream/7/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s98542/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s235774",
+      "name": "DOC Radio - Christian Hits",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://server10.reliastream.com/proxy/docradio/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s235774/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s159780",
+      "name": "Gospel Hits - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1535_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s159780/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s67045",
+      "name": "GPraise - WPOZ-HD3 (Orlando - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://ice.zradio.org/g/high.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s67045/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s67217",
+      "name": "Hot 95.9 - WPOZ-HD2 (Orlando - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://ice.zradio.org/h/high.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s67217/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s140612",
+      "name": "JewishMusic Stream",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://stream.jewishmusicstream.com:8000/;",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s140612/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s31919",
+      "name": "KBYR FM (Rexburg - ID)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://radiostream.byui.edu/kbyr",
+      "codec": "aac",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s31919/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s34411",
+      "name": "OASIS NETWORK (Tulsa - OK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://oasis.streamguys1.com/live-mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s34411/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s21886",
+      "name": "Rejoice Radio (Pensacola - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://rejoice.primcast.com/proxy/rejoice_google/Rejoice",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s21886/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s21764",
+      "name": "Shine.FM (Kankakee - IL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://mist.olivet.edu/shine128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s21764/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s3223",
+      "name": "SOS Radio Network (Las Vegas - NV)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://ais-sa15.cdnstream1.com/4862_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s3223/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s129505",
+      "name": "The Christian Mix",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://199.180.72.2:10572/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s129505/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s27570",
+      "name": "The Q90.1 (Charlton - MA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "http://streams.radio.co/s34176e739/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s27570/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s228347",
+      "name": "TheRockHD (Orlando - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://ice.zradio.org/r/high.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s228347/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s2651",
+      "name": "UCB 1 (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://listen-ucb.sharp-stream.com/55_ucb_1_128_mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s2651/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s6933",
+      "name": "UCB 2 (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://listen-ucb.sharp-stream.com/55_ucb_2_128_mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s6933/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s22075",
+      "name": "WGBN (Pittsburgh - PA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Religious Music",
+      "image": null,
+      "streamUrl": "https://streaming.live365.com/a42440",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Religious Music",
+      "homepage": "https://tunein.com/radio/s22075/",
+      "style": "vocal",
+      "group": "religious-music"
+    },
+    {
+      "id": "ti-s162354",
+      "name": "8Radio (Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://edge4.audioxi.com/8RADIO",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s162354/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s221580",
+      "name": "AlternativeRadio.us (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "http://audiovision.cdnstream1.com/2154_128.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s221580/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s188877",
+      "name": "Asterisk Radio (San Diego - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://usa6.fastcast4u.com/proxy/bigfeat2?mp=/1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s188877/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s256973",
+      "name": "Blown (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://ais-sa2.cdnstream1.com/1370_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s256973/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s226064",
+      "name": "Classic Rock 109 (Cincinnati - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://broadcast.classicrock109.com/cr109",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s226064/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s291748",
+      "name": "Hard Rock Heaven (Los Angeles - CA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://ais-sa2.cdnstream1.com/1521_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s291748/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s32961",
+      "name": "KUTX 98.9 (Leander - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://streams.kut.org/4428_192.mp3?aw_0_1st.playerid=kutx-tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s32961/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s237470",
+      "name": "METAL SHOP (Portland - OR)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://cheetah.streemlion.com:1945/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s237470/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s30842",
+      "name": "QFM96 (Columbus - OH)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/saga-wlvqfmmp3-ibc2?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s30842/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s10517",
+      "name": "Radio Caroline (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "http://sc6.radiocaroline.net:8040/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s10517/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s35908",
+      "name": "The North 103.3 (Duluth-Superior - MN)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://thenorth1033.streamguys1.com/live",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s35908/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s24231",
+      "name": "The Peak (Briarcliff Manor - NY)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "http://ais-sa1.streamon.fm/7836_128k.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk0NywiaXNzIjoidGlzcnYifQ.brC0-YeQJ6gOoQnbJKbFPxIeo1LfPb5GwHOfWwIeLxI",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s24231/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s257972",
+      "name": "W3Z HOTLINE (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Rock Music",
+      "image": null,
+      "streamUrl": "https://fwd.autopo.st/w3zhotline",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Rock Music",
+      "homepage": "https://tunein.com/radio/s257972/",
+      "style": "vocal",
+      "group": "rock-music"
+    },
+    {
+      "id": "ti-s283763",
+      "name": "Crackers Radio (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://comet.shoutca.st:8334/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s283763/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s277730",
+      "name": "G&G Southern Soul Radio 24/7 (Midway - FL)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://usa19.fastcast4u.com:5230/;?type=http&nocache=1677734565",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s277730/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s199317",
+      "name": "Global RnB (Richmond - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://s5.radio.co/sf02cf450a/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s199317/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s159772",
+      "name": "Greatest Hits of R&B - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1534_backup",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s159772/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s159778",
+      "name": "Old School R&B - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1540_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s159778/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s103084",
+      "name": "Smooth Motion FM (Montreal - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://vm.motionfm.com/motiontwo_free",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s103084/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s159769",
+      "name": "Smooth R&B (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1541_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s159769/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s297137",
+      "name": "Soul 105.7 (Lafayette - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://securestreams.onlineradiostation.co:8000/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s297137/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s267618",
+      "name": "Soul Good Radio (Salt Lake City - UT)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://c3.radioboss.fm:8090/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s267618/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s54913",
+      "name": "Soulconnexion Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://stream.soulconnexionradio.com/1045",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s54913/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s295080",
+      "name": "Sunshine Soul (Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/SUNSHINE_SOUL.mp3?dist=tunein",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s295080/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s273904",
+      "name": "Super Throwback Party R&B Playlist (Houston-Galveston - TX)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://ais-sa2.cdnstream1.com/1543_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s273904/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s43695",
+      "name": "The ViBE (Roanoke-Lynchburg - VA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://live.amperwave.net/direct/wheelerbroadcasting-wvbefmmp3-imc4?source=TuneIn&gdpr=0",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s43695/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s159773",
+      "name": "Today's R&B - Urbanradio.com (Atlanta - GA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://hydra.cdnstream.com/1531_128",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s159773/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s254798",
+      "name": "Totally Wired Radio (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "http://totallywired.out.airtime.pro:8000/totallywired_a",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s254798/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s257560",
+      "name": "Ubiquity Radio (London - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Soul & R&B",
+      "image": null,
+      "streamUrl": "https://listen.openstream.co/3172",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Soul & R&B",
+      "homepage": "https://tunein.com/radio/s257560/",
+      "style": "vocal",
+      "group": "soul-r-b"
+    },
+    {
+      "id": "ti-s67855",
+      "name": "Diverse FM (Luton - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Top 40 & Pop Music",
+      "image": null,
+      "streamUrl": "https://icecast.mediaice.co.uk/DiverseMP3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Top 40 & Pop Music",
+      "homepage": "https://tunein.com/radio/s67855/",
+      "style": "vocal",
+      "group": "top-40-pop-music"
+    },
+    {
+      "id": "ti-s299317",
+      "name": "OMG! Omega Sound Radio (New Orleans - LA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Top 40 & Pop Music",
+      "image": null,
+      "streamUrl": "https://stream.rcast.net/65801",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Top 40 & Pop Music",
+      "homepage": "https://tunein.com/radio/s299317/",
+      "style": "vocal",
+      "group": "top-40-pop-music"
+    },
+    {
+      "id": "ti-s127108",
+      "name": "Radio New York Live (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Top 40 & Pop Music",
+      "image": null,
+      "streamUrl": "https://streaming.radiostreamlive.com/radionylive_devices",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Top 40 & Pop Music",
+      "homepage": "https://tunein.com/radio/s127108/",
+      "style": "vocal",
+      "group": "top-40-pop-music"
+    },
+    {
+      "id": "ti-s31121",
+      "name": "The Fox 99.9 (Sarnia - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Top 40 & Pop Music",
+      "image": null,
+      "streamUrl": "https://blackburn-ais.leanstream.co/CFGXFM-MP3?args=tuneIn_01&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk0MSwiaXNzIjoidGlzcnYifQ.nLcT3EkJ8BxMHmU5257XMMs787KOwNqIDvX1MHpNVfg",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Top 40 & Pop Music",
+      "homepage": "https://tunein.com/radio/s31121/",
+      "style": "vocal",
+      "group": "top-40-pop-music"
+    },
+    {
+      "id": "ti-s24692",
+      "name": "Z99 Regina (Zed 99) (Regina - Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Top 40 & Pop Music",
+      "image": null,
+      "streamUrl": "https://rawlco.leanstream.co/CIZLFM-MP3?args=tunein_01",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Top 40 & Pop Music",
+      "homepage": "https://tunein.com/radio/s24692/",
+      "style": "vocal",
+      "group": "top-40-pop-music"
+    },
+    {
+      "id": "ti-s45494",
+      "name": "CRMK (Northampton - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "https://stream.radio.co/sdfcc41b7a/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s45494/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s301896",
+      "name": "Fishnet Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "https://stream.radio.co/s74e130a62/listen",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s301896/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s214826",
+      "name": "Harbour Radio (Norwich - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://stream.radiojar.com/pkzd477ccchvv",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s214826/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s121010",
+      "name": "HM Radio (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://haimusique3.primcast.com:9996",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s121010/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s31466",
+      "name": "KAOS (Seattle-Tacoma - WA)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://205.134.192.90:8930/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s31466/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s298813",
+      "name": "Kaptn' K's Clever Way (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://kleverway.ddns.net:8000/",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s298813/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s116689",
+      "name": "Penistone FM (Penistone - UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "https://radio.canstream.co.uk:8021/live.mp3",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s116689/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s9634",
+      "name": "Radio Kerry (Tralee - Ireland)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KERRY.mp3?dist=tunein&DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NDYyMDk5OSwiaXNzIjoidGlzcnYifQ.Rz7tF2ZLIJTXgx1BPX-RUTzeUevQl-DzmgbSl6G40Ow",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s9634/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s237703",
+      "name": "Retro Radio (Canada)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "https://puma.streemlion.com:5345/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s237703/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s28704",
+      "name": "WFCS 107.7 The Edge (New Britain - CT)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://edge.mixlr.com/channel/umcqh",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s28704/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s291919",
+      "name": "WKDMJAZZDETROITRADIO (US)",
+      "source": "TuneIn",
+      "detail": "Vocal · Variety",
+      "image": null,
+      "streamUrl": "http://wkdmjazzdetroit.out.airtime.pro:8000/wkdmjazzdetroit_b",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, Variety",
+      "homepage": "https://tunein.com/radio/s291919/",
+      "style": "vocal",
+      "group": "variety"
+    },
+    {
+      "id": "ti-s104346",
+      "name": "Black Cat Radio (UK)",
+      "source": "TuneIn",
+      "detail": "Vocal · World Music",
+      "image": null,
+      "streamUrl": "https://s5.voscast.com:9097/stream",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Vocal, TuneIn, World Music",
+      "homepage": "https://tunein.com/radio/s104346/",
+      "style": "vocal",
+      "group": "world-music"
+    },
+    {
+      "id": "vcr-auditorium",
+      "name": "VCR Auditorium",
+      "source": "Venice Classic Radio",
+      "detail": "Classical",
+      "image": "https://veniceclassicradio.eu/logo/logo-vcr-auditorium-round.svg",
+      "streamUrl": "https://uk2.streamingpulse.com/ssl/vcr1",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Venice Classic Radio, Classical",
+      "homepage": "https://veniceclassicradio.eu/",
+      "style": "classical",
+      "group": "venice-classic-radio"
+    },
+    {
+      "id": "vcr-classica-plus",
+      "name": "VCR Classica+",
+      "source": "Venice Classic Radio",
+      "detail": "Classical",
+      "image": "https://veniceclassicradio.eu/logo/logo-vcr-classica-piu-round.svg",
+      "streamUrl": "https://uk2.streamingpulse.com/ssl/vcr2",
+      "codec": "mp3",
+      "bitrate": 0,
+      "uuid": null,
+      "tags": "Venice Classic Radio, Classical",
+      "homepage": "https://veniceclassicradio.eu/",
+      "style": "classical",
+      "group": "venice-classic-radio"
     }
   ]
 }

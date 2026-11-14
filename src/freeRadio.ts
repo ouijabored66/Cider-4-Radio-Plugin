@@ -16,6 +16,7 @@ interface CatalogStation {
   image?: string | null;
   streamUrl?: string | null;
   tags?: string | null;
+  homepage?: string | null;
 }
 
 export interface FreeRadioGroup {
@@ -34,6 +35,7 @@ function toStation(entry: CatalogStation): Station {
     source: entry.source,
     streamUrl: entry.streamUrl || undefined,
     tags: entry.tags || undefined,
+    homepage: entry.homepage || undefined,
   };
 }
 

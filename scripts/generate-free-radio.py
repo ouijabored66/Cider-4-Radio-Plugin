@@ -86,6 +86,20 @@ def source_for(group_title: str) -> str:
     raise SystemExit(f"unknown group {group_title!r}")
 
 
+def catalog_homepage(source: str, station_id: str) -> str:
+    if source == "SomaFM" and station_id.startswith("sm-"):
+        return f"https://somafm.com/{station_id[3:]}/"
+    if source == "TuneIn" and station_id.startswith("ti-"):
+        return f"https://tunein.com/radio/{station_id[3:]}/"
+    if source == "Radio Browser":
+        return "https://www.radio-browser.info/"
+    if source == "Icecast":
+        return "https://dir.xiph.org/"
+    if source == "Venice Classic Radio":
+        return "https://veniceclassicradio.eu/"
+    return ""
+
+
 def soma_channel(url: str) -> str | None:
     match = re.search(r"/([a-z0-9]+)-\d+-mp3$", urllib.parse.urlsplit(url).path)
     return match.group(1) if match else None
@@ -268,6 +282,7 @@ enum FreeRadioCatalog {
             let bitrate: Int
             let uuid: String?
             let tags: String
+            let homepage: String?
         }
         let groups: [Group]
         let stations: [Entry]
@@ -280,6 +295,7 @@ enum FreeRadioCatalog {
         case "SomaFM": return .somaFM
         case "Icecast": return .icecast
         case "iptv-org": return .iptvOrg
+        case "Venice Classic Radio": return .veniceClassic
         default: return .tuneIn
         }
     }
@@ -297,7 +313,8 @@ enum FreeRadioCatalog {
                     source: source(entry.source),
                     streamUrl: entry.streamUrl.flatMap { $0.isEmpty ? nil : $0 },
                     uuid: entry.uuid.flatMap { $0.isEmpty ? nil : $0 },
-                    tags: entry.tags, country: nil)
+                    tags: entry.tags, country: nil,
+                    homepage: entry.homepage.flatMap { $0.isEmpty ? nil : $0 })
             }
             return Group(id: group.id, name: group.name, source: source(group.source), stations: stations)
         }
@@ -417,6 +434,8 @@ def main() -> None:
                 "bitrate": bitrate,
                 "uuid": uuid,
                 "tags": tags,
+                "homepage": catalog_homepage(source, station_id),
+                "style": "instrumental",
             }
         )
 
@@ -442,6 +461,8 @@ def main() -> None:
                 "bitrate": 0,
                 "uuid": None,
                 "tags": f"TuneIn, {group_name}",
+                "homepage": catalog_homepage("TuneIn", guide),
+                "style": "instrumental",
             }
         )
 
