@@ -1,3 +1,4 @@
+if (typeof globalThis.process === "undefined") { globalThis.process = { env: { NODE_ENV: "production" } }; }
 (function(){try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(`.radio-search[data-v-b8dc3f54]{gap:8px;max-width:560px;margin-bottom:16px;display:flex}.radio-search input[data-v-b8dc3f54]{min-width:0;color:inherit;font:inherit;background:0 0;border:1px solid #80808066;border-radius:8px;flex:1;padding:8px 12px}.radio-now[data-v-b8dc3f54]{background:#80808026;border-radius:10px;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:16px;padding:12px 16px;display:flex}.radio-now-text[data-v-b8dc3f54]{flex-direction:column;flex:1;min-width:180px;display:flex}.radio-diagnostics[data-v-b8dc3f54]{opacity:.7;font-size:.75em}.radio-note[data-v-b8dc3f54]{opacity:.75;margin:4px 0}.radio-library h2[data-v-b8dc3f54]{margin:0 0 4px;font-size:1.15rem}.radio-groups[data-v-b8dc3f54]{flex-wrap:wrap;gap:8px;margin:12px 0 16px;display:flex}.radio-groups button[data-v-b8dc3f54]{color:inherit;font:inherit;cursor:pointer;background:0 0;border:1px solid #80808059;border-radius:999px;align-items:center;gap:6px;padding:6px 10px;display:inline-flex}.radio-groups button.active[data-v-b8dc3f54]{background:#80808033}.radio-groups span[data-v-b8dc3f54]{opacity:.6;font-size:.8em}.radio-list[data-v-b8dc3f54]{margin:0;padding:0;list-style:none}.radio-list button[data-v-b8dc3f54]{text-align:left;width:100%;color:inherit;font:inherit;cursor:pointer;background:0 0;border:0;border-radius:8px;grid-template-rows:auto auto;grid-template-columns:40px 1fr auto;column-gap:12px;padding:8px;display:grid}.radio-list button[data-v-b8dc3f54]:hover,.radio-list button.active[data-v-b8dc3f54]{background:#80808026}.radio-list img[data-v-b8dc3f54]{object-fit:cover;border-radius:6px;grid-row:1/3;width:40px;height:40px}.radio-name[data-v-b8dc3f54]{grid-column:2;font-weight:600}.radio-detail[data-v-b8dc3f54]{opacity:.7;grid-column:2;font-size:.85em}.radio-source[data-v-b8dc3f54]{opacity:.6;grid-area:1/3/3;align-self:center;font-size:.8em}
 /*$vite$:1*/`)),document.head.appendChild(a)}}catch(d){console.error("vite-plugin-css-injected-by-js",d)}})();
 var b2 = (t, i) => () => (i || (t((i = { exports: {} }).exports, i), t = null), i.exports);
@@ -7446,7 +7447,7 @@ var xp = class {
   identifier: "local.cider.radio",
   name: "Radio",
   description: "Play the Free Radio library, singing and instrumental, and search TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.",
-  version: "0.3.0",
+  version: "0.3.1",
   author: "ouijabored66",
   repo: "https://github.com/ouijabored66/Cider-4-Radio-Plugin",
   pluginKitVersion: "4",

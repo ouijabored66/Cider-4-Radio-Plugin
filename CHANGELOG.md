@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### 0.3.1
+
+Cider imports `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. The 0.3.0 zip unpacked as a folder named `radio`, so Enable on Cider 4.0.40 failed with "Failed to fetch dynamically imported module". The plugin folder is now `local.cider.radio`. `scripts/install.sh` installs that folder and removes an older `radio` copy of this plugin. The station library is unchanged. `plugin.js` defines `process` when the page does not already have it, which is how the Vue build reads `process.env.NODE_ENV`.
+
+Install instructions cover macOS at `~/Library/Application Support/sh.cider.genten/plugins/local.cider.radio`. These macOS steps have not been retested on a real Mac after the rename.
+
+On Linux the script uses `~/.config/sh.cider.genten/plugins`. It uses the Flatpak folder `~/.var/app/sh.cider.Cider/config/sh.cider.genten/plugins` when that is the Cider data folder already on disk. On Windows, `scripts/install.ps1` uses `%APPDATA%\C2Windows\plugins` when that folder exists and when Cider has not created a data folder yet.
+
 ## 0.3.0 / iOS 1.1.1 — 2026-11-14
 
 The Free Radio library is built into the Cider plugin and the iPhone app. The plugin release stays **0.3.0**. The iPhone app is **1.1.1**.
