@@ -11,8 +11,10 @@ from free_radio.streams import parse_playlist
 
 def main():
     groups, stations = load_catalog(Path(__file__).resolve().parents[1] / "src" / "free-radio.json")
-    if len(stations) != 813:
-        raise SystemExit(f"expected 813 stations, found {len(stations)}")
+    if len(stations) != 819:
+        raise SystemExit(f"expected 819 stations, found {len(stations)}")
+    if not any(station.get("id") == "ti-s45455" and station.get("streamUrl") == "https://live-icy.dr.dk/A/A29H.mp3" for station in stations):
+        raise SystemExit("DR P6 Beat is missing its direct stream")
     if not groups:
         raise SystemExit("catalog has no groups")
     found = search_stations(stations, groups, "beat blender", "all")

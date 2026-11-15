@@ -219,6 +219,11 @@
       "id": "world-music",
       "name": "World Music · Vocal",
       "source": "TuneIn"
+    },
+    {
+      "id": "dr",
+      "name": "DR",
+      "source": "TuneIn"
     }
   ],
   "stations": [
@@ -12416,6 +12421,96 @@
       "homepage": "https://veniceclassicradio.eu/",
       "style": "classical",
       "group": "venice-classic-radio"
+    },
+    {
+      "id": "ti-s24860",
+      "name": "DR P1",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A03H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Talk, Vocal",
+      "homepage": "https://www.dr.dk/lyd/p1",
+      "style": "vocal"
+    },
+    {
+      "id": "ti-s37197",
+      "name": "DR P2 Klassisk",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A04H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Classical, Instrumental",
+      "homepage": "https://www.dr.dk/lyd/p2",
+      "style": "instrumental"
+    },
+    {
+      "id": "ti-s24861",
+      "name": "DR P3",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A05H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Pop, Vocal",
+      "homepage": "https://www.dr.dk/lyd/p3",
+      "style": "vocal"
+    },
+    {
+      "id": "ti-s69060",
+      "name": "DR P5",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A25H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Vocal",
+      "homepage": "https://www.dr.dk/lyd/p5",
+      "style": "vocal"
+    },
+    {
+      "id": "ti-s45455",
+      "name": "DR P6 Beat",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A29H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Beat, Vocal",
+      "homepage": "https://www.dr.dk/lyd/p6beat",
+      "style": "vocal"
+    },
+    {
+      "id": "ti-s36105",
+      "name": "DR P8 Jazz",
+      "group": "dr",
+      "source": "TuneIn",
+      "detail": "DR · 128 kbps mp3",
+      "image": null,
+      "streamUrl": "https://live-icy.dr.dk/A/A22H.mp3",
+      "codec": "mp3",
+      "bitrate": 128,
+      "uuid": null,
+      "tags": "DR, Jazz, Instrumental",
+      "homepage": "https://www.dr.dk/lyd/p8jazz",
+      "style": "instrumental"
     }
   ]
 }

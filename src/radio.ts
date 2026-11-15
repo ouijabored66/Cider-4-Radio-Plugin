@@ -295,14 +295,68 @@ export function parseIptvOrg(text: string): Station[] {
   return out;
 }
 
-/** First stream address in a .pls or .m3u playlist body. */
-export function parsePlaylist(text: string): string | undefined {
+/** Every stream address in a .pls or .m3u playlist body, in file order. */
+export function parsePlaylistUrls(text: string): string[] {
+  const out: string[] = [];
   for (const raw of text.split(/\r?\n/)) {
     let line = raw.trim();
-    if (/^file1=/i.test(line)) line = line.slice(6).trim();
-    if (/^https?:\/\//i.test(line)) return line;
+    if (!line || line.startsWith("#")) continue;
+    if (/^file\d+=/i.test(line)) line = line.replace(/^file\d+=/i, "").trim();
+    if (/^https?:\/\//i.test(line)) out.push(line);
   }
-  return undefined;
+  return out;
+}
+
+/** First stream address in a .pls or .m3u playlist body. */
+export function parsePlaylist(text: string): string | undefined {
+  return parsePlaylistUrls(text)[0];
+}
+
+/** http://host:80/path -> https://host/path. Leaves https URLs alone. */
+export function httpsUpgrade(url: string): string | undefined {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "http:") return undefined;
+    parsed.protocol = "https:";
+    if (parsed.port === "80") parsed.port = "";
+    const next = parsed.toString();
+    return next === url ? undefined : next;
+  } catch {
+    return undefined;
+  }
+}
+
+function isPlaylistPath(url: string): boolean {
+  try {
+    const path = new URL(url).pathname.toLowerCase();
+    return path.endsWith(".m3u") || path.endsWith(".m3u8") || path.endsWith(".pls");
+  } catch {
+    return false;
+  }
+}
+
+function isHls(url: string): boolean {
+  try {
+    return new URL(url).pathname.toLowerCase().endsWith(".m3u8");
+  } catch {
+    return false;
+  }
+}
+
+function uniqueUrls(urls: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const url of urls) {
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    out.push(url);
+  }
+  return out;
+}
+
+function httpsFirst(url: string): string[] {
+  const https = httpsUpgrade(url);
+  return https ? [https, url] : [url];
 }
 
 async function getText(url: string) {
@@ -473,40 +527,96 @@ export async function searchStations(query: string): Promise<SearchResult> {
 }
 
 /** TuneIn answers protected stations with a "notcompatible" notice clip. */
-export function pickTuneInStream(body: any[]): string | undefined {
-  return body.find((b) => b?.url && !/notcompatible/i.test(b.url))?.url;
+export function tuneInUrls(body: any[]): string[] {
+  const out: string[] = [];
+  for (const item of body ?? []) {
+    const url = item?.url;
+    if (typeof url === "string" && url && !/notcompatible/i.test(url)) out.push(url);
+  }
+  return out;
 }
 
-/** .pls/.m3u playlist files can't be played directly; read the first stream out of them. */
-async function unwrapPlaylist(address: string): Promise<string | undefined> {
-  let path: string;
+export function pickTuneInStream(body: any[]): string | undefined {
+  return tuneInUrls(body)[0];
+}
+
+async function readText(url: string): Promise<string | undefined> {
   try {
-    path = new URL(address).pathname.toLowerCase();
+    const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    if (!response.ok) return undefined;
+    return await response.text();
   } catch {
     return undefined;
   }
-  if (!path.endsWith(".pls") && !path.endsWith(".m3u")) return undefined;
+}
+
+/** A short read that succeeds when the server is sending audio or an HLS playlist. */
+async function playable(url: string): Promise<boolean> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
   try {
-    return parsePlaylist(await getText(address));
-  } catch (error) {
-    console.warn("[radio] could not read playlist", error);
-    return undefined;
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: { Range: "bytes=0-8191" },
+    });
+    if (!response.ok && response.status !== 206) return false;
+    const type = (response.headers.get("content-type") ?? "").toLowerCase();
+    if (type.includes("audio/") || type.includes("mpegurl") || type.includes("scpls")) return true;
+    const reader = response.body?.getReader();
+    if (!reader) return false;
+    const { value } = await reader.read();
+    await reader.cancel().catch(() => undefined);
+    if (!value || value.length < 2) return false;
+    if (value[0] === 0x49 && value[1] === 0x44 && value[2] === 0x33) return true;
+    if (value[0] === 0xff && (value[1] & 0xe0) === 0xe0) return true;
+    const head = new TextDecoder().decode(value.slice(0, 12));
+    return head.startsWith("#EXTM3U");
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
   }
 }
 
+async function expandAddress(url: string): Promise<string[]> {
+  if (isHls(url) || !isPlaylistPath(url)) return httpsFirst(url);
+  let text: string | undefined;
+  for (const attempt of httpsFirst(url)) {
+    text = await readText(attempt);
+    if (text) break;
+  }
+  const inner = text ? parsePlaylistUrls(text) : [];
+  if (!inner.length) return httpsFirst(url);
+  return uniqueUrls(inner.flatMap((item) => httpsFirst(item)));
+}
+
 /**
- * Returns the address to play: TuneIn stations are looked up first, and
- * .pls/.m3u playlist addresses (SomaFM, TuneIn, some Icecast entries) are unwrapped.
+ * Address to play. A saved direct stream is used as-is. Playlists are unwrapped,
+ * http links are tried again over https (port 80 stripped), and every TuneIn
+ * entry is tried. If those fail, a saved library stream is the last resort.
  */
 export async function resolveStream(station: Station): Promise<string> {
-  let address = station.streamUrl;
-  if (!address) {
-    const guideId = station.id.replace(/^ti-/, "");
-    const data = await getJson(
-      `${TUNEIN}/Tune.ashx?${new URLSearchParams({ id: guideId, render: "json" })}`
-    );
-    address = pickTuneInStream(data.body ?? []);
-    if (!address) throw new Error("TuneIn gave no playable stream for this station");
+  const saved = station.streamUrl;
+  if (saved && !isPlaylistPath(saved) && saved.startsWith("https://")) return saved;
+
+  const seeds: string[] = [];
+  if (station.id.startsWith("ti-")) {
+    try {
+      const guideId = station.id.replace(/^ti-/, "");
+      const data = await getJson(
+        `${TUNEIN}/Tune.ashx?${new URLSearchParams({ id: guideId, render: "json" })}`
+      );
+      seeds.push(...tuneInUrls(data.body ?? []));
+    } catch (error) {
+      console.warn("[radio] TuneIn lookup failed", error);
+    }
   }
-  return (await unwrapPlaylist(address)) ?? address;
+  if (saved) seeds.push(saved);
+
+  for (const url of uniqueUrls((await Promise.all(uniqueUrls(seeds).map(expandAddress))).flat())) {
+    if (isPlaylistPath(url) && !isHls(url)) continue;
+    if (await playable(url)) return url;
+  }
+  if (saved) return saved;
+  throw new Error("TuneIn gave no playable stream for this station");
 }
