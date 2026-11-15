@@ -5,7 +5,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-USER_AGENT = "FreeRadio/0.3.1 (+https://github.com/ouijabored66/Cider-4-Radio-Plugin)"
+USER_AGENT = "FreeRadio/0.3.2 (+https://github.com/ouijabored66/Cider-4-Radio-Plugin)"
 TUNEIN = "https://opml.radiotime.com/Tune.ashx"
 
 
