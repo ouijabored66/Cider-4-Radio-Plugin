@@ -139,7 +139,7 @@ The library has 819 stations: 502 instrumental, 315 vocal, and 2 Venice Classic 
 
 Every bundled station records its source and a homepage: a SomaFM channel page, a TuneIn guide page, the station homepage when Radio Browser had one, or the directory page for Icecast. Venice Classic Radio stations use `https://veniceclassicradio.eu/`.
 
-I AM NOT AFFILIATED WITH ANY OF THESE NETWORKS AND I DO NOT CLAIM OWNERSHIP, THIS APP IS COMPLETELY FREE FOR OTHERS TO USE!!!
+**_I AM NOT AFFILIATED WITH ANY OF THESE NETWORKS AND I DO NOT CLAIM OWNERSHIP, THIS APP IS COMPLETELY FREE FOR OTHERS TO USE!!!_**
 A broadcaster who wants a station removed can open an issue.
 
 ## Notes
