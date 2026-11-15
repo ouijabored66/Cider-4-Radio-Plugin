@@ -17,7 +17,20 @@ Free internet radio plugin for Cider 4. It opens on the Free Radio library (813 
 
 ## Install
 
-Download [cider-radio-plugin-0.3.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.3.0/cider-radio-plugin-0.3.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest). The zip is the same plugin on Linux, Windows, and macOS. Quit Cider, unzip it, and put the plugin folder in Cider's plugins directory so it sits alongside your other plugins. The folder name has to be the identifier, `local.cider.radio`. The 0.3.0 zip unpacks as `radio`; rename that folder to `local.cider.radio`. Cider loads the module from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. A folder named only `radio` shows up in the plugin list, and Enable fails because that URL is not the folder on disk. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
+Download [cider-radio-plugin-0.3.1.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/cider-radio-plugin-0.3.1.zip) from the [v0.3.2 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.2). The zip is the same plugin on Linux, Windows, and macOS, and it unpacks as a folder already named `local.cider.radio`. Quit Cider and put that folder in Cider's plugins directory, alongside your other plugins. Cider loads it from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
+
+From a copy of this repository, `scripts/install.sh` copies `local.cider.radio` into the plugins directory and removes an older `radio` folder of this plugin:
+
+```bash
+chmod +x scripts/install.sh
+./scripts/install.sh
+```
+
+To install the downloaded zip the same way:
+
+```bash
+./scripts/install.sh ~/Downloads/cider-radio-plugin-0.3.1.zip
+```
 
 Cider can open that directory for you: **Settings → Extensions → Plugins**, then the **…** menu, **Open AppData Folder**, and go into `plugins`.
 
@@ -29,20 +42,7 @@ Cider can open that directory for you: **Settings → Extensions → Plugins**, 
 
 That is the plugins directory Cider 4 reports on macOS (`~/Library/Application Support/sh.cider.genten`). The [Cider FAQ](https://cider.gitbook.io/welcome-to-gitbook/docs/1.client/faqs) writes this path without the `~`. The folder is in your home Library, the same place Cider's startup log calls `appData`.
 
-From Terminal, in a copy of this repository:
-
-```bash
-chmod +x scripts/install.sh
-./scripts/install.sh
-```
-
-To install a downloaded zip:
-
-```bash
-./scripts/install.sh ~/Downloads/cider-radio-plugin-0.3.0.zip
-```
-
-`./scripts/install.sh --print-path` prints the plugins directory. `--dry-run` prints the copy and does not write it. These macOS steps have not been tested on a real Mac. If Radio does not appear, use **Open AppData Folder** (above) and move the `radio` folder into the `plugins` directory Cider opened.
+`./scripts/install.sh --print-path` prints the plugins directory. `--dry-run` prints the copy and does not write it. These macOS steps have not been tested on a real Mac. If Radio does not appear, use **Open AppData Folder** (above) and confirm `local.cider.radio` is inside the `plugins` directory Cider opened.
 
 When `sh.cider.genten` is absent and an older `~/Library/Application Support/sh.cider.electron` data folder is already on disk, the script uses that older folder.
 
