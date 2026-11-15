@@ -17,7 +17,7 @@ Free internet radio plugin for Cider 4. It opens on the Free Radio library (819 
 
 ## Install
 
-Download [cider-radio-plugin-0.3.1.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/cider-radio-plugin-0.3.1.zip) from the [v0.3.2 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.2). The zip is the same plugin on Linux, Windows, and macOS, and it unpacks as a folder already named `local.cider.radio`. Quit Cider and put that folder in Cider's plugins directory, alongside your other plugins. Cider loads it from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
+Download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/cider-radio-plugin-0.3.2.zip) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). The zip is the same plugin on Linux, Windows, and macOS, and it unpacks as a folder already named `local.cider.radio`. Quit Cider and put that folder in Cider's plugins directory, alongside your other plugins. Cider loads it from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
 
 From a copy of this repository, `scripts/install.sh` copies `local.cider.radio` into the plugins directory and removes an older `radio` folder of this plugin:
 
@@ -29,7 +29,7 @@ chmod +x scripts/install.sh
 To install the downloaded zip the same way:
 
 ```bash
-./scripts/install.sh ~/Downloads/cider-radio-plugin-0.3.1.zip
+./scripts/install.sh ~/Downloads/cider-radio-plugin-0.3.2.zip
 ```
 
 Cider can open that directory for you: **Settings → Extensions → Plugins**, then the **…** menu, **Open AppData Folder**, and go into `plugins`.
@@ -89,10 +89,10 @@ Free Radio for Linux is a standalone desktop app. It plays the same Free Radio l
 - Now playing, including a stream title or artist when the station sends one
 - Favorites: star a station from its row or the now-playing bar. The Favorites view lists them. They are saved in `~/.config/free-radio/favorites.json` (`XDG_CONFIG_HOME` is used when it is set)
 
-Download [free-radio_0.3.2_all.deb](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/free-radio_0.3.2_all.deb) from the [GitHub Releases](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases) page. The package is published only on GitHub, not on an apt repository or any other store.
+Download [free-radio_0.3.3_all.deb](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/free-radio_0.3.3_all.deb) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). The package is published only on GitHub, not on an apt repository or any other store.
 
 ```bash
-sudo apt install ./free-radio_0.3.2_all.deb
+sudo apt install ./free-radio_0.3.3_all.deb
 ```
 
 `apt` installs the dependencies: Python 3, PyGObject, GTK 4, libadwaita, GStreamer (base, good, bad, and libav), glib-networking, and CA certificates. Then open **Free Radio** from the app menu, or run `free-radio`.
@@ -109,7 +109,7 @@ A companion iPhone app (version 1.1.1) with the same Free Radio library, plus th
 - Background and lock-screen playback
 - Built with [xtool](https://github.com/xtool-org/xtool), so no Mac or Xcode is needed
 
-Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/FreeRadio-1.1.1.ipa) from the [v0.3.2 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.2). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
+Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/FreeRadio-1.1.1.ipa) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
 
 ### Install
 
