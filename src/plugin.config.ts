@@ -6,7 +6,7 @@ export default {
     identifier: 'local.cider.radio',
     name: 'Radio',
     description: 'Play the Free Radio library, singing and instrumental, and search TuneIn, Radio Browser, SomaFM, Icecast and iptv-org.',
-    version: '0.3.1',
+    version: '0.3.2',
     author: 'ouijabored66',
     repo: 'https://github.com/ouijabored66/Cider-4-Radio-Plugin',
     pluginKitVersion: '4',

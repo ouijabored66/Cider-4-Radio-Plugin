@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Linux app 0.3.3 / Cider plugin 0.3.2
+
+DR P6 Beat (TuneIn s45455) plays from DR's own stream, `https://live-icy.dr.dk/A/A29H.mp3`. That address returned MPEG audio from outside Denmark. TuneIn's old `.m3u` links are still followed, and an `http` address is tried again as `https` with port 80 removed. If those fail, a direct stream saved in the library is used. DR P1, P2 Klassisk, P3, P5, P6 Beat, and P8 Jazz are in the library with those verified streams.
+
 ### 0.3.2
 
 Free Radio for Linux is a GTK app in [linux-app/](linux-app/). It plays the same 813-station library and does not need Cider. Favorites are saved in `~/.config/free-radio/favorites.json`. `scripts/build-deb.sh` builds `free-radio_0.3.2_all.deb`.

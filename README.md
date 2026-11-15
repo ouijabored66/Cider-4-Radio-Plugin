@@ -1,6 +1,6 @@
 # Cider 4 Radio Plugin
 
-Free internet radio plugin for Cider 4. It opens on the Free Radio library (813 stations, singing and instrumental) and can also search TuneIn, Radio Browser, SomaFM, the Icecast directory and iptv-org.
+Free internet radio plugin for Cider 4. It opens on the Free Radio library (819 stations, singing and instrumental) and can also search TuneIn, Radio Browser, SomaFM, the Icecast directory and iptv-org.
 
 ## Features
 
@@ -82,7 +82,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
 
 Free Radio for Linux is a standalone desktop app. It plays the same Free Radio library as the Cider plugin and does not need Cider installed.
 
-- 813 stations (SomaFM, Radio Browser, Icecast, TuneIn, and Venice Classic Radio)
+- 819 stations (SomaFM, Radio Browser, Icecast, TuneIn, DR, and Venice Classic Radio)
 - Search the library
 - Play and stop
 - Volume
@@ -127,14 +127,14 @@ Source: [ios/](ios/)
 
 This project hosts no audio. Each station's stream address is stored as published and is left unchanged, so playback connects to that broadcaster's own stream. All rights in the streams and in the music belong to the broadcasters and the other rightsholders.
 
-The library has 813 stations: 500 instrumental, 311 vocal, and 2 Venice Classic Radio.
+The library has 819 stations: 502 instrumental, 315 vocal, and 2 Venice Classic Radio.
 
 | Source | Stations | Credit |
 | --- | ---: | --- |
 | SomaFM | 48 | [somafm.com](https://somafm.com/), listener-supported |
 | Radio Browser | 68 | [radio-browser.info](https://www.radio-browser.info/), community directory, CC0 data |
 | Icecast directory | 10 | [dir.xiph.org](https://dir.xiph.org/) |
-| TuneIn | 685 | [tunein.com](https://tunein.com/). Streams are the exported address when one was saved, otherwise resolved through TuneIn's public OPML API (`opml.radiotime.com`) |
+| TuneIn | 691 | [tunein.com](https://tunein.com/). Streams are the exported address when one was saved, otherwise resolved through TuneIn's public OPML API (`opml.radiotime.com`). Six DR channels use DR's own HTTPS MP3 address |
 | Venice Classic Radio | 2 | [veniceclassicradio.eu](https://veniceclassicradio.eu/) |
 
 Every bundled station records its source and a homepage: a SomaFM channel page, a TuneIn guide page, the station homepage when Radio Browser had one, or the directory page for Icecast. Venice Classic Radio stations use `https://veniceclassicradio.eu/`.
