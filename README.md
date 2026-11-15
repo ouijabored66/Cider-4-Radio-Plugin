@@ -17,9 +17,66 @@ Free internet radio plugin for Cider 4. It opens on the Free Radio library (813 
 
 ## Install
 
-1. Download [cider-radio-plugin-0.3.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.3.0/cider-radio-plugin-0.3.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest).
-2. Unzip it into Cider's plugins folder so the `radio` folder sits alongside your other plugins.
-3. Restart Cider and open **Radio** from the menu.
+Download [cider-radio-plugin-0.3.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.3.0/cider-radio-plugin-0.3.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest). The zip is the plugin for Linux, Windows, and macOS. Quit Cider, unzip it, and put the `radio` folder in Cider's plugins directory so it sits alongside your other plugins. Start Cider and open **Radio** from the menu.
+
+Cider can open that directory for you: **Settings → Extensions → Plugins**, then the **…** menu, **Open AppData Folder**, and go into `plugins`.
+
+### macOS
+
+```
+~/Library/Application Support/sh.cider.genten/plugins/radio
+```
+
+That is the plugins directory Cider 4 reports on macOS (`~/Library/Application Support/sh.cider.genten`). The [Cider FAQ](https://cider.gitbook.io/welcome-to-gitbook/docs/1.client/faqs) writes this path without the `~`. The folder is in your home Library, the same place Cider's startup log calls `appData`.
+
+From Terminal, in a copy of this repository:
+
+```bash
+chmod +x scripts/install.sh
+./scripts/install.sh
+```
+
+To install a downloaded zip:
+
+```bash
+./scripts/install.sh ~/Downloads/cider-radio-plugin-0.3.0.zip
+```
+
+`./scripts/install.sh --print-path` prints the plugins directory. `--dry-run` prints the copy and does not write it. These macOS steps have not been tested on a real Mac. If Radio does not appear, use **Open AppData Folder** (above) and move the `radio` folder into the `plugins` directory Cider opened.
+
+When `sh.cider.genten` is absent and an older `~/Library/Application Support/sh.cider.electron` data folder is already on disk, the script uses that older folder.
+
+### Linux
+
+```
+~/.config/sh.cider.genten/plugins/radio
+```
+
+The Flatpak build keeps its data here when `~/.config/sh.cider.genten` is not present:
+
+```
+~/.var/app/sh.cider.Cider/config/sh.cider.genten/plugins/radio
+```
+
+`./scripts/install.sh` uses `~/.config/sh.cider.genten` when that data folder exists, and when Cider has not created a data folder yet. It uses the Flatpak path when that is the data folder already on disk. `XDG_CONFIG_HOME` is honored when it is set.
+
+### Windows
+
+```
+%APPDATA%\C2Windows\plugins\radio
+```
+
+Microsoft Store installs use:
+
+```
+%LOCALAPPDATA%\packages\27554FireDevElijahKlauman.CiderEA_270bejk4xgzqp\LocalCache\Roaming\C2Windows\plugins\radio
+```
+
+`scripts/install.ps1` keeps `%APPDATA%\C2Windows` when that folder exists and when Cider has not created a data folder yet. When `C2Windows` is absent and `%APPDATA%\sh.cider.genten`, `%APPDATA%\sh.cider.dotnet`, or the Store folder above is already on disk, the script uses that folder.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
+```
 
 ## Free Radio for iPhone
 
@@ -65,6 +122,7 @@ A broadcaster who wants a station removed can open an issue.
 
 ## Notes
 
+- macOS install uses `~/Library/Application Support/sh.cider.genten/plugins`. Those steps have not been tested on a real Mac.
 - Directory search can still find stations that are not in this library, including the rest of the SomaFM channel list.
 - The iptv-org source is currently empty upstream. Some stations may not play if their stream is offline or uses an unsupported format.
 - The eight Jellyfin visualizer channels are not included. They are MPEG-TS video served only on the server's own network, and these apps play audio.

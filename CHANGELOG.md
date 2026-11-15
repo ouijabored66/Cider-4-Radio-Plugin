@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+Install instructions cover macOS. `scripts/install.sh` copies the existing `radio` folder to `~/Library/Application Support/sh.cider.genten/plugins/radio`. The plugin JavaScript and the station library are unchanged. These macOS steps have not been tested on a real Mac.
+
+On Linux the script uses `~/.config/sh.cider.genten/plugins`. It uses the Flatpak folder `~/.var/app/sh.cider.Cider/config/sh.cider.genten/plugins` when that is the Cider data folder already on disk. On Windows, `scripts/install.ps1` uses `%APPDATA%\C2Windows\plugins` when that folder exists and when Cider has not created a data folder yet.
+
 ## 0.3.0 / iOS 1.1.1 — 2026-11-14
 
 The Free Radio library is built into the Cider plugin and the iPhone app. The plugin release stays **0.3.0**. The iPhone app is **1.1.1**.
