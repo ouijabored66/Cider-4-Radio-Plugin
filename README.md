@@ -17,14 +17,14 @@ Free internet radio plugin for Cider 4. It opens on the Free Radio library (813 
 
 ## Install
 
-Download [cider-radio-plugin-0.3.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.3.0/cider-radio-plugin-0.3.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest). The zip is the plugin for Linux, Windows, and macOS. Quit Cider, unzip it, and put the `radio` folder in Cider's plugins directory so it sits alongside your other plugins. Start Cider and open **Radio** from the menu.
+Download [cider-radio-plugin-0.3.0.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/V0.3.0/cider-radio-plugin-0.3.0.zip) from the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest). The zip is the same plugin on Linux, Windows, and macOS. Quit Cider, unzip it, and put the plugin folder in Cider's plugins directory so it sits alongside your other plugins. The folder name has to be the identifier, `local.cider.radio`. The 0.3.0 zip unpacks as `radio`; rename that folder to `local.cider.radio`. Cider loads the module from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. A folder named only `radio` shows up in the plugin list, and Enable fails because that URL is not the folder on disk. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
 
 Cider can open that directory for you: **Settings → Extensions → Plugins**, then the **…** menu, **Open AppData Folder**, and go into `plugins`.
 
 ### macOS
 
 ```
-~/Library/Application Support/sh.cider.genten/plugins/radio
+~/Library/Application Support/sh.cider.genten/plugins/local.cider.radio
 ```
 
 That is the plugins directory Cider 4 reports on macOS (`~/Library/Application Support/sh.cider.genten`). The [Cider FAQ](https://cider.gitbook.io/welcome-to-gitbook/docs/1.client/faqs) writes this path without the `~`. The folder is in your home Library, the same place Cider's startup log calls `appData`.
@@ -49,13 +49,13 @@ When `sh.cider.genten` is absent and an older `~/Library/Application Support/sh.
 ### Linux
 
 ```
-~/.config/sh.cider.genten/plugins/radio
+~/.config/sh.cider.genten/plugins/local.cider.radio
 ```
 
 The Flatpak build keeps its data here when `~/.config/sh.cider.genten` is not present:
 
 ```
-~/.var/app/sh.cider.Cider/config/sh.cider.genten/plugins/radio
+~/.var/app/sh.cider.Cider/config/sh.cider.genten/plugins/local.cider.radio
 ```
 
 `./scripts/install.sh` uses `~/.config/sh.cider.genten` when that data folder exists, and when Cider has not created a data folder yet. It uses the Flatpak path when that is the data folder already on disk. `XDG_CONFIG_HOME` is honored when it is set.
@@ -63,13 +63,13 @@ The Flatpak build keeps its data here when `~/.config/sh.cider.genten` is not pr
 ### Windows
 
 ```
-%APPDATA%\C2Windows\plugins\radio
+%APPDATA%\C2Windows\plugins\local.cider.radio
 ```
 
 Microsoft Store installs use:
 
 ```
-%LOCALAPPDATA%\packages\27554FireDevElijahKlauman.CiderEA_270bejk4xgzqp\LocalCache\Roaming\C2Windows\plugins\radio
+%LOCALAPPDATA%\packages\27554FireDevElijahKlauman.CiderEA_270bejk4xgzqp\LocalCache\Roaming\C2Windows\plugins\local.cider.radio
 ```
 
 `scripts/install.ps1` keeps `%APPDATA%\C2Windows` when that folder exists and when Cider has not created a data folder yet. When `C2Windows` is absent and `%APPDATA%\sh.cider.genten`, `%APPDATA%\sh.cider.dotnet`, or the Store folder above is already on disk, the script uses that folder.
@@ -122,7 +122,7 @@ A broadcaster who wants a station removed can open an issue.
 
 ## Notes
 
-- macOS install uses `~/Library/Application Support/sh.cider.genten/plugins`. Those steps have not been tested on a real Mac.
+- macOS install uses `~/Library/Application Support/sh.cider.genten/plugins/local.cider.radio`. The folder name is the plugin identifier. These steps have not been retested on a real Mac after the rename.
 - Directory search can still find stations that are not in this library, including the rest of the SomaFM channel list.
 - The iptv-org source is currently empty upstream. Some stations may not play if their stream is offline or uses an unsupported format.
 - The eight Jellyfin visualizer channels are not included. They are MPEG-TS video served only on the server's own network, and these apps play audio.

@@ -27,9 +27,10 @@ if [ -d "$HOME/Library" ]; then
   exit 1
 fi
 
+installed="$plugins/local.cider.radio"
 "$INSTALL" >/dev/null
-cmp -s "$REPO_ROOT/radio/plugin.js" "$plugins/radio/plugin.js"
-cmp -s "$REPO_ROOT/radio/plugin.yml" "$plugins/radio/plugin.yml"
+cmp -s "$REPO_ROOT/local.cider.radio/plugin.js" "$installed/plugin.js"
+cmp -s "$REPO_ROOT/local.cider.radio/plugin.yml" "$installed/plugin.yml"
 
 mkdir -p "$plugins/other-plugin"
 printf 'keep\n' > "$plugins/other-plugin/plugin.yml"
@@ -39,19 +40,20 @@ if [ "$(cat "$plugins/other-plugin/plugin.yml")" != "keep" ]; then
   exit 1
 fi
 
-rm -rf "$plugins/radio"
-mkdir -p "$plugins/custom-name"
-cp "$REPO_ROOT/radio/plugin.yml" "$plugins/custom-name/plugin.yml"
-printf 'old\n' > "$plugins/custom-name/plugin.js"
+# A copy in plugins/radio is the 0.3.0 layout. Cider requests the identifier path.
+rm -rf "$installed"
+mkdir -p "$plugins/radio"
+cp "$REPO_ROOT/local.cider.radio/plugin.yml" "$plugins/radio/plugin.yml"
+printf 'old\n' > "$plugins/radio/plugin.js"
 "$INSTALL" >/dev/null
-cmp -s "$REPO_ROOT/radio/plugin.js" "$plugins/custom-name/plugin.js"
+cmp -s "$REPO_ROOT/local.cider.radio/plugin.js" "$installed/plugin.js"
 if [ -d "$plugins/radio" ]; then
-  printf 'install created a second copy next to an existing one\n' >&2
+  printf 'install left the old radio folder in place\n' >&2
   exit 1
 fi
 
 rm -rf "$plugins"
-python3 - "$ROOT/plugin.zip" "$REPO_ROOT/radio" <<'PY'
+python3 - "$ROOT/plugin.zip" "$REPO_ROOT/local.cider.radio" <<'PY'
 import sys
 import zipfile
 from pathlib import Path
@@ -62,15 +64,19 @@ with zipfile.ZipFile(zip_path, "w") as archive:
             archive.write(path, f"radio/{path.name}")
 PY
 "$INSTALL" "$ROOT/plugin.zip" >/dev/null
-cmp -s "$REPO_ROOT/radio/plugin.js" "$plugins/radio/plugin.js"
+cmp -s "$REPO_ROOT/local.cider.radio/plugin.js" "$installed/plugin.js"
+if [ -d "$plugins/radio" ]; then
+  printf 'zip install created a radio folder\n' >&2
+  exit 1
+fi
 
 mkdir -p "$plugins"
 ln -s "$ROOT/elsewhere" "$plugins/linked"
-# A symlink named radio is refused, and its target is left alone.
-rm -rf "$plugins/radio"
+# A symlink at the identifier path is refused, and its target is left alone.
+rm -rf "$installed"
 mkdir -p "$ROOT/elsewhere"
 printf 'target\n' > "$ROOT/elsewhere/marker"
-ln -s "$ROOT/elsewhere" "$plugins/radio"
+ln -s "$ROOT/elsewhere" "$installed"
 if "$INSTALL" >/dev/null 2>"$ROOT/symlink-err"; then
   printf 'install replaced a symlink\n' >&2
   exit 1
@@ -79,7 +85,7 @@ if [ "$(cat "$ROOT/elsewhere/marker")" != "target" ]; then
   printf 'install wrote through the symlink\n' >&2
   exit 1
 fi
-rm "$plugins/radio"
+rm "$installed"
 
 bad="$ROOT/bad"
 mkdir -p "$bad"

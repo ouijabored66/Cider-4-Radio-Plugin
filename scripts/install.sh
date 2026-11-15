@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 # Install the Radio plugin into Cider's plugins directory.
 #
-# macOS destination (not yet tried on a real Mac):
-#   ~/Library/Application Support/sh.cider.genten/plugins/radio
-# Linux destination, unchanged:
-#   ~/.config/sh.cider.genten/plugins/radio
-# Windows destination when this script is run from Git Bash, unchanged:
-#   %APPDATA%\C2Windows\plugins\radio
+# The folder name is the plugin identifier. Cider imports
+# http://127.0.0.1:10767/plugins/<identifier>/plugin.js
+# macOS: ~/Library/Application Support/sh.cider.genten/plugins/local.cider.radio
+# Linux: ~/.config/sh.cider.genten/plugins/local.cider.radio
+# Windows (Git Bash): %APPDATA%\C2Windows\plugins\local.cider.radio
 #   (scripts/install.ps1 is the Windows script.)
 #
 # Quit Cider before installing. Start Cider again afterward and open Radio.
@@ -34,8 +33,8 @@ Quit Cider first. Start it again and open Radio from the menu.
   --print-path   Print the plugins directory and exit
   --dry-run      Print the copy that would be made and do not write it
 
-With no path, the script uses the radio/ folder in this repository,
-then dist/ if that folder contains a built plugin.
+With no path, the script uses the local.cider.radio/ folder in this
+repository, then radio/ or dist/ if one of those contains a built plugin.
 EOF
 }
 
@@ -110,14 +109,13 @@ plugin_dir_from() {
 resolve_source() {
   local input=${1:-}
   if [ -z "$input" ]; then
-    if plugin_dir_from "$REPO_ROOT/radio" >/dev/null; then
-      plugin_dir_from "$REPO_ROOT/radio"
-      return 0
-    fi
-    if plugin_dir_from "$REPO_ROOT/dist" >/dev/null; then
-      plugin_dir_from "$REPO_ROOT/dist"
-      return 0
-    fi
+    local candidate
+    for candidate in "$REPO_ROOT/local.cider.radio" "$REPO_ROOT/radio" "$REPO_ROOT/dist"; do
+      if plugin_dir_from "$candidate" >/dev/null; then
+        plugin_dir_from "$candidate"
+        return 0
+      fi
+    done
     printf 'No plugin found. Pass the radio folder or the release zip.\n' >&2
     return 1
   fi
@@ -166,26 +164,28 @@ if ! grep -Eq "^identifier:[[:space:]]*['\"]?local\\.cider\\.radio['\"]?[[:space
   exit 1
 fi
 
-existing_install() {
-  local plugins=$1
+# Cider fetches /plugins/<identifier>/plugin.js. The directory name has to
+# be the identifier, including when an older copy lives in plugins/radio.
+DEST="$PLUGINS_DIR/$PLUGIN_IDENTIFIER"
+
+remove_other_copies() {
   local dir
-  [ -d "$plugins" ] || return 1
-  for dir in "$plugins"/*; do
+  [ -d "$PLUGINS_DIR" ] || return 0
+  for dir in "$PLUGINS_DIR"/*; do
     [ -d "$dir" ] || continue
+    [ -L "$dir" ] && continue
+    [ "$dir" = "$DEST" ] && continue
     [ -f "$dir/plugin.yml" ] || continue
     if grep -Eq "^identifier:[[:space:]]*['\"]?local\\.cider\\.radio['\"]?[[:space:]]*$" "$dir/plugin.yml"; then
-      (cd "$dir" && pwd)
-      return 0
+      if [ "$DRY_RUN" -eq 1 ]; then
+        printf 'Would remove old copy: %s\n' "$dir"
+      else
+        rm -rf "$dir"
+        printf 'Removed old copy: %s\n' "$dir"
+      fi
     fi
   done
-  return 1
 }
-
-if DEST=$(existing_install "$PLUGINS_DIR"); then
-  :
-else
-  DEST="$PLUGINS_DIR/radio"
-fi
 
 case "$DEST" in
   */plugins/*) ;;
@@ -213,6 +213,7 @@ printf 'From: %s\n' "$SOURCE"
 printf 'To:   %s\n' "$DEST"
 
 if [ "$DRY_RUN" -eq 1 ]; then
+  remove_other_copies
   printf 'Dry run: nothing was copied.\n'
   exit 0
 fi
@@ -227,9 +228,10 @@ mkdir -p "$PLUGINS_DIR"
 rm -rf "$DEST"
 mkdir -p "$DEST"
 cp -R "$SOURCE"/. "$DEST"/
+remove_other_copies
 
 if [ "$DATA_EXISTED" -eq 0 ]; then
   printf 'Copied the plugin. Cider has not created its data folder yet; start Cider once so it picks this directory up.\n'
 else
-  printf 'Copied the plugin. Quit Cider if it is open, start it again, and open Radio from the menu.\n'
+  printf 'Copied the plugin. Quit Cider if it is open, start it again, enable Radio if it is disabled, and open Radio from the menu.\n'
 fi

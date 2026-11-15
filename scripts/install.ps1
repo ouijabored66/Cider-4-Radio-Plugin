@@ -1,7 +1,9 @@
 # Install the Radio plugin into Cider's plugins directory on Windows.
 # macOS and Linux: use scripts/install.sh instead.
 #
-# The usual Windows folder stays %APPDATA%\C2Windows\plugins\radio.
+# Cider loads http://127.0.0.1:10767/plugins/<identifier>/plugin.js
+# so the folder name is local.cider.radio on every system.
+# The usual Windows data folder stays %APPDATA%\C2Windows\plugins.
 # A data folder that is already on disk is used when C2Windows is not:
 #   %APPDATA%\sh.cider.genten
 #   %APPDATA%\sh.cider.dotnet
@@ -114,7 +116,11 @@ function Resolve-PluginSource {
     param([string]$InputPath)
 
     if (-not $InputPath) {
-        foreach ($candidate in @((Join-Path $RepoRoot 'radio'), (Join-Path $RepoRoot 'dist'))) {
+        foreach ($candidate in @(
+            (Join-Path $RepoRoot 'local.cider.radio'),
+            (Join-Path $RepoRoot 'radio'),
+            (Join-Path $RepoRoot 'dist')
+        )) {
             if (Test-PluginDir $candidate) { return (Resolve-Path -LiteralPath $candidate).Path }
             $nested = Join-Path $candidate 'radio'
             if (Test-PluginDir $nested) { return (Resolve-Path -LiteralPath $nested).Path }
@@ -167,16 +173,7 @@ try {
         throw "plugin.yml in $resolved is not $PluginIdentifier"
     }
 
-    $dest = Join-Path $pluginsDir 'radio'
-    if (Test-Path -LiteralPath $pluginsDir -PathType Container) {
-        foreach ($dir in Get-ChildItem -LiteralPath $pluginsDir -Directory) {
-            $existingYml = Join-Path $dir.FullName 'plugin.yml'
-            if ((Test-Path -LiteralPath $existingYml -PathType Leaf) -and (Test-RadioIdentifier $existingYml)) {
-                $dest = $dir.FullName
-                break
-            }
-        }
-    }
+    $dest = Join-Path $pluginsDir $PluginIdentifier
 
     if ($dest -notmatch '[\\/]plugins[\\/][^\\/]+$') {
         throw "Refusing to install outside a Cider plugins directory: $dest"
@@ -189,6 +186,22 @@ try {
 
     Write-Output "From: $resolved"
     Write-Output "To:   $dest"
+    $oldCopies = @()
+    if (Test-Path -LiteralPath $pluginsDir -PathType Container) {
+        foreach ($dir in Get-ChildItem -LiteralPath $pluginsDir -Directory) {
+            if ($dir.FullName -eq $dest) { continue }
+            if ($dir.Attributes -band [IO.FileAttributes]::ReparsePoint) { continue }
+            $existingYml = Join-Path $dir.FullName 'plugin.yml'
+            if ((Test-Path -LiteralPath $existingYml -PathType Leaf) -and (Test-RadioIdentifier $existingYml)) {
+                $oldCopies += $dir.FullName
+            }
+        }
+    }
+    foreach ($old in $oldCopies) {
+        if ($DryRun) {
+            Write-Output "Would remove old copy: $old"
+        }
+    }
     if ($DryRun) {
         Write-Output 'Dry run: nothing was copied.'
         return
@@ -203,12 +216,16 @@ try {
     }
     New-Item -ItemType Directory -Path $dest -Force | Out-Null
     Copy-Item -Path (Join-Path $resolved '*') -Destination $dest -Recurse -Force
+    foreach ($old in $oldCopies) {
+        Remove-Item -LiteralPath $old -Recurse -Force
+        Write-Output "Removed old copy: $old"
+    }
 
     if (-not $dataExisted) {
         Write-Output 'Copied the plugin. Cider has not created its data folder yet; start Cider once so it picks this directory up.'
     }
     else {
-        Write-Output 'Copied the plugin. Quit Cider if it is open, start it again, and open Radio from the menu.'
+        Write-Output 'Copied the plugin. Quit Cider if it is open, start it again, enable Radio if it is disabled, and open Radio from the menu.'
     }
 }
 finally {
