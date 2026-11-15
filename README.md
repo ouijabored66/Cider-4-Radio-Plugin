@@ -109,11 +109,11 @@ A companion iPhone app (version 1.1.1) with the same Free Radio library, plus th
 - Background and lock-screen playback
 - Built with [xtool](https://github.com/xtool-org/xtool), so no Mac or Xcode is needed
 
-Version 1.1.1 is the source in [ios/](ios/). Build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`) and install that build. The `FreeRadio.ipa` on the ios-v1.0 release does not include this library.
+Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/FreeRadio-1.1.1.ipa) from the [v0.3.2 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.2). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
 
 ### Install
 
-Build or download `FreeRadio.ipa`, then install it with any of these tools using your own Apple ID:
+Download `FreeRadio-1.1.1.ipa`, then install it with any of these tools using your own Apple ID:
 
 - **SideStore** (no computer after the one-time setup): open SideStore, go to My Apps, tap **+** and pick the IPA. SideStore refreshes the app automatically before the 7-day free-signing expiry.
 - **iLoader** (computer): connect the iPhone by USB, sign in with your Apple ID, import the IPA and choose Install.
