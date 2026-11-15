@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### 0.3.2
+
+Free Radio for Linux is a GTK app in [linux-app/](linux-app/). It plays the same 813-station library and does not need Cider. Favorites are saved in `~/.config/free-radio/favorites.json`. `scripts/build-deb.sh` builds `free-radio_0.3.2_all.deb`.
+
 ### 0.3.1
 
 Cider imports `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. The 0.3.0 zip unpacked as a folder named `radio`, so Enable on Cider 4.0.40 failed with "Failed to fetch dynamically imported module". The plugin folder is now `local.cider.radio`. `scripts/install.sh` installs that folder and removes an older `radio` copy of this plugin. The station library is unchanged. `plugin.js` defines `process` when the page does not already have it, which is how the Vue build reads `process.env.NODE_ENV`.

@@ -78,6 +78,27 @@ Microsoft Store installs use:
 powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
 ```
 
+## Free Radio for Linux
+
+Free Radio for Linux is a standalone desktop app. It plays the same Free Radio library as the Cider plugin and does not need Cider installed.
+
+- 813 stations (SomaFM, Radio Browser, Icecast, TuneIn, and Venice Classic Radio)
+- Search the library
+- Play and stop
+- Volume
+- Now playing, including a stream title or artist when the station sends one
+- Favorites: star a station from its row or the now-playing bar. The Favorites view lists them. They are saved in `~/.config/free-radio/favorites.json` (`XDG_CONFIG_HOME` is used when it is set)
+
+Download [free-radio_0.3.2_all.deb](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.2/free-radio_0.3.2_all.deb) from the [GitHub Releases](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases) page. The package is published only on GitHub, not on an apt repository or any other store.
+
+```bash
+sudo apt install ./free-radio_0.3.2_all.deb
+```
+
+`apt` installs the dependencies: Python 3, PyGObject, GTK 4, libadwaita, GStreamer (base, good, bad, and libav), glib-networking, and CA certificates. Then open **Free Radio** from the app menu, or run `free-radio`.
+
+Source: [linux-app/](linux-app/). `scripts/build-deb.sh` rebuilds `dist/free-radio_<version>_all.deb` from `linux-app/VERSION`.
+
 ## Free Radio for iPhone
 
 A companion iPhone app (version 1.1.1) with the same Free Radio library, plus the station directories from Radio Browser, TuneIn, SomaFM and the Icecast directory. iptv-org support is included, but its radio playlist is currently unavailable upstream, so that source shows as unreachable.

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Free Radio
+Comment=Play the Free Radio library
+Exec=free-radio
+Icon=free-radio
+Terminal=false
+Type=Application
+Categories=Audio;AudioVideo;Player;
+Keywords=radio;internet;music;
+StartupNotify=true
