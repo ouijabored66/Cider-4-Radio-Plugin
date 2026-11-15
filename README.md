@@ -21,6 +21,22 @@ Free internet radio plugin for Cider 4. It opens on the Free Radio library (813 
 2. Unzip it into Cider's plugins folder so the `radio` folder sits alongside your other plugins.
 3. Restart Cider and open **Radio** from the menu.
 
+## Free Radio for Linux
+
+A desktop app with the same Free Radio library (813 stations). It does not need Cider. Search the library, play and stop a station, and set the volume. When a stream sends a title or artist, that is shown under the station name. TuneIn stations that have no saved stream address are resolved through TuneIn's public OPML API, the same way the Cider plugin does.
+
+The package is pure Python, so the file is `free-radio_0.3.1_all.deb`. It is published on [GitHub Releases](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases) and is not published to an apt repository or any other store.
+
+```bash
+sudo apt install ./free-radio_0.3.1_all.deb
+```
+
+Then open **Free Radio** from the app menu, or run `free-radio`.
+
+Build it from this repository with `scripts/build-deb.sh`. The version in the file name is `linux-app/VERSION`. The package is written to `dist/free-radio_<version>_all.deb`. Publishing a GitHub release builds that package and attaches it to the release.
+
+Source: [linux-app/](linux-app/)
+
 ## Free Radio for iPhone
 
 A companion iPhone app (version 1.1.1) with the same Free Radio library, plus the station directories from Radio Browser, TuneIn, SomaFM and the Icecast directory. iptv-org support is included, but its radio playlist is currently unavailable upstream, so that source shows as unreachable.

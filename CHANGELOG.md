@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+Free Radio for Linux is a GTK app in [linux-app/](linux-app/). It plays the same 813-station library and does not need Cider. `scripts/build-deb.sh` builds `free-radio_0.3.1_all.deb`.
+
 ## 0.3.0 / iOS 1.1.1 — 2026-11-14
 
 The Free Radio library is built into the Cider plugin and the iPhone app. The plugin release stays **0.3.0**. The iPhone app is **1.1.1**.
