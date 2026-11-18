@@ -29,10 +29,13 @@ python "$ROOT/linux-app/packaging/windows/stage_runtime.py" overlay "$STAGE" "$R
 
 FIXTURES="$ROOT/dist/fixtures"
 python "$ROOT/linux-app/packaging/windows/make_fixtures.py" "$FIXTURES"
-# MSYS2 otherwise rewrites /CN=127.0.0.1 into a path under the MSYS prefix.
+# MSYS_NO_PATHCONV keeps /CN=127.0.0.1 intact, so the output paths must
+# already be Windows paths. A POSIX path is not a directory openssl can open.
+KEY_PATH=$(cygpath -m "$FIXTURES/key.pem")
+CERT_PATH=$(cygpath -m "$FIXTURES/cert.pem")
 MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:2048 \
-  -keyout "$FIXTURES/key.pem" \
-  -out "$FIXTURES/cert.pem" \
+  -keyout "$KEY_PATH" \
+  -out "$CERT_PATH" \
   -days 2 -nodes \
   -subj "/CN=127.0.0.1" \
   -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
