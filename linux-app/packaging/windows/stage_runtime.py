@@ -116,7 +116,15 @@ def prefix_path():
 
 def is_system_dll(name):
     stem = os.path.splitext(os.path.basename(name))[0].lower()
-    return stem.startswith(SYSTEM_DLL)
+    return stem.startswith(SYSTEM_DLL) or stem.startswith(("api-ms-", "ext-ms-"))
+
+
+def is_optional_windows_dll(name):
+    """ntldd reports delay-loaded Windows DLLs as missing. MinGW libraries are lib*.dll or zlib*.dll."""
+    if is_system_dll(name):
+        return True
+    base = os.path.basename(name).lower()
+    return not (base.startswith("lib") or base.startswith("zlib"))
 
 
 def run_ntldd(ntldd, path):
@@ -145,7 +153,7 @@ def parse_ntldd(text, prefix):
         if not name:
             continue
         if dest.lower() == "not found" or not dest:
-            if not is_system_dll(name):
+            if not is_optional_windows_dll(name):
                 missing.append(name)
             continue
         dest_abs = os.path.abspath(dest)

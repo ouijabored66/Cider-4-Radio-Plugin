@@ -16,7 +16,7 @@ export GI_TYPELIB_PATH="$(cygpath -m /ucrt64/lib/girepository-1.0)"
 export GST_PLUGIN_PATH="$(cygpath -m /ucrt64/lib/gstreamer-1.0)"
 export GST_PLUGIN_SYSTEM_PATH="$GST_PLUGIN_PATH"
 export XDG_DATA_DIRS="$(cygpath -m /ucrt64/share)"
-python -m pip install --upgrade pip
+python -m pip install --upgrade pip --break-system-packages
 python -m pip install "pyinstaller>=6.14,<7" --break-system-packages
 
 STAGE="$ROOT/dist/runtime-stage"
