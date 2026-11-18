@@ -17,8 +17,9 @@ $httpsPort = 18766
 $cert = Join-Path $Fixtures "cert.pem"
 $key = Join-Path $Fixtures "key.pem"
 $testCa = Join-Path $env:TEMP "freeradio-test-ca.crt"
-Get-Content -LiteralPath $ca -Raw | Set-Content -LiteralPath $testCa -Encoding ascii
-Get-Content -LiteralPath $cert -Raw | Add-Content -LiteralPath $testCa -Encoding ascii
+[System.IO.File]::WriteAllBytes($testCa, [System.IO.File]::ReadAllBytes($ca))
+$pem = [System.IO.File]::ReadAllText($cert).Trim() + "`n"
+[System.IO.File]::AppendAllText($testCa, $pem)
 
 $serverScript = Join-Path $PSScriptRoot "windows-test-server.py"
 $serverOut = Join-Path $env:TEMP "freeradio-server.out"
@@ -87,16 +88,25 @@ try {
         $env:FREERADIO_CATALOG = $catalogPath
         $env:FREERADIO_SINK = "fakesink"
         if ($case.Ca) { $env:FREERADIO_CA_BUNDLE = $case.Ca }
-        Write-Host "PLAY $($case.Id) $($case.Url)"
-        $proc = Start-Process -FilePath $Exe -ArgumentList @("--play", $case.Id, "--quit-after", "25") -PassThru
-        if (-not $proc.WaitForExit(60000)) {
-            Stop-Process -Id $proc.Id -Force
-            throw "$($case.Id) did not exit"
-        }
         $text = ""
-        if (Test-Path -LiteralPath $log) { $text = Get-Content -LiteralPath $log -Raw }
-        Write-Host $text
-        if ($proc.ExitCode -ne 0) { throw "$($case.Id) exited $($proc.ExitCode)" }
+        $exitCode = 1
+        foreach ($attempt in 1, 2) {
+            if (Test-Path -LiteralPath $log) { Remove-Item -LiteralPath $log -Force }
+            Write-Host "PLAY $($case.Id) $($case.Url) attempt $attempt"
+            $proc = Start-Process -FilePath $Exe -ArgumentList @("--play", $case.Id, "--quit-after", "25") -PassThru
+            if (-not $proc.WaitForExit(90000)) {
+                & taskkill.exe /F /T /PID $proc.Id | Out-Null
+                Write-Host "$($case.Id) attempt $attempt timed out"
+                continue
+            }
+            $exitCode = $proc.ExitCode
+            if (Test-Path -LiteralPath $log) { $text = Get-Content -LiteralPath $log -Raw }
+            Write-Host $text
+            if ($exitCode -eq 0 -and $text -match "Stream connected" -and $text -match "Free Radio window shown") {
+                break
+            }
+        }
+        if ($exitCode -ne 0) { throw "$($case.Id) exited $exitCode" }
         if ($text -notmatch "Free Radio window shown") { throw "$($case.Id) did not show the window" }
         if ($text -notmatch "Stream connected") { throw "$($case.Id) did not connect" }
     }

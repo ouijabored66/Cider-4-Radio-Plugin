@@ -260,15 +260,8 @@ def stage(dest):
     if not any("gnutls" in os.path.basename(path).lower() or "openssl" in os.path.basename(path).lower() for path in gio_dlls):
         names = ", ".join(os.path.basename(path) for path in gio_dlls)
         raise SystemExit(f"No GIO TLS module in {gio_src}: {names}")
-    # The TLS module is loaded from its own directory, which Windows searches
-    # before PATH. Keep its dependencies beside it.
-    for path in gio_dlls:
-        found, missing_deps = parse_ntldd(run_ntldd(ntldd, path), prefix)
-        if missing_deps:
-            raise SystemExit("GIO TLS dependency was not found: " + ", ".join(sorted(set(missing_deps))))
-        for dep in found:
-            if dep.lower().endswith(".dll"):
-                copy_file(dep, gio_dir)
+    # GIO treats every DLL in this directory as a module. Dependency libraries
+    # belong next to the executable, not in here, or startup scans them and hangs.
 
     scanner_matches = glob.glob(os.path.join(prefix, "**", "gst-plugin-scanner.exe"), recursive=True)
     if not scanner_matches:
