@@ -29,7 +29,8 @@ python "$ROOT/linux-app/packaging/windows/stage_runtime.py" overlay "$STAGE" "$R
 
 FIXTURES="$ROOT/dist/fixtures"
 python "$ROOT/linux-app/packaging/windows/make_fixtures.py" "$FIXTURES"
-openssl req -x509 -newkey rsa:2048 \
+# MSYS2 otherwise rewrites /CN=127.0.0.1 into a path under the MSYS prefix.
+MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:2048 \
   -keyout "$FIXTURES/key.pem" \
   -out "$FIXTURES/cert.pem" \
   -days 2 -nodes \
