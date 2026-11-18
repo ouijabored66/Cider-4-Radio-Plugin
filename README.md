@@ -8,8 +8,8 @@ The short steps below are for a first install. Paths, package scripts, and the o
 
 This is the Free Radio window by itself. You do not install Cider.
 
-1. Open the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest).
-2. Under **Assets**, download **FreeRadio-windows.zip**. If that file is not in the list, this release was published before the Windows app. Use a release that lists it.
+1. Open the [v0.3.4 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.4).
+2. Under **Assets**, download [FreeRadio-windows.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/FreeRadio-windows.zip).
 3. Open the zip. In File Explorer, click **Extract all**, then **Extract**. Leave the files together. `FreeRadio.exe` only works in that folder.
 4. Double-click **FreeRadio.exe**.
 5. Windows SmartScreen says it protected your PC. The app is unsigned, so that message is expected. Click **More info**, then **Run anyway**.
@@ -23,7 +23,7 @@ Starred stations are saved at `C:\Users\<your Windows user name>\.config\free-ra
 
 This adds **Radio** inside Cider. Quit Cider before you copy anything.
 
-1. From the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest), download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/cider-radio-plugin-0.3.2.zip). The name says 0.3.2 because that is the plugin's version. That file is the one on the v0.3.3 release.
+1. From the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest), download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/cider-radio-plugin-0.3.2.zip). The name says 0.3.2 because that is the plugin's version. That file is the one on the v0.3.4 release.
 2. Extract the zip. You should see a folder named `local.cider.radio` with `plugin.js` and `plugin.yml` inside. If those two files are one folder deeper, use the folder that contains them.
 3. Copy that folder to:
 
@@ -53,7 +53,7 @@ Cider can open the plugins folder itself: **Settings → Extensions → Plugins*
 
 ## Easy way: iPhone
 
-The iPhone file is **FreeRadio-1.1.1.ipa** on the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest): [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/FreeRadio-1.1.1.ipa).
+The iPhone file is **FreeRadio-1.1.1.ipa** on the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest): [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/FreeRadio-1.1.1.ipa).
 
 [Sideloadly](https://sideloadly.io/) installs that file with a free Apple ID. A spare Apple ID works too. A paid developer account is not required. These steps use a Windows or Mac computer and a USB cable.
 
@@ -82,7 +82,7 @@ A free Apple ID signs the app for 7 days. After that it will not open until you 
 
 ## Install
 
-Download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/cider-radio-plugin-0.3.2.zip) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). The zip is the same plugin on Linux, Windows, and macOS, and it unpacks as a folder already named `local.cider.radio`. Quit Cider and put that folder in Cider's plugins directory, alongside your other plugins. Cider loads it from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
+Download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/cider-radio-plugin-0.3.2.zip) from the [v0.3.4 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.4). The zip is the same plugin on Linux, Windows, and macOS, and it unpacks as a folder already named `local.cider.radio`. Quit Cider and put that folder in Cider's plugins directory, alongside your other plugins. Cider loads it from `http://127.0.0.1:10767/plugins/local.cider.radio/plugin.js`. Start Cider, enable **Radio** if it is disabled, and open **Radio** from the menu.
 
 From a copy of this repository, `scripts/install.sh` copies `local.cider.radio` into the plugins directory and removes an older `radio` folder of this plugin:
 
@@ -156,7 +156,7 @@ Free Radio for Linux is a standalone desktop app. It plays the same Free Radio l
 - Now playing, including a stream title or artist when the station sends one
 - Favorites: star a station from its row or the now-playing bar. The Favorites view lists them. They are saved in `~/.config/free-radio/favorites.json` (`XDG_CONFIG_HOME` is used when it is set)
 
-Download [free-radio_0.3.3_all.deb](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/free-radio_0.3.3_all.deb) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). The package is published only on GitHub, not on an apt repository or any other store.
+Download [free-radio_0.3.3_all.deb](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/free-radio_0.3.3_all.deb) from the [v0.3.4 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.4). The package is published only on GitHub, not on an apt repository or any other store.
 
 ```bash
 sudo apt install ./free-radio_0.3.3_all.deb
@@ -182,7 +182,7 @@ A companion iPhone app (version 1.1.1) with the same Free Radio library, plus th
 - Background and lock-screen playback
 - Built with [xtool](https://github.com/xtool-org/xtool), so no Mac or Xcode is needed
 
-Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/FreeRadio-1.1.1.ipa) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
+Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.4/FreeRadio-1.1.1.ipa) from the [v0.3.4 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.4). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
 
 ### Install
 
