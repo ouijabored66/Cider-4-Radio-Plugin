@@ -70,10 +70,18 @@ class Player:
         if ident in self._tls_seen:
             return
         self._tls_seen.add(ident)
+        ca_path = ca.replace("\\", "/")
         for name in ("ssl-ca-file", "tls-ca-file"):
             prop = element.find_property(name)
             if prop is not None:
-                element.set_property(name, ca)
+                element.set_property(name, ca_path)
+        if element.find_property("tls-database") is not None:
+            try:
+                from gi.repository import Gio
+
+                element.set_property("tls-database", Gio.TlsFileDatabase.new(ca_path))
+            except Exception:
+                pass
         try:
             element.connect("source-setup", self._on_source_setup)
         except TypeError:

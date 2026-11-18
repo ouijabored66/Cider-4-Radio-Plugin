@@ -47,6 +47,13 @@ def _log_plugins():
     for name in names:
         found = Gst.ElementFactory.find(name) is not None
         _note(f"plugin {name}: {'yes' if found else 'no'}")
+    try:
+        from gi.repository import Gio
+
+        backend = Gio.TlsBackend.get_default()
+        _note("tls backend: " + (backend.get_name() if backend else "none"))
+    except Exception as error:
+        _note(f"tls backend: {error}")
 
 
 def main(argv=None):
@@ -93,7 +100,16 @@ def _run(argv):
                     _note(f"Stream url: {player.last_url}")
                 if not player.connected:
                     detail = player.error_message or ""
-                    _note("Stream did not connect" + (f": {detail}" if detail else ""))
+                    debug = ""
+                    for line in (player.error_debug or "").splitlines():
+                        if any(word in line.lower() for word in ("error", "tls", "certificate", "ssl")):
+                            debug = line.strip()
+                    text = "Stream did not connect"
+                    if detail:
+                        text += f": {detail}"
+                    if debug and debug not in text:
+                        text += f" | {debug[:400]}"
+                    _note(text)
                 elif player.failed:
                     _note("Stream failed after connecting: " + (player.error_message or ""))
                     if player.error_debug:

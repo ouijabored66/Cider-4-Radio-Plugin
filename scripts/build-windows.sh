@@ -29,16 +29,28 @@ python "$ROOT/linux-app/packaging/windows/stage_runtime.py" overlay "$STAGE" "$R
 
 FIXTURES="$ROOT/dist/fixtures"
 python "$ROOT/linux-app/packaging/windows/make_fixtures.py" "$FIXTURES"
-# MSYS_NO_PATHCONV keeps /CN=127.0.0.1 intact, so the output paths must
-# already be Windows paths. A POSIX path is not a directory openssl can open.
+# The subject must not be a bare /CN path, or MSYS2 rewrites it.
+# basicConstraints makes the test certificate a trust anchor for souphttpsrc.
+cat > "$FIXTURES/test-ca.cnf" <<'EOF'
+[req]
+distinguished_name = dn
+x509_extensions = v3_ca
+prompt = no
+[dn]
+CN = 127.0.0.1
+[v3_ca]
+basicConstraints = critical,CA:TRUE
+keyUsage = critical,keyCertSign,cRLSign
+subjectAltName = IP:127.0.0.1,DNS:localhost
+EOF
 KEY_PATH=$(cygpath -m "$FIXTURES/key.pem")
 CERT_PATH=$(cygpath -m "$FIXTURES/cert.pem")
+CONF_PATH=$(cygpath -m "$FIXTURES/test-ca.cnf")
 MSYS_NO_PATHCONV=1 openssl req -x509 -newkey rsa:2048 \
   -keyout "$KEY_PATH" \
   -out "$CERT_PATH" \
   -days 2 -nodes \
-  -subj "/CN=127.0.0.1" \
-  -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
+  -config "$CONF_PATH"
 
 python - "$ROOT" <<'PY'
 import os
