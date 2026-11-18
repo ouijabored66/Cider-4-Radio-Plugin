@@ -1,6 +1,7 @@
 """Free Radio desktop app. Run with `python3 -m free_radio` or /usr/bin/free-radio."""
 
 import argparse
+import os
 import sys
 
 import gi
@@ -16,7 +17,54 @@ from .player import Player
 from .window import RadioWindow
 
 
+def _note(message):
+    print(message, file=sys.stderr)
+    path = os.environ.get("FREERADIO_LOG")
+    if not path:
+        return
+    try:
+        with open(path, "a", encoding="utf-8") as handle:
+            handle.write(message + "\n")
+    except OSError:
+        pass
+
+
+def _log_plugins():
+    if not os.environ.get("FREERADIO_LOG"):
+        return
+    names = (
+        "playbin",
+        "souphttpsrc",
+        "mpg123audiodec",
+        "avdec_aac",
+        "faad",
+        "oggdemux",
+        "vorbisdec",
+        "fakesink",
+        "wasapisink",
+        "directsoundsink",
+    )
+    for name in names:
+        found = Gst.ElementFactory.find(name) is not None
+        _note(f"plugin {name}: {'yes' if found else 'no'}")
+    try:
+        from gi.repository import Gio
+
+        backend = Gio.TlsBackend.get_default()
+        _note("tls backend: " + (backend.get_name() if backend else "none"))
+    except Exception as error:
+        _note(f"tls backend: {error}")
+
+
 def main(argv=None):
+    try:
+        return _run(argv)
+    except Exception as error:
+        _note(f"Free Radio failed: {error}")
+        return 1
+
+
+def _run(argv):
     parser = argparse.ArgumentParser(prog="free-radio", description="Play the Free Radio library")
     parser.add_argument("--version", action="version", version=f"Free Radio {__version__}")
     parser.add_argument("--play", metavar="ID", help="Start playback of a catalog station id")
@@ -29,6 +77,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     Gst.init(None)
+    _log_plugins()
     groups, stations = load_catalog()
     player = Player()
     app = Adw.Application(application_id="io.github.ouijabored66.FreeRadio")
@@ -38,20 +87,35 @@ def main(argv=None):
         window = RadioWindow(app, groups, stations, player)
         window_box["window"] = window
         window.present()
+        _note("Free Radio window shown")
         if args.play and not window.play_id(args.play):
-            print(f"No station {args.play}", file=sys.stderr)
+            _note(f"No station {args.play}")
             app.quit()
             return
         if args.quit_after is not None:
             def finish():
                 code = 0 if player.connected and not player.failed else 1
                 app._quit_code = code
+                if player.last_url:
+                    _note(f"Stream url: {player.last_url}")
                 if not player.connected:
-                    print("Stream did not connect", file=sys.stderr)
+                    detail = player.error_message or ""
+                    debug = ""
+                    for line in (player.error_debug or "").splitlines():
+                        if any(word in line.lower() for word in ("error", "tls", "certificate", "ssl")):
+                            debug = line.strip()
+                    text = "Stream did not connect"
+                    if detail:
+                        text += f": {detail}"
+                    if debug and debug not in text:
+                        text += f" | {debug[:400]}"
+                    _note(text)
                 elif player.failed:
-                    print("Stream failed after connecting", file=sys.stderr)
+                    _note("Stream failed after connecting: " + (player.error_message or ""))
+                    if player.error_debug:
+                        _note(player.error_debug[:2000])
                 else:
-                    print("Stream connected", file=sys.stderr)
+                    _note("Stream connected")
                 app.quit()
                 return False
 

@@ -1,0 +1,70 @@
+# Build the Free Radio Windows app.
+# A push uploads dist/FreeRadio-windows.zip as a workflow artifact.
+# A published release also attaches that zip to the release.
+# Already published releases are left as they are.
+
+name: Windows package
+
+on:
+  push:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  exe:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install MSYS2 UCRT64 packages
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          cache: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gtk4
+            mingw-w64-ucrt-x86_64-libadwaita
+            mingw-w64-ucrt-x86_64-python
+            mingw-w64-ucrt-x86_64-python-gobject
+            mingw-w64-ucrt-x86_64-python-pip
+            mingw-w64-ucrt-x86_64-gstreamer
+            mingw-w64-ucrt-x86_64-gst-plugins-base
+            mingw-w64-ucrt-x86_64-gst-plugins-good
+            mingw-w64-ucrt-x86_64-gst-plugins-bad
+            mingw-w64-ucrt-x86_64-gst-plugins-ugly
+            mingw-w64-ucrt-x86_64-gst-libav
+            mingw-w64-ucrt-x86_64-glib-networking
+            mingw-w64-ucrt-x86_64-ca-certificates
+            mingw-w64-ucrt-x86_64-adwaita-icon-theme
+            mingw-w64-ucrt-x86_64-hicolor-icon-theme
+            mingw-w64-ucrt-x86_64-gsettings-desktop-schemas
+            mingw-w64-ucrt-x86_64-librsvg
+            mingw-w64-ucrt-x86_64-ntldd
+            openssl
+
+      - name: Build the Windows app
+        shell: msys2 {0}
+        run: bash scripts/build-windows.sh
+
+      - name: Upload the Windows zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: FreeRadio-windows
+          path: dist/FreeRadio-windows.zip
+          if-no-files-found: error
+
+      - name: Play http and https streams
+        shell: pwsh
+        run: ./scripts/windows-playback-check.ps1 -Exe dist/FreeRadio/FreeRadio.exe -Fixtures dist/fixtures
+
+      - name: Attach the zip to the GitHub release
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/FreeRadio-windows.zip --clobber

@@ -2,6 +2,71 @@
 
 Free internet radio plugin for Cider 4. It opens on the Free Radio library (819 stations, singing and instrumental) and can also search TuneIn, Radio Browser, SomaFM, the Icecast directory and iptv-org.
 
+The short steps below are for a first install. Paths, package scripts, and the other systems are further down.
+
+## Easy way: Windows app
+
+This is the Free Radio window by itself. You do not install Cider.
+
+1. Open the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest).
+2. Under **Assets**, download **FreeRadio-windows.zip**. If that file is not in the list, this release was published before the Windows app. Use a release that lists it.
+3. Open the zip. In File Explorer, click **Extract all**, then **Extract**. Leave the files together. `FreeRadio.exe` only works in that folder.
+4. Double-click **FreeRadio.exe**.
+5. Windows SmartScreen says it protected your PC. The app is unsigned, so that message is expected. Click **More info**, then **Run anyway**.
+6. A window titled **Free Radio** opens. The station list starts on **SomaFM**. Along the bottom: a play button, a stop button, a star, the word **Stopped**, and a volume slider.
+7. Click a station name. The bottom line changes to that station, then **Connecting…**, then **Playing**, or the song name the station sends. The bottom play button plays the highlighted row. The stop button stops it.
+8. There is no box for your own station address. The stations are already in the list. Click the star on a row to keep it. **Favorites**, at the top left, shows the starred stations. The search box says **Search stations**. The menu at the top right starts on **SomaFM** and can be switched to **All**.
+
+Starred stations are saved at `C:\Users\<your Windows user name>\.config\free-radio\favorites.json`.
+
+## Easy way: Cider plugin on Windows
+
+This adds **Radio** inside Cider. Quit Cider before you copy anything.
+
+1. From the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest), download [cider-radio-plugin-0.3.2.zip](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/cider-radio-plugin-0.3.2.zip). The name says 0.3.2 because that is the plugin's version. That file is the one on the v0.3.3 release.
+2. Extract the zip. You should see a folder named `local.cider.radio` with `plugin.js` and `plugin.yml` inside. If those two files are one folder deeper, use the folder that contains them.
+3. Copy that folder to:
+
+```
+%APPDATA%\C2Windows\plugins\local.cider.radio
+```
+
+Press the Windows key and R, type `%APPDATA%`, and press Enter. Open **C2Windows**, then **plugins**, and paste the folder there. If **C2Windows** is missing, start Cider once, quit it, and look again. A Microsoft Store install of Cider keeps its plugins in a different folder. The script below picks the folder that is already on the computer, including the Store folder.
+
+4. Or, from a copy of this repository, open Windows PowerShell and run this. `-ExecutionPolicy Bypass` applies only to this command, which is what you need when Windows says running scripts is disabled:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
+```
+
+To install the downloaded zip the same way:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1 C:\path\to\cider-radio-plugin-0.3.2.zip
+```
+
+The script prints `To:` and the folder it used. When it finishes, it says to start Cider again, enable **Radio** if it is disabled, and open **Radio** from the menu.
+
+5. Open **Radio** in Cider. Click a station name. The page shows **Connecting…**, then **Playing**. **Stop** stops it. Type in the box labeled **Search stations** and click **Search** to search the directories. There is no separate Add button.
+
+Cider can open the plugins folder itself: **Settings → Extensions → Plugins**, then the **…** menu, **Open AppData Folder**, and go into `plugins`.
+
+## Easy way: iPhone
+
+The iPhone file is **FreeRadio-1.1.1.ipa** on the [latest release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/latest): [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/FreeRadio-1.1.1.ipa).
+
+[Sideloadly](https://sideloadly.io/) installs that file with a free Apple ID. A spare Apple ID works too. A paid developer account is not required. These steps use a Windows or Mac computer and a USB cable.
+
+1. Download Sideloadly for your computer from sideloadly.io. On Windows, Sideloadly's own FAQ says to install the iTunes and iCloud downloads linked from that site, the installers from Apple's website. The Microsoft Store copies can keep the phone from showing up in Sideloadly. Install those, then install Sideloadly.
+2. Download **FreeRadio-1.1.1.ipa** on the computer from the release link above.
+3. Plug in the iPhone. If the phone asks you to trust this computer, tap **Trust** and enter the phone passcode.
+4. Open Sideloadly and confirm the phone is listed. Drag **FreeRadio-1.1.1.ipa** into the window, enter the Apple ID, and run Sideloadly's install step. Sideloadly describes this as Download, Load IPA, Apple ID, then Sideload. Apple may ask for the password and a verification code.
+5. On iOS 16 and later, Sideloadly's FAQ says to turn on Developer Mode: **Settings → Privacy & Security**, scroll to **Developer Mode**, open it, and turn the switch on. If **Developer Mode** is not in the list yet, run the Sideloadly install once and look again. Turning the switch on asks you to restart the phone. After it starts, confirm Developer Mode if the phone asks.
+6. If the app says the developer is untrusted, Sideloadly's FAQ says: **Settings → General → Profiles/VPN & Device Management**. On current iOS that row is **VPN & Device Management**. On older iOS it is **Profiles & Device Management**. Tap the email you used, then **Trust**.
+7. Open **Free Radio** on the home screen.
+
+A free Apple ID signs the app for 7 days. After that it will not open until you sideload the same file again with the same Apple ID. Sideloadly has an automatic refreshing option, handled by the Sideloadly Daemon, if the computer can see the phone over USB or over Wi-Fi. A free Apple ID can keep only 3 sideloaded apps installed at the same time. If Sideloadly says the device reached the maximum number of installed apps, remove another sideloaded app first. A paid Apple Developer account lasts up to a year and does not have that 3-app cap.
+
 ## Features
 
 - **Free Radio library**: 48 SomaFM, 68 Radio Browser, 10 Icecast, 685 TuneIn and 2 Venice Classic Radio stations. Instrumental and vocal stations are grouped separately. TuneIn stations keep their guide id. A direct stream is used when the library has one; otherwise playback asks TuneIn.
@@ -62,6 +127,8 @@ The Flatpak build keeps its data here when `~/.config/sh.cider.genten` is not pr
 
 ### Windows
 
+The click-by-click install is [Easy way: Cider plugin on Windows](#easy-way-cider-plugin-on-windows). The usual folder is:
+
 ```
 %APPDATA%\C2Windows\plugins\local.cider.radio
 ```
@@ -99,6 +166,12 @@ sudo apt install ./free-radio_0.3.3_all.deb
 
 Source: [linux-app/](linux-app/). `scripts/build-deb.sh` rebuilds `dist/free-radio_<version>_all.deb` from `linux-app/VERSION`.
 
+## Free Radio for Windows
+
+The click-by-click steps are [Easy way: Windows app](#easy-way-windows-app).
+
+`scripts/build-windows.sh`, run in an MSYS2 UCRT64 shell, builds `dist/FreeRadio-windows.zip`. The zip is `FreeRadio.exe` plus a bundled GTK 4, libadwaita, and GStreamer runtime, including the plugins used for http and https MP3, AAC, and Ogg. A clean Windows machine does not need those libraries installed. The Windows package workflow uploads that zip as the `FreeRadio-windows` artifact on every push, and attaches the same zip to a release when that release is published.
+
 ## Free Radio for iPhone
 
 A companion iPhone app (version 1.1.1) with the same Free Radio library, plus the station directories from Radio Browser, TuneIn, SomaFM and the Icecast directory. iptv-org support is included, but its radio playlist is currently unavailable upstream, so that source shows as unreachable.
@@ -112,6 +185,8 @@ A companion iPhone app (version 1.1.1) with the same Free Radio library, plus th
 Version 1.1.1 is the source in [ios/](ios/). Download [FreeRadio-1.1.1.ipa](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/download/v0.3.3/FreeRadio-1.1.1.ipa) from the [v0.3.3 release](https://github.com/ouijabored66/Cider-4-Radio-Plugin/releases/tag/v0.3.3). You can also build the unsigned IPA with [xtool](https://github.com/xtool-org/xtool) (`xtool dev build --ipa` inside `ios/`).
 
 ### Install
+
+The click-by-click Sideloadly steps are [Easy way: iPhone](#easy-way-iphone).
 
 Download `FreeRadio-1.1.1.ipa`, then install it with any of these tools using your own Apple ID:
 

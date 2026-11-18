@@ -24,11 +24,17 @@ class Player:
                 sink.set_property("sync", True)
             self.playbin.set_property("audio-sink", sink)
         self.playbin.set_property("volume", 0.8)
+        self.playbin.connect("source-setup", self._on_source_setup)
+        self.playbin.connect("deep-element-added", self._on_deep_element)
         bus = self.playbin.get_bus()
         bus.add_signal_watch()
         bus.connect("message", self._on_message)
         self.connected = False
         self.failed = False
+        self.last_url = ""
+        self.error_message = ""
+        self.error_debug = ""
+        self._tls_seen = set()
         self.on_state = None
         self.on_tags = None
         self.on_error = None
@@ -39,11 +45,47 @@ class Player:
     def play_url(self, url):
         self.connected = False
         self.failed = False
+        self.last_url = url or ""
+        self.error_message = ""
+        self.error_debug = ""
         self.playbin.set_state(Gst.State.NULL)
         self.playbin.set_property("uri", url)
         self.playbin.set_state(Gst.State.PLAYING)
         if self.on_state:
             self.on_state("connecting")
+
+    def _on_source_setup(self, _parent, source):
+        self._use_bundled_ca(source)
+
+    def _on_deep_element(self, _bin, _subbin, element):
+        self._use_bundled_ca(element)
+
+    def _use_bundled_ca(self, element):
+        # The frozen Windows build sets this to the bundled CA file. Linux
+        # leaves it unset and keeps using the system certificate store.
+        ca = os.environ.get("FREERADIO_CA_BUNDLE")
+        if not ca or element is None:
+            return
+        ident = id(element)
+        if ident in self._tls_seen:
+            return
+        self._tls_seen.add(ident)
+        ca_path = ca.replace("\\", "/")
+        for name in ("ssl-ca-file", "tls-ca-file"):
+            prop = element.find_property(name)
+            if prop is not None:
+                element.set_property(name, ca_path)
+        if element.find_property("tls-database") is not None:
+            try:
+                from gi.repository import Gio
+
+                element.set_property("tls-database", Gio.TlsFileDatabase.new(ca_path))
+            except Exception:
+                pass
+        try:
+            element.connect("source-setup", self._on_source_setup)
+        except TypeError:
+            return
 
     def stop(self):
         self.playbin.set_state(Gst.State.NULL)
@@ -66,7 +108,9 @@ class Player:
                 self.on_tags(title, artist)
         elif kind == Gst.MessageType.ERROR:
             self.failed = True
-            error, _debug = message.parse_error()
+            error, debug = message.parse_error()
+            self.error_message = error.message or ""
+            self.error_debug = str(debug or "")
             self.playbin.set_state(Gst.State.NULL)
             if self.on_error:
                 self.on_error(error.message)
