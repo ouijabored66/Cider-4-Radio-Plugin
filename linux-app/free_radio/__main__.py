@@ -92,7 +92,8 @@ def _run(argv):
                 if player.last_url:
                     _note(f"Stream url: {player.last_url}")
                 if not player.connected:
-                    _note("Stream did not connect")
+                    detail = player.error_message or ""
+                    _note("Stream did not connect" + (f": {detail}" if detail else ""))
                 elif player.failed:
                     _note("Stream failed after connecting: " + (player.error_message or ""))
                     if player.error_debug:

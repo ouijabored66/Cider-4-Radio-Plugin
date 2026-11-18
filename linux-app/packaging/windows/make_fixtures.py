@@ -18,6 +18,8 @@ def have(name):
 
 
 def encode(description, dest):
+    if os.path.isfile(dest):
+        os.remove(dest)
     pipeline = Gst.parse_launch(description + " ! filesink name=sink")
     sink = pipeline.get_by_name("sink")
     sink.set_property("location", os.path.abspath(dest))
@@ -29,13 +31,19 @@ def encode(description, dest):
     )
     pipeline.set_state(Gst.State.NULL)
     if message is None:
-        raise SystemExit(f"Timed out writing {dest}")
+        raise RuntimeError(f"Timed out writing {dest}")
     if message.type == Gst.MessageType.ERROR:
         error, debug = message.parse_error()
-        raise SystemExit(f"Could not write {dest}: {error.message}\n{debug}")
+        raise RuntimeError(f"Could not write {dest}: {error.message}\n{debug}")
     if not os.path.isfile(dest) or os.path.getsize(dest) < 100:
-        raise SystemExit(f"{dest} is empty")
+        raise RuntimeError(f"{dest} is empty")
     print(f"fixture {dest} ({os.path.getsize(dest)} bytes)")
+
+
+def is_adts(path):
+    with open(path, "rb") as handle:
+        data = handle.read(8)
+    return len(data) >= 2 and data[0] == 0xFF and (data[1] & 0xF0) == 0xF0
 
 
 def main(argv):
@@ -53,15 +61,26 @@ def main(argv):
         raise SystemExit("No mp3 encoder (lamemp3enc or avenc_mp3)")
     encode(mp3, os.path.join(dest_dir, "test.mp3"))
 
-    if have("avenc_aac") and have("aacparse"):
-        aac = f"{SRC} ! avenc_aac ! aacparse"
-    elif have("fdkaacenc") and have("aacparse"):
-        aac = f"{SRC} ! fdkaacenc ! aacparse"
-    elif have("faac") and have("aacparse"):
-        aac = f"{SRC} ! faac ! aacparse"
-    else:
-        raise SystemExit("No aac encoder (avenc_aac, fdkaacenc, or faac)")
-    encode(aac, os.path.join(dest_dir, "test.aac"))
+    aac_path = os.path.join(dest_dir, "test.aac")
+    wrote_aac = False
+    if not have("aacparse"):
+        raise SystemExit("aacparse is missing")
+    for encoder in ("avenc_aac", "fdkaacenc", "faac"):
+        if not have(encoder):
+            continue
+        # Raw AAC has no ADTS header, so playbin never recognizes the stream.
+        pipeline = f"{SRC} ! {encoder} ! aacparse ! audio/mpeg,mpegversion=4,stream-format=adts"
+        try:
+            encode(pipeline, aac_path)
+        except RuntimeError as error:
+            print(error)
+            continue
+        if is_adts(aac_path):
+            wrote_aac = True
+            break
+        print(f"{encoder} did not write an ADTS header")
+    if not wrote_aac:
+        raise SystemExit("AAC fixture is not ADTS")
 
     for name in ("souphttpsrc", "mpg123audiodec", "avdec_aac", "faad", "oggdemux", "vorbisdec"):
         print(f"build plugin {name}: {'yes' if have(name) else 'no'}")

@@ -25,6 +25,7 @@ class Player:
             self.playbin.set_property("audio-sink", sink)
         self.playbin.set_property("volume", 0.8)
         self.playbin.connect("source-setup", self._on_source_setup)
+        self.playbin.connect("deep-element-added", self._on_deep_element)
         bus = self.playbin.get_bus()
         bus.add_signal_watch()
         bus.connect("message", self._on_message)
@@ -55,6 +56,9 @@ class Player:
 
     def _on_source_setup(self, _parent, source):
         self._use_bundled_ca(source)
+
+    def _on_deep_element(self, _bin, _subbin, element):
+        self._use_bundled_ca(element)
 
     def _use_bundled_ca(self, element):
         # The frozen Windows build sets this to the bundled CA file. Linux
