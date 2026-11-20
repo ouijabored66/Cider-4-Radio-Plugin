@@ -16,6 +16,10 @@ Your favorite stations and settings are saved only on your iPhone. Deleting the 
 
 To show and play stations, the app requests station lists from public radio directories (Radio Browser, TuneIn, SomaFM, the Icecast directory, and iptv-org) and connects directly to the station you choose. Like any website, those services and stations can see your IP address and the request when the app contacts them. Their own privacy policies apply. The developer does not control them and receives none of that information.
 
+## Content
+
+Free Radio does not host, own, or control any radio stream or station content. It only lists stations from public directories and plays each station's own public stream. Each station owns its stream and content.
+
 ## Children
 
 Free Radio does not knowingly collect information from anyone, including children.
